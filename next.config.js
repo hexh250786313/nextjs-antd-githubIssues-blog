@@ -104,7 +104,8 @@ module.exports = withSize(
             new TerserPlugin({
               cache: true,
               terserOptions: {
-                ecma: 6,
+                // ecma: 6,
+                ecma: undefined,
                 warnings: false,
                 extractComments: false, // remove comment
                 output: {
