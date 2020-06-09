@@ -1,34 +1,19 @@
 import PropTypes from 'prop-types';
-import { Table } from 'antd';
-import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import React from 'react';
 
-const columns = [{
-  title: 'Username',
-  dataIndex: 'username',
-  key: 'username',
-  render: (text) => (
-    <Link href={`/user/[username]`} as={`/user/${text}`}>
-      <a>{text}</a>
-    </Link>
-  )
-}, {
-  title: 'Email',
-  dataIndex: 'email',
-  key: 'email',
-}];
+export default class BlogDetail extends React.Component {
+  render() {
+    const { issuesList } = this.props;
+    return (
+      <ReactMarkdown
+        source={issuesList[0] ? issuesList[0].body : ''}
+        escapeHtml={false}
+      ></ReactMarkdown>
+    );
+  }
+}
 
-const UserList = ({ list }) => (
-  <Table
-    rowKey={record => record.id}
-    style={{ minWidth: '600px' }}
-    dataSource={list}
-    columns={columns}
-    bordered
-  />
-);
-
-export default UserList;
-
-UserList.propTypes = {
-  list: PropTypes.array.isRequired
+BlogDetail.propTypes = {
+  issuesList: PropTypes.array.isRequired,
 };

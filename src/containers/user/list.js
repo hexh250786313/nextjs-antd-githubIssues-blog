@@ -4,6 +4,7 @@ import UserList from '../../components/User/UserList';
 
 const mapStateToProps = state => ({
   list: state.user.list.list,
+  issuesList: state.user.list.issuesList,
 });
 
 const mapDispatchToProps = dispatch => ({
