@@ -172,9 +172,11 @@ module.exports = withSize(
     // isDev, // Pass through env variables
     // },
     env: {
-      SERVER_HOST: 'http://www.luffyzhou.cn',
+      isDev,
+      // rootDir: path.join(__dirname, './'),
+      // PORT: isDev ? 3006 : process.env.PORT || 5999,
+      // staticFolder: '/static',
     },
     target: 'serverless',
   }),
 );
-
