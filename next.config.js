@@ -10,33 +10,30 @@ const path = require('path');
 
 // Where your antd-custom.less file lives
 const themeVariables = lessToJS(
-  fs.readFileSync(
-    path.resolve(__dirname, './assets/antd-custom.less'),
-    'utf8',
-  )
+  fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8'),
 );
 
 // development or other environment
 const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
-// analyse use webpack-bundle-analyzer 
+// analyse use webpack-bundle-analyzer
 const isAnalyse = process.env.NODE_ENV === 'analyse';
 
 // fix antd bug in dev development
 const devAntd = '@import "~antd/dist/antd.less";\n';
 const stylesData = fs.readFileSync(
   path.resolve(__dirname, './assets/_styles.less'),
-  'utf-8'
+  'utf-8',
 );
 fs.writeFileSync(
   path.resolve(__dirname, './assets/self-styles.less'),
   isDev ? `${devAntd}${stylesData}` : stylesData,
-  'utf-8'
+  'utf-8',
 );
 
 // fix: prevents error when .css files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = () => {}
+  require.extensions['.less'] = () => {};
 }
 
 const srcFolder = [
@@ -46,8 +43,8 @@ const srcFolder = [
   path.resolve(__dirname, './src/core'),
   path.resolve(__dirname, './src/middlewares'),
   path.resolve(__dirname, './src/pages'),
-  path.resolve(__dirname, './src/redux')
-]
+  path.resolve(__dirname, './src/redux'),
+];
 
 module.exports = withSize(
   withLess({
@@ -59,23 +56,23 @@ module.exports = withSize(
     webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
       if (isServer) {
         // deal antd style
-        const antStyles = /antd\/.*?\/style.*?/
-        const origExternals = [...config.externals]
+        const antStyles = /antd\/.*?\/style.*?/;
+        const origExternals = [...config.externals];
         config.externals = [
           (context, request, callback) => {
-            if (request.match(antStyles)) return callback()
+            if (request.match(antStyles)) return callback();
             if (typeof origExternals[0] === 'function') {
-              origExternals[0](context, request, callback)
+              origExternals[0](context, request, callback);
             } else {
-              callback()
+              callback();
             }
           },
           ...(typeof origExternals[0] === 'function' ? [] : origExternals),
-        ]
+        ];
         config.module.rules.unshift({
           test: antStyles,
           use: 'null-loader',
-        })
+        });
       }
       // analyse use webpack-bundle-analyser
       if (isAnalyse) {
@@ -84,8 +81,8 @@ module.exports = withSize(
           // For all options see https://github.com/th0r/webpack-bundle-analyzer#as-plugin
           generateStatsFile: true,
           // Will be available at `.next/stats.json`
-          statsFilename: 'stats.json'
-        })
+          statsFilename: 'stats.json',
+        });
       }
       if (!dev) {
         // polyfill IE11
@@ -99,7 +96,7 @@ module.exports = withSize(
             entries['main.js'].unshift('./assets/polyfills.js');
           }
           return entries;
-        }
+        };
         // add other webpack plugins
         config.plugins.push(
           ...[
@@ -111,23 +108,24 @@ module.exports = withSize(
                 warnings: false,
                 extractComments: false, // remove comment
                 output: {
-                  comments: false
+                  comments: false,
                 },
                 compress: {
-                  drop_console: true // remove console
+                  drop_console: true, // remove console
                 },
-                ie8: false
-              }
+                ie8: false,
+              },
             }),
             // optimize CSS
             new OptimizeCssPlugin({
               cssProcessor: require('cssnano'), //import cssnano option
-              cssProcessorOptions: { 
-                discardComments: { removeAll: true } 
+              cssProcessorOptions: {
+                discardComments: { removeAll: true },
               },
-              canPrint: true // print info to console
-            })
-        ]);
+              canPrint: true, // print info to console
+            }),
+          ],
+        );
         config.module.rules.push({
           test: /\.js$/,
           include: srcFolder,
@@ -136,7 +134,7 @@ module.exports = withSize(
             // additional node.js arguments
             workerNodeArgs: ['--max-old-space-size=1024'],
           },
-          loader: 'thread-loader'
+          loader: 'thread-loader',
         });
         config.devtool = 'source-map';
       } else {
@@ -147,10 +145,10 @@ module.exports = withSize(
           options: {
             configFile: path.resolve('.eslintrc'),
             eslint: {
-              configFile: path.resolve(__dirname, '.eslintrc')
-            }
+              configFile: path.resolve(__dirname, '.eslintrc'),
+            },
           },
-          loader: 'eslint-loader'
+          loader: 'eslint-loader',
         });
         config.devtool = 'cheap-module-inline-source-map';
       }
@@ -162,16 +160,20 @@ module.exports = withSize(
       // Important: return the modified config
       return config;
     },
-    serverRuntimeConfig: { // Will only be available on the server side
-      rootDir: path.join(__dirname, './'),
-      PORT: isDev ? 3006 : (process.env.PORT || 5999)
-    },
-    publicRuntimeConfig: { // Will be available on both server and client
-      staticFolder: '/static',
-      isDev, // Pass through env variables
-    },
+    // serverRuntimeConfig: {
+    // // Will only be available on the server side
+    // rootDir: path.join(__dirname, './'),
+    // PORT: isDev ? 3006 : process.env.PORT || 5999,
+    // },
+    // publicRuntimeConfig: {
+    // // Will be available on both server and client
+    // staticFolder: '/static',
+    // isDev, // Pass through env variables
+    // },
     env: {
-      SERVER_HOST: 'http://www.luffyzhou.cn'
-    }
-  })
+      SERVER_HOST: 'http://www.luffyzhou.cn',
+    },
+    target: 'serverless',
+  }),
 );
+
