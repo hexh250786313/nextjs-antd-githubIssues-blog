@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import { take, put, fork } from 'redux-saga/effects';
-import { FETCH_USER_LIST } from '../../../constants/ActionTypes';
+import { FETCH_POST_LIST } from '../../../constants/ActionTypes';
 import {
   fetchUserListFail,
   // fetchUserListSuccess,
@@ -13,7 +13,7 @@ import api from '../../../constants/ApiUrlForBE';
  */
 export function* fetchUserList() {
   while (true) {
-    yield take(FETCH_USER_LIST);
+    yield take(FETCH_POST_LIST);
     try {
       // const res = yield fetch(api.getUserList);
       const issuesRes = yield fetch(api.getGitHubIssues);

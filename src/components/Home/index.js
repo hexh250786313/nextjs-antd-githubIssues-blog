@@ -9,6 +9,12 @@ const Home = () => (
     <Link href='/user/list'>
       <Button type='primary'>UserList Page</Button>
     </Link>
+    <Link href='/'>
+      <Button type='primary'>hello</Button>
+    </Link>
+    <Link href={`/user/[username]`} as={`/user/${`1`}`}>
+      <Button type='primary'>tony</Button>
+    </Link>
     <IfComp
       expression={true}
       trueComp={

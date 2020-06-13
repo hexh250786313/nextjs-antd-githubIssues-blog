@@ -3,10 +3,14 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducers/index';
 import rootSaga from './sagas/index';
 import userMiddleware from '../middlewares/client/user';
+import postListMiddleware from '../middlewares/client/post/list';
+import postDetailMiddleware from '../middlewares/client/post/detail';
 
-const bindMiddleware = (middleware) => {
+const bindMiddleware = middleware => {
   // add route middleware
   middleware.push(userMiddleware);
+  middleware.push(postListMiddleware);
+  middleware.push(postDetailMiddleware);
   if (process.env.NODE_ENV !== 'production') {
     const { composeWithDevTools } = require('redux-devtools-extension');
     // development use logger
@@ -17,12 +21,12 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware);
 };
 
-function configureStore (initialState) {
+function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
     initialState,
-    bindMiddleware([sagaMiddleware])
+    bindMiddleware([sagaMiddleware]),
   );
 
   store.sagaTask = sagaMiddleware.run(rootSaga);

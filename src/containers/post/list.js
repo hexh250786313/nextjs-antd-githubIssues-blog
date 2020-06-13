@@ -1,0 +1,15 @@
+import { connect } from 'react-redux';
+import { fetchPostList } from '../../redux/actions/post';
+import PostList from '../../components/Post/PostList';
+
+const mapStateToProps = state => ({
+  list: state.post.list.list,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchPostList() {
+    dispatch(fetchPostList());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);
