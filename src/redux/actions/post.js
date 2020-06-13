@@ -27,9 +27,10 @@ export function fetchPostListSuccess(payload) {
   };
 }
 
-export function fetchPostDetail() {
+export function fetchPostDetail(payload) {
   return {
     type: FETCH_POST_DETAIL,
+    payload,
   };
 }
 

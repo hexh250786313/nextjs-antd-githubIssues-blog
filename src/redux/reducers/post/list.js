@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   list: [],
+  detail: {},
 };
 
 const list = (state = initialState, { type, payload }) => {

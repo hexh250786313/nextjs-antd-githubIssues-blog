@@ -4,7 +4,7 @@ import { FETCH_POST_LIST } from '../../../constants/ActionTypes';
 import {
   fetchPostListFail,
   fetchPostListSuccess,
-} from '../../actions/user';
+} from '../../actions/post';
 import api from '../../../constants/ApiUrlForBE';
 /**
  * postList saga
@@ -12,7 +12,6 @@ import api from '../../../constants/ApiUrlForBE';
 export function* fetchPostList() {
   while (true) {
     yield take(FETCH_POST_LIST);
-    console.log('========================================================================================');
     try {
       const res = yield fetch(api.getGitHubIssues);
       const data = yield res.json();

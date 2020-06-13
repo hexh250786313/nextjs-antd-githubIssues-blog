@@ -7,7 +7,7 @@ export default class PostList extends React.Component {
   renderPostList = item => {
     const { number, title } = item;
     return (
-      <Link href={`/user/[username]`} as={`/user/${number}`} key={number}>
+      <Link href={`/post/[number]`} as={`/post/${number}`} key={number}>
         <a>{title}</a>
       </Link>
     );

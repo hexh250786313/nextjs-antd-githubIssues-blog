@@ -1,14 +1,15 @@
-import UserDetail from '../../containers/user/issue';
-import { fetchIssue } from '../../redux/actions/user';
+import PostDetail from '../../containers/post/detail';
+import { fetchPostDetail } from '../../redux/actions/post';
 
-UserDetail.getInitialProps = async props => {
+PostDetail.getInitialProps = async props => {
   const {
     store,
     isServer,
-    query: { username },
+    query: { number },
   } = props.ctx;
-  store.dispatch(fetchIssue(username));
+  const payload = { number };
+  store.dispatch(fetchPostDetail(payload));
   return { isServer };
 };
 
-export default UserDetail;
+export default PostDetail;

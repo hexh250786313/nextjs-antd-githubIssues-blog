@@ -6,14 +6,8 @@ import Counter from '../../containers/home/counter';
 const Home = () => (
   <>
     <h1>Hello Next.js</h1>
-    <Link href='/user/list'>
-      <Button type='primary'>UserList Page</Button>
-    </Link>
-    <Link href='/'>
-      <Button type='primary'>hello</Button>
-    </Link>
-    <Link href={`/user/[username]`} as={`/user/${`1`}`}>
-      <Button type='primary'>tony</Button>
+    <Link href='/post/list'>
+      <Button type='primary'>PostList Page</Button>
     </Link>
     <IfComp
       expression={true}
