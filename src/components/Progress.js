@@ -34,18 +34,21 @@ const _Progress = () => {
     setStatus(promiseInProgress);
   }
 
-  useInterval(() => {
-    console.log(count);
-    // Your custom logic here
-    if (count < 90) {
-      setCount(count + 20);
-    }
-  }, promiseInProgress ? 1000 : null);
+  useInterval(
+    () => {
+      console.log(count);
+      // Your custom logic here
+      if (count < 90) {
+        setCount(count + 20);
+      }
+    },
+    promiseInProgress ? 1000 : null,
+  );
 
   return (
     <div
       // className='myprogress'
-      className='top-progress'
+      className="top-progress"
       style={promiseInProgress ? { display: 'block' } : { display: 'none' }}
     >
       <style jsx>{`
@@ -156,11 +159,11 @@ const _Progress = () => {
       {
         <Progress
           percent={count}
-          size='small'
+          size="small"
           showInfo={false}
-          trailColor='rgba(0, 0, 0, 0)'
-          status='active'
-          strokeLinecap='square'
+          trailColor="rgba(0, 0, 0, 0)"
+          status="active"
+          strokeLinecap="square"
         />
       }
     </div>

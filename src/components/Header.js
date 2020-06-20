@@ -8,7 +8,7 @@ import { color_white } from '../constants/CustomTheme';
 // const { publicRuntimeConfig: { staticFolder } } = getConfig();
 
 const Header = () => (
-  <div id='header_bar' className='container'>
+  <div id="header_bar" className="container">
     <style jsx>{`
       .container {
         position: fixed;
@@ -44,17 +44,17 @@ const Header = () => (
         right: 20px;
       }
     `}</style>
-    <Link href='/'>
-      <div className='logo-container'>
-        <a className='sys-name'>hexh's blog</a>
+    <Link href="/">
+      <div className="logo-container">
+        <a className="sys-name">hexh's blog</a>
       </div>
     </Link>
-    <div className='right-container'>
-      <Button style={{ margin: '0 10px' }} type='primary' ghost>
+    <div className="right-container">
+      <Button style={{ margin: '0 10px' }} type="primary" ghost>
         <LoginOutlined />
         Login
       </Button>
-      <Button type='primary'>
+      <Button type="primary">
         <EditOutlined />
         Register
       </Button>

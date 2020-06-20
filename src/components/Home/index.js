@@ -6,8 +6,8 @@ import Counter from '../../containers/home/counter';
 const Home = () => (
   <>
     <h1>Hello Next.js</h1>
-    <Link href='/post/list'>
-      <Button type='primary'>PostList Page</Button>
+    <Link href="/post/list">
+      <Button type="primary">PostList Page</Button>
     </Link>
     <IfComp
       expression={true}

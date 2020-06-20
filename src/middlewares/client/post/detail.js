@@ -7,7 +7,7 @@ export default () => next => action => {
   const ret = next(action);
   switch (action.type) {
     case FETCH_POST_DETAIL_FAIL: {
-      message.error('Fetch post detail fail');
+      message.error('你能跟上我的思必得吗~');
       break;
     }
     default:

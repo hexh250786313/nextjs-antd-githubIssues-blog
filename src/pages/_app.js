@@ -10,14 +10,13 @@ import Router from 'next/router';
 import NProgress from 'nprogress'; // nprogress module
 import '../../assets/progress.less'; // styles of nprogress
 
-// Binding events. 
+// Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 class NextApp extends App {
-  
-  static async getInitialProps ({ Component, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -27,24 +26,26 @@ class NextApp extends App {
     return { pageProps };
   }
 
-  render () {
+  render() {
     const { Component, pageProps, store, router } = this.props;
     return (
       <>
         <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <meta charSet='utf-8' />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="utf-8" />
           <title>hexh's blog</title>
-          <link rel='shortcut icon' href='/tama.ico' type='image/ico'/>
-          <style jsx global>{`
-            * {
-              margin: 0;
-              padding: 0;
-            }
-            body {
-              font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
-            }
-          `}
+          <link rel="shortcut icon" href="/tama.ico" type="image/ico" />
+          <style jsx global>
+            {`
+              * {
+                margin: 0;
+                padding: 0;
+              }
+              body {
+                font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei',
+                  '微软雅黑', Arial, sans-serif;
+              }
+            `}
           </style>
         </Head>
         <Provider store={store}>

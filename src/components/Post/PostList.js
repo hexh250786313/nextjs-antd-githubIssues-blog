@@ -1,26 +1,47 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import React from 'react';
+// import React from 'react';
 import { Spin } from 'antd';
 
-export default class PostList extends React.Component {
-  renderPostList = item => {
-    const { number, title } = item;
-    return (
-      <Link href={`/post/[number]`} as={`/post/${number}`} key={number}>
-        <a>{title}</a>
-      </Link>
-    );
-  };
+const PostList = ({ list: postList }) => {
+  return (
+    <Spin delay={1000} spinning={postList.length === 0}>
+      <div>
+        {postList.map(item => {
+          const { number, title } = item;
+          return (
+            <Link href={`/post/[number]`} as={`/post/${number}`} key={number}>
+              <a>{title}</a>
+            </Link>
+          );
+        })}
+      </div>
+    </Spin>
+  );
+};
 
-  render() {
-    const { list: postList } = this.props;
-    if (postList.length === 0) {
-      return <Spin />;
-    }
-    return <div>{postList.map(item => this.renderPostList(item))}</div>;
-  }
-}
+export default PostList;
+
+// export default class PostList extends React.Component {
+// renderPostList = item => {
+// const { number, title } = item;
+// return (
+// <Link href={`/post/[number]`} as={`/post/${number}`} key={number}>
+// <a>{title}</a>
+// </Link>
+// );
+// };
+
+// render() {
+// const { list: postList } = this.props;
+
+// return (
+// <Spin delay={1000} spinning={postList.length === 0}>
+// <div>{postList.map(item => this.renderPostList(item))}</div>
+// </Spin>
+// );
+// }
+// }
 
 PostList.propTypes = {
   list: PropTypes.array.isRequired,
