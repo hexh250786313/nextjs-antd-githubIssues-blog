@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DynamicAntdTheme from 'dynamic-antd-theme';
 import Header from './Header';
-import Progress from './Progress';
+// import Progress from './Progress';
 import React from 'react';
 
 class Layout extends React.Component {
@@ -30,7 +30,9 @@ class Layout extends React.Component {
             background-color: #fff;
           }
         `}</style>
-        <Progress />
+        {
+          // <Progress />
+        }
         <Header />
         <div className='content-container'>{children}</div>
         <div

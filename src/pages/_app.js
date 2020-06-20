@@ -6,6 +6,14 @@ import withReduxSaga from 'next-redux-saga';
 import createStore from '../redux/store';
 import Layout from '../components/Layout';
 import '../../assets/self-styles.less';
+import Router from 'next/router';
+import NProgress from 'nprogress'; // nprogress module
+import '../../assets/progress.less'; // styles of nprogress
+
+// Binding events. 
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 class NextApp extends App {
   
@@ -26,8 +34,8 @@ class NextApp extends App {
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta charSet='utf-8' />
-          <title>Next-Antd-Scaffold</title>
-          <link rel='shortcut icon' href='/favicon.ico' type='image/ico'/>
+          <title>hexh's blog</title>
+          <link rel='shortcut icon' href='/tama.ico' type='image/ico'/>
           <style jsx global>{`
             * {
               margin: 0;

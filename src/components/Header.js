@@ -46,8 +46,7 @@ const Header = () => (
     `}</style>
     <Link href='/'>
       <div className='logo-container'>
-        <img className='logo' alt='logo' src={`/static/logo.png`} />
-        <a className='sys-name'>Next-Antd-Scaffold</a>
+        <a className='sys-name'>hexh's blog</a>
       </div>
     </Link>
     <div className='right-container'>

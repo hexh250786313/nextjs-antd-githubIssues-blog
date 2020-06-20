@@ -5,12 +5,16 @@ import CodeBlock from '../CodeBlock';
 import './index.less';
 import MarkdownNavbar from 'markdown-navbar';
 import { Anchor } from 'antd';
+import { Spin } from 'antd';
 
 export default class PostDetail extends React.Component {
   render() {
     let {
       detail: { title = '', body = '', number = '' },
     } = this.props;
+    if (!body) {
+      return <Spin />;
+    }
     return (
       <div>
         <p>
