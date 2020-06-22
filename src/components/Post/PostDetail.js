@@ -12,7 +12,7 @@ const PostDetail = ({ detail }) => {
 
   return (
     <div>
-      <Spin spinning={!body}>
+      <Spin delay={1000} spinning={!body}>
         <div>
           <p>
             {number}
@@ -27,7 +27,7 @@ const PostDetail = ({ detail }) => {
             escapeHtml={false}
           ></ReactMarkdown>
           <Anchor style={{ position: `fixed`, top: 80, right: 0 }}>
-            <div className="markNav-title">文章目录</div>
+            <div className="markNav-title">TOC</div>
 
             <div className="navigation">
               <MarkdownNavbar ordered={false} source={body} />

@@ -1,29 +1,37 @@
 import PropTypes from 'prop-types';
 // import DynamicAntdTheme from 'dynamic-antd-theme';
 import Drawer from '../containers/Layout/drawer';
+// import Drawer from './Drawer1';
 // import Progress from './Progress';
 // import React from 'react';
 import Navigation from '../containers/Layout/navigation';
 import { useState, useEffect } from 'react';
 
 const Layout = ({ children }) => {
-  const [scrollTop, setScrollTop] = useState(0);
+  const [isShowTopShadow, setTopShadow] = useState(false);
+
+  let scrollTop = 0;
 
   useEffect(() => {
     window.addEventListener(
       'scroll',
       () => {
-        const scrollTop =
+        const currtScrollTop =
           window.pageYOffset ||
           document.documentElement.scrollTop ||
           document.body.scrollTop ||
           0;
-        // setScrollTop(e.target.scrollTop);
-        setScrollTop(scrollTop);
+        if (currtScrollTop > 0 && scrollTop === 0) {
+          scrollTop = 1;
+          setTopShadow(true);
+        } else if (currtScrollTop === 0 && scrollTop > 0) {
+          scrollTop = 0;
+          setTopShadow(false);
+        }
       },
       false,
     );
-  }, [setScrollTop]);
+  }, []);
 
   return (
     <div id="app" className="App affix">
@@ -52,7 +60,7 @@ const Layout = ({ children }) => {
           transition: box-shadow 0.2s, -webkit-transform 0.2s;
           border-bottom: 0;
           position: absolute;
-          box-shadow: ${scrollTop ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
+          box-shadow: ${isShowTopShadow ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
         }
 
         .affix.App:before {

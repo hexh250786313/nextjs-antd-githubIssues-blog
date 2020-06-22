@@ -9,7 +9,7 @@ const Navigation = ({ openDrawer }) => {
         @media (max-width: 767px) {
           .App-backControl {
             position: fixed !important;
-            z-index: 1001;
+            z-index: 1000;
             top: 0 !important;
             margin: 0;
           }

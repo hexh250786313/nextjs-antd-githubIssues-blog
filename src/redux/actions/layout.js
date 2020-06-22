@@ -1,4 +1,4 @@
-import { OPEN_DRAWER, CLOSE_DRAWER } from '../../constants/ActionTypes';
+import { OPEN_DRAWER, CLOSE_DRAWER, HANDLE_SEARCH_TEXT_CHANGE } from '../../constants/ActionTypes';
 
 export function openDrawer() {
   return {
@@ -9,6 +9,12 @@ export function openDrawer() {
 export function closeDrawer() {
   return {
     type: CLOSE_DRAWER,
+  };
+}
+
+export function handleSearchTextChange() {
+  return {
+    type: HANDLE_SEARCH_TEXT_CHANGE,
   };
 }
 
