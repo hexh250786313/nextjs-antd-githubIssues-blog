@@ -7,7 +7,7 @@ import Drawer from '../../components/Drawer';
 
 const mapStateToProps = state => ({
   isShowDrawer: state.layout.drawer.isShowDrawer,
-  searchText: state.layout.search.seachText,
+  searchText: state.layout.search.searchText,
 });
 
 const mapDispatchToProps = dispatch => ({

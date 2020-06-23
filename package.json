@@ -40,6 +40,7 @@
     "@zeit/next-less": "^1.0.1",
     "antd": "^4.0.0",
     "babel-plugin-import": "^1.9.0",
+    "copy-to-clipboard": "^3.3.1",
     "core-js": "^2.6.5",
     "dynamic-antd-theme": "latest",
     "es6-promise": "^4.2.5",

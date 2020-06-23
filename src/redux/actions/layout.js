@@ -12,9 +12,10 @@ export function closeDrawer() {
   };
 }
 
-export function handleSearchTextChange() {
+export function handleSearchTextChange(payload) {
   return {
     type: HANDLE_SEARCH_TEXT_CHANGE,
+    payload,
   };
 }
 

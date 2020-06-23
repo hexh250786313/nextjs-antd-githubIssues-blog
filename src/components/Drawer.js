@@ -23,7 +23,6 @@ const renderContact = () => {
         return (
           <Menu.Item
             key={link}
-            // onClick={() => handleLink(link)}
             icon={<Icon />}
           >
             {text}
@@ -63,7 +62,11 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
                 placeholder="Make your life easier..."
                 // onPressEnter={}
                 value={searchText}
-                onChange={handleSearchTextChange}
+                onChange={e => {
+                  if (e.currentTarget && typeof e.currentTarget.value === 'string') {
+                    handleSearchTextChange(e.currentTarget.value);
+                  }
+                }}
                 allowClear
               />
             </Menu.Item>
@@ -85,6 +88,7 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
           }
 
           .drawer-header {
+            cursor: pointer;
             padding: 13px 10px;
             text-align: center;
             font-size: 16px;

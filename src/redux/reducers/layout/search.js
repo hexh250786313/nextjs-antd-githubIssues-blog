@@ -1,7 +1,7 @@
 import { HANDLE_SEARCH_TEXT_CHANGE } from '../../../constants/ActionTypes';
 
 const initialState = {
-  searchText: 'niubi',
+  searchText: '',
 };
 
 const search = (state = initialState, { type, payload }) => {
@@ -9,7 +9,7 @@ const search = (state = initialState, { type, payload }) => {
     case HANDLE_SEARCH_TEXT_CHANGE:
       return {
         ...state,
-        searchText: payload.searchText,
+        searchText: payload,
       };
     default:
       return state;
