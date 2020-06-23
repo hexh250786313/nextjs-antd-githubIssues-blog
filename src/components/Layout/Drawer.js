@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Drawer as AntDrawer, Menu, Input } from 'antd';
 import { MailOutlined, SearchOutlined } from '@ant-design/icons';
-import { color_primary } from '../constants/CustomTheme';
-import { contactTypes, blogName } from '../constants/ConstTypes';
+import { color_primary } from '../../constants/CustomTheme';
+import { contactTypes, blogName } from '../../constants/ConstTypes';
 import SubMenu from 'antd/lib/menu/SubMenu';
-import { handleLink } from '../core/util';
+import { handleLink } from '../../core/util';
 
 const renderContact = () => {
   return (
@@ -80,7 +80,6 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
             align-items: center;
             justify-content: flex-start;
             flex-direction: column;
-            min-height: 100vh;
           }
 
           .drawer-container > * {

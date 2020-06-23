@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { openDrawer } from '../../redux/actions/layout';
-import Navigation from '../../components/Navigation';
+// import Navigation from '../../components/Layout/Navigation';
+import Header from '../../components/Layout/Header';
 
 const mapStateToProps = () => ({});
 
@@ -10,4 +11,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
