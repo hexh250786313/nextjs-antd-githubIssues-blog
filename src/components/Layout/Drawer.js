@@ -67,14 +67,13 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
                     handleSearchTextChange(e.currentTarget.value);
                   }
                 }}
-                allowClear
               />
             </Menu.Item>
             {renderContact()}
           </Menu>
         </div>
 
-        <style>{`
+        <style jsx>{`
           .drawer-container {
             display: flex;
             align-items: center;
@@ -94,7 +93,7 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
             color: ${color_primary};
           }
 
-          .drawer-search {
+          :global(.drawer-container .ant-input-affix-wrapper) {
             border-radius: 100px;
           }
 
