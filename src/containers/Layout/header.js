@@ -1,18 +1,15 @@
 import { connect } from 'react-redux';
-import { openDrawer, handleSearchTextChange } from '../../redux/actions/layout';
-// import Navigation from '../../components/Layout/Navigation';
+import { handleHeaderChange } from '../../redux/actions/layout';
 import Header from '../../components/Layout/Header';
 
 const mapStateToProps = state => ({
-  searchText: state.layout.search.searchText,
+  pic: state.layout.header.pic,
+  title: state.layout.header.title,
 });
 
 const mapDispatchToProps = dispatch => ({
-  openDrawer() {
-    dispatch(openDrawer());
-  },
-  handleSearchTextChange(searchText) {
-    dispatch(handleSearchTextChange(searchText));
+  handleHeaderChange() {
+    dispatch(handleHeaderChange());
   },
 });
 

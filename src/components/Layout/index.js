@@ -6,6 +6,7 @@ import Drawer from '../../containers/Layout/drawer';
 // import React from 'react';
 // import Navigation from '../../containers/Layout/navigation';
 // import { useState, useEffect } from 'react';
+import Navigation from '../../containers/Layout/navigation';
 import Header from '../../containers/Layout/header';
 
 const Layout = ({ children }) => {
@@ -15,10 +16,9 @@ const Layout = ({ children }) => {
         // <Progress />
       }
 
+      <Navigation />
+
       <Header />
-      {
-      // <Navigation />
-      }
 
       <Drawer />
 
@@ -44,6 +44,14 @@ const Layout = ({ children }) => {
         .layout {
           background-color: #fff;
           height: 200vh;
+          min-height: 100vh;
+          min-width: 100vw;
+        }
+
+        .layout:before {
+          content: '';
+          display: block;
+          height: 46px;
         }
       `}</style>
     </div>

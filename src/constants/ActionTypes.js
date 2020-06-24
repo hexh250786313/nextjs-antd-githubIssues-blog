@@ -23,3 +23,6 @@ export const CLOSE_DRAWER = 'CLOSE_DRAWER';
 
 export const HANDLE_SEARCH_TEXT_CHANGE = 'HANDLE_SEARCH_TEXT_CHANGE';
 
+// ================= Header Part ==================== //
+
+export const HANDLE_HEADER_CHANGE = 'HANDLE_HEADER_CHANGE';
