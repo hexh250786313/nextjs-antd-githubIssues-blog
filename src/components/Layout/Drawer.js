@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Drawer as AntDrawer, Menu, Input } from 'antd';
-import { MailOutlined, SearchOutlined } from '@ant-design/icons';
+import { MailOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
 import { color_primary } from '../../constants/CustomTheme';
 import { contactTypes, blogName } from '../../constants/ConstTypes';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -14,17 +14,14 @@ const renderContact = () => {
       title={
         <span>
           <MailOutlined />
-          <span>联系我</span>
+          <span>CONTACT</span>
         </span>
       }
     >
       {contactTypes.map(item => {
         const { text, link, Icon } = item;
         return (
-          <Menu.Item
-            key={link}
-            icon={<Icon />}
-          >
+          <Menu.Item key={link} icon={<Icon />}>
             {text}
           </Menu.Item>
         );
@@ -33,7 +30,12 @@ const renderContact = () => {
   );
 };
 
-const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange }) => {
+const Drawer = ({
+  isShowDrawer,
+  closeDrawer,
+  searchText,
+  handleSearchTextChange,
+}) => {
   return (
     <AntDrawer
       visible={isShowDrawer}
@@ -63,16 +65,23 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
                 // onPressEnter={}
                 value={searchText}
                 onChange={e => {
-                  if (e.currentTarget && typeof e.currentTarget.value === 'string') {
+                  if (
+                    e.currentTarget &&
+                    typeof e.currentTarget.value === 'string'
+                  ) {
                     handleSearchTextChange(e.currentTarget.value);
                   }
                 }}
               />
             </Menu.Item>
+            <Menu.Item onClick={closeDrawer} icon={<UserOutlined />}>
+              <Link href="/about">
+                <a>ABOUT</a>
+              </Link>
+            </Menu.Item>
             {renderContact()}
           </Menu>
         </div>
-
         <style jsx>{`
           .drawer-container {
             display: flex;
@@ -96,7 +105,6 @@ const Drawer = ({ isShowDrawer, closeDrawer, searchText, handleSearchTextChange 
           :global(.drawer-container .ant-input-affix-wrapper) {
             border-radius: 100px;
           }
-
         `}</style>
       </div>
     </AntDrawer>

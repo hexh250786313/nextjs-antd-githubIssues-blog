@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 // import DynamicAntdTheme from 'dynamic-antd-theme';
-import Drawer from '../../containers/Layout/drawer';
-// import Drawer from './Drawer1';
-// import Progress from './Progress';
-// import React from 'react';
-// import Navigation from '../../containers/Layout/navigation';
-// import { useState, useEffect } from 'react';
-import Navigation from '../../containers/Layout/navigation';
-import Header from '../../containers/Layout/header';
+import Drawer from '../../containers/layout/drawer';
+import Navigation from '../../containers/layout/navigation';
+import Header from '../../containers/layout/header';
+import SideNavigation from './SideNavigation';
 
 const Layout = ({ children }) => {
   return (
@@ -22,7 +18,14 @@ const Layout = ({ children }) => {
 
       <Drawer />
 
-      <div className="content-container">{children}</div>
+      <div className="container-outer">
+        <div className="container">
+          <SideNavigation />
+          <div className="main">
+            {children}
+          </div>
+        </div>
+      </div>
       {
         // <div
         // style={{
@@ -45,13 +48,37 @@ const Layout = ({ children }) => {
           background-color: #fff;
           height: 200vh;
           min-height: 100vh;
-          min-width: 100vw;
         }
 
         .layout:before {
           content: '';
           display: block;
           height: 46px;
+        }
+
+        .container {
+          max-width: 1150px;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .container-outer {
+          padding-top: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .main {
+          width: 100%;
+          margin-left: 24px;
+        }
+
+        @media (min-width: 768px) {
+          .container {
+            padding: 0 42px;
+          }
         }
       `}</style>
     </div>

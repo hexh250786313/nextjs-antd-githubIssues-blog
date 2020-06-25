@@ -1,4 +1,9 @@
-import { HANDLE_HEADER_CHANGE, OPEN_DRAWER, CLOSE_DRAWER, HANDLE_SEARCH_TEXT_CHANGE } from '../../constants/ActionTypes';
+import {
+  HANDLE_HEADER_CHANGE,
+  OPEN_DRAWER,
+  CLOSE_DRAWER,
+  HANDLE_SEARCH_TEXT_CHANGE,
+} from '../../constants/ActionTypes';
 
 export function openDrawer() {
   return {

@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleHeaderChange() {
-    dispatch(handleHeaderChange());
+  handleHeaderChange(payload) {
+    dispatch(handleHeaderChange(payload));
   },
 });
 

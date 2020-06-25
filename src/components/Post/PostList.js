@@ -5,7 +5,7 @@ import { Spin } from 'antd';
 
 const PostList = ({ list: postList }) => {
   return (
-    <Spin delay={1000} spinning={postList.length === 0}>
+    <Spin spinning={postList.length === 0}>
       <div>
         {postList.map(item => {
           const { number, title } = item;

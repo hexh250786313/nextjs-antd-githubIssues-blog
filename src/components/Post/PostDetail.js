@@ -12,7 +12,7 @@ const PostDetail = ({ detail }) => {
 
   return (
     <div>
-      <Spin delay={1000} spinning={!body}>
+      <Spin spinning={!body}>
         <div>
           <p>
             {number}

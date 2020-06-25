@@ -1,6 +1,6 @@
 import GithubOutlined from '@ant-design/icons/GithubOutlined';
 import WeiboOutlined from '@ant-design/icons/WeiboOutlined';
-import MailOutlined from '@ant-design/icons/MailOutlined';
+import MailFilled from '@ant-design/icons/MailFilled';
 
 // 博客名称
 export const blogName = "hexh's blog";
@@ -20,7 +20,7 @@ export const contactTypes = [
   {
     text: 'Mail',
     link: 'mailto:250786313@qq.com',
-    Icon: MailOutlined,
+    Icon: MailFilled,
   }
 ];
 

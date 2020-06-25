@@ -59,55 +59,69 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
   }, []);
 
   return (
-    <div className="navigation">
-      <div className="button-box">
-        <Button
-          onClick={openDrawer}
-          type="link"
-          icon={<MenuOutlined />}
-          size="large"
-        />
-      </div>
-
-      <Link href="/">
-        <div className="title">{blogName}</div>
-      </Link>
-
-      <ul className="menu">
-        <li onClick={setSearchBarOpen} className="search">
-          <Input
-            prefix={<SearchOutlined style={{ color: color_primary }} />}
-            // onBlur={setSearchBarClose}
-            // placeholder="Search for something interesting?"
-            placeholder="Make your life easier..."
-            // onPressEnter={}
-            style={{ width: searchBarWidth }}
-            value={searchText}
-            onChange={e => {
-              if (e.currentTarget && typeof e.currentTarget.value === 'string') {
-                handleSearchTextChange(e.currentTarget.value);
-              }
-            }}
+    <div className="container">
+      <div className="navigation">
+        <div className="button-box">
+          <Button
+            onClick={openDrawer}
+            type="link"
+            icon={<MenuOutlined />}
+            size="large"
           />
-        </li>
-        <Dropdown overlay={_Menu}>
-          <li className="contact">联系我</li>
-        </Dropdown>
-      </ul>
+        </div>
 
+        <Link href="/">
+          <div className="title">{blogName}</div>
+        </Link>
+
+        <ul className="menu">
+          <li onClick={setSearchBarOpen} className="search">
+            <Input
+              prefix={<SearchOutlined style={{ color: color_primary }} />}
+              // onBlur={setSearchBarClose}
+              // placeholder="Search for something interesting?"
+              placeholder="Make your life easier..."
+              // onPressEnter={}
+              style={{ width: searchBarWidth }}
+              value={searchText}
+              onChange={e => {
+                if (
+                  e.currentTarget &&
+                  typeof e.currentTarget.value === 'string'
+                ) {
+                  handleSearchTextChange(e.currentTarget.value);
+                }
+              }}
+            />
+          </li>
+          <Dropdown overlay={_Menu}>
+            <li className="contact">CONTACT</li>
+          </Dropdown>
+          <li className="contact">ABOUT</li>
+        </ul>
+      </div>
       <style jsx>{`
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          top: 0;
+          z-index: 1;
+          box-shadow: ${isShowTopShadow ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
+          background-color: #fff;
+          width: 100%;
+        }
+
         .navigation {
           height: 46px;
           width: 100%;
           background-color: #fff;
           color: ${color_primary};
-          box-shadow: ${isShowTopShadow ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
-          position: fixed;
-          top: 0;
-          z-index: 1;
           display: flex;
           justify-content: space-between;
           align-items: center;
+          max-width: 1150px;
         }
 
         .menu {
@@ -143,6 +157,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           .navigation {
             padding: 0 42px;
           }
+
         }
 
         @media (max-width: 767px) {
