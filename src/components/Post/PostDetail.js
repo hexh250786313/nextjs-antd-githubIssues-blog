@@ -4,8 +4,22 @@ import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../CodeBlock';
 import './index.less';
 import MarkdownNavbar from 'markdown-navbar';
-import { Anchor } from 'antd';
-import { Spin } from 'antd';
+import { Spin, Anchor } from 'antd';
+
+const removeHash = e => {
+  setTimeout(() => {
+    window.location.replace(
+      window.location.href.toString().replace(window.location.hash, '') +
+        '#' +
+        e,
+    );
+    // console.log(
+    // window.location.href.toString().replace(window.location.hash, '') +
+    // '#' +
+    // e,
+    // );
+  }, 500);
+};
 
 const PostDetail = ({ detail }) => {
   const { title = '', body = '', number = '' } = detail;
@@ -28,9 +42,14 @@ const PostDetail = ({ detail }) => {
           ></ReactMarkdown>
           <Anchor style={{ position: `fixed`, top: 80, right: 0 }}>
             <div className="markNav-title">TOC</div>
-
             <div className="navigation">
-              <MarkdownNavbar ordered={false} source={body} />
+              <MarkdownNavbar
+                headingTopOffset={-165}
+                // updateHashAuto={false}
+                ordered={false}
+                source={body}
+                onHashChange={removeHash}
+              />
             </div>
           </Anchor>
         </div>

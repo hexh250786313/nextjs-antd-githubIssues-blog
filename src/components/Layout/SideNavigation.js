@@ -11,7 +11,7 @@ const SideNavigation = () => {
   useEffect(() => {
     setPathname(window.location.pathname);
     Router.events.on('routeChangeComplete', pathname => setPathname(pathname));
-  });
+  }, []);
 
   return (
     <>
