@@ -127,7 +127,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
         onClose={handleBottomDrawer}
         closable={false}
         bodyStyle={{ padding: 0 }}
-        headerStyle={{ paddingLeft: 16, border: 0, fontWeight: `800` }}
+        headerStyle={{ paddingLeft: 16, border: 0 }}
         title="Index"
       >
         <Menu selectedKeys={[pathname]} mode="vertical">

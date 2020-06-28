@@ -70,6 +70,7 @@ const Layout = ({ children }) => {
         }
 
         .main {
+          min-width: 0;
           width: 100%;
         }
 

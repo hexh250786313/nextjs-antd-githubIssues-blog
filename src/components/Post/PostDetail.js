@@ -42,7 +42,7 @@ const PostDetail = ({ detail, setTOC, handleHeaderChange }) => {
 
   return (
     <div>
-      <Spin spinning={!body}>
+      <Spin style={{ minWidth: 0 }} spinning={!body}>
         <ReactMarkdown
           className="markdown-body"
           source={body}
