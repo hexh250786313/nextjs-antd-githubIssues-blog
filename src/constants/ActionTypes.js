@@ -27,3 +27,6 @@ export const HANDLE_SEARCH_TEXT_CHANGE = 'HANDLE_SEARCH_TEXT_CHANGE';
 
 export const HANDLE_HEADER_CHANGE = 'HANDLE_HEADER_CHANGE';
 
+// ================= TOC Part ==================== //
+
+export const SET_TOC = 'SET_TOC';

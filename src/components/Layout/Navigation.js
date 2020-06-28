@@ -1,14 +1,22 @@
 import { color_primary } from '../../constants/CustomTheme';
 import { useState, useEffect } from 'react';
-import { MenuOutlined } from '@ant-design/icons';
-import { Button, Input, Dropdown, Menu } from 'antd';
+import { Button, Input, Dropdown, Menu, Drawer } from 'antd';
 import PropTypes from 'prop-types';
-import { blogName, contactTypes } from '../../constants/ConstTypes';
+import { blogName, contactTypes, pagesIndex } from '../../constants/ConstTypes';
 import Link from 'next/link';
-import { SearchOutlined } from '@ant-design/icons';
+import SearchOutlined from '@ant-design/icons/SearchOutlined';
+import MenuOutlined from '@ant-design/icons/MenuOutlined';
+import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined';
 import { handleLink } from '../../core/util';
+import Router from 'next/router';
 
+const Item = Menu.Item;
 const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37];
+const mapPagesIndex = (() => {
+  const obj = {};
+  pagesIndex.forEach(item => (obj[item.key] = item.value));
+  return obj;
+})();
 
 const _Menu = () => {
   return (
@@ -28,6 +36,8 @@ const _Menu = () => {
 const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
   const [isShowTopShadow, setTopShadow] = useState(false);
   const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH);
+  const [isShowBottomDrawer, setShowBottomDrawer] = useState(false);
+  const [pathname, setPathname] = useState('/');
   let scrollTop = 0;
 
   const setSearchBarOpen = () => {
@@ -35,6 +45,10 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
       return null;
     }
     setSearchWidth(OPENED_SEARCH_BAR_WIDTH);
+  };
+
+  const handleBottomDrawer = () => {
+    setShowBottomDrawer(!isShowBottomDrawer);
   };
 
   useEffect(() => {
@@ -56,6 +70,8 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
       },
       false,
     );
+    setPathname(window.location.pathname);
+    Router.events.on('routeChangeComplete', pathname => setPathname(pathname));
   }, []);
 
   return (
@@ -68,6 +84,10 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
             icon={<MenuOutlined />}
             size="large"
           />
+
+          <Button type="link" size="large" onClick={handleBottomDrawer}>
+            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : pathname} <CaretDownOutlined />
+          </Button>
         </div>
 
         <Link href="/">
@@ -100,6 +120,26 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           <li className="contact">ABOUT</li>
         </ul>
       </div>
+
+      <Drawer
+        visible={isShowBottomDrawer}
+        placement="bottom"
+        onClose={handleBottomDrawer}
+        closable={false}
+        bodyStyle={{ padding: 0 }}
+        headerStyle={{ paddingLeft: 16, border: 0, fontWeight: `800` }}
+        title="Index"
+      >
+        <Menu selectedKeys={[pathname]} mode="vertical">
+          {pagesIndex.map(item => (
+            <Item onClick={handleBottomDrawer} key={item.key}>
+              <Link href={item.key}>
+                <a>{item.value}</a>
+              </Link>
+            </Item>
+          ))}
+        </Menu>
+      </Drawer>
       <style jsx>{`
         .container {
           display: flex;
@@ -111,6 +151,19 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           box-shadow: ${isShowTopShadow ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
           background-color: #fff;
           width: 100%;
+        }
+
+        .button-box {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+        }
+
+        .button-box:after {
+          content: '';
+          display: block;
+          width: 40px;
         }
 
         .navigation {
@@ -157,7 +210,6 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           .navigation {
             padding: 0 42px;
           }
-
         }
 
         @media (max-width: 767px) {
@@ -172,7 +224,6 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
 
         :global(.navigation .ant-btn) {
           height: 46px;
-          width: 46px;
         }
 
         :global(.navigation .ant-input-affix-wrapper) {

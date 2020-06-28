@@ -8,6 +8,7 @@ import Drawer from '../../components/Layout/Drawer';
 const mapStateToProps = state => ({
   isShowDrawer: state.layout.drawer.isShowDrawer,
   searchText: state.layout.search.searchText,
+  mdSource: state.layout.toc.source,
 });
 
 const mapDispatchToProps = dispatch => ({

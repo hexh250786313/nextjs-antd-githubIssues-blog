@@ -2,6 +2,7 @@ import { Affix, Menu } from 'antd';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
+import { pagesIndex } from '../../constants/ConstTypes';
 
 const Item = Menu.Item;
 
@@ -18,16 +19,13 @@ const SideNavigation = () => {
       <Affix offsetTop={80}>
         <div className="navigation">
           <Menu selectedKeys={[pathname]} mode="vertical">
-            <Item key="/">
-              <Link href="/">
-                <a>Timeline</a>
-              </Link>
-            </Item>
-            <Item key="/post/list">
-              <Link href="/post/list">
-                <a>Post</a>
-              </Link>
-            </Item>
+            {pagesIndex.map(item => (
+              <Item key={item.key}>
+                <Link href={item.key}>
+                  <a>{item.value}</a>
+                </Link>
+              </Item>
+            ))}
           </Menu>
 
           <style jsx>{`
@@ -35,10 +33,10 @@ const SideNavigation = () => {
               width: 190px;
             }
 
-            :global(.navigation .ant-menu-vertical) {
-              border-right: 0;
+            @media (max-width: 767px) {
+              display: none;
             }
-           `}</style>
+          `}</style>
         </div>
       </Affix>
     </>

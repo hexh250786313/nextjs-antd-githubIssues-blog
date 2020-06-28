@@ -46,7 +46,6 @@ const Layout = ({ children }) => {
       <style jsx>{`
         .layout {
           background-color: #fff;
-          height: 200vh;
           min-height: 100vh;
         }
 
@@ -72,13 +71,31 @@ const Layout = ({ children }) => {
 
         .main {
           width: 100%;
-          margin-left: 24px;
         }
 
         @media (min-width: 768px) {
           .container {
             padding: 0 42px;
           }
+
+          .main {
+            margin-left: 24px;
+            padding: 0 0 40px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .main {
+            padding: 0 12px 40px;
+          }
+        }
+
+        :global(.ant-menu-vertical) {
+          border-right: 0;
+        }
+
+        :global(.ant-drawer-title) {
+          font-weight: bold;
         }
       `}</style>
     </div>

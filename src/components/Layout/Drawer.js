@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Drawer as AntDrawer, Menu, Input } from 'antd';
-import { MailOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons';
+import { OrderedListOutlined, MailOutlined, SearchOutlined } from '@ant-design/icons';
 import { color_primary } from '../../constants/CustomTheme';
 import { contactTypes, blogName } from '../../constants/ConstTypes';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { handleLink } from '../../core/util';
+import TOC from '../../containers/layout/toc';
 
 const renderContact = () => {
   return (
@@ -30,11 +31,28 @@ const renderContact = () => {
   );
 };
 
+const renderTOC = () => {
+  return (
+    <SubMenu
+      key="toc"
+      title={
+        <span>
+          <OrderedListOutlined />
+          <span>TOC</span>
+        </span>
+      }
+    >
+      <TOC />
+    </SubMenu>
+  );
+};
+
 const Drawer = ({
   isShowDrawer,
   closeDrawer,
   searchText,
   handleSearchTextChange,
+  mdSource,
 }) => {
   return (
     <AntDrawer
@@ -74,12 +92,8 @@ const Drawer = ({
                 }}
               />
             </Menu.Item>
-            <Menu.Item onClick={closeDrawer} icon={<UserOutlined />}>
-              <Link href="/about">
-                <a>ABOUT</a>
-              </Link>
-            </Menu.Item>
             {renderContact()}
+            {mdSource ? renderTOC() : null}
           </Menu>
         </div>
         <style jsx>{`
@@ -116,10 +130,12 @@ Drawer.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   handleSearchTextChange: PropTypes.func.isRequired,
   searchText: PropTypes.string,
+  mdSource: PropTypes.string,
 };
 
 Drawer.defaultProps = {
   searchText: '',
+  mdSource: '',
 };
 
 export default Drawer;

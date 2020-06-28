@@ -21,6 +21,21 @@ export const contactTypes = [
     text: 'Mail',
     link: 'mailto:250786313@qq.com',
     Icon: MailFilled,
-  }
+  },
 ];
 
+// 页面索引
+export const pagesIndex = [
+  {
+    key: '/',
+    value: 'Timeline',
+  },
+  {
+    key: '/post/list',
+    value: 'Post',
+  },
+  {
+    key: '/about',
+    value: 'About',
+  },
+];

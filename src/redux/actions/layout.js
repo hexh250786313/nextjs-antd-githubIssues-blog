@@ -3,6 +3,7 @@ import {
   OPEN_DRAWER,
   CLOSE_DRAWER,
   HANDLE_SEARCH_TEXT_CHANGE,
+  SET_TOC,
 } from '../../constants/ActionTypes';
 
 export function openDrawer() {
@@ -27,6 +28,13 @@ export function handleSearchTextChange(payload) {
 export function handleHeaderChange(payload) {
   return {
     type: HANDLE_HEADER_CHANGE,
+    payload,
+  };
+}
+
+export function setTOC(payload) {
+  return {
+    type: SET_TOC,
     payload,
   };
 }
