@@ -1,6 +1,6 @@
+import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import Router from 'next/router';
 
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
@@ -15,7 +15,7 @@ const Header = ({ handleHeaderChange, pic, title }) => {
 
       default:
         handleHeaderChange({
-          title: "Posts List",
+          title: 'Posts List',
           pic:
             'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg',
         });

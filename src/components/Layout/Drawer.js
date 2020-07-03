@@ -4,9 +4,10 @@ import { Drawer as AntDrawer, Menu, Input } from 'antd';
 import { OrderedListOutlined, MailOutlined, SearchOutlined } from '@ant-design/icons';
 import { color_primary } from '../../constants/CustomTheme';
 import { contactTypes, blogName } from '../../constants/ConstTypes';
-import SubMenu from 'antd/lib/menu/SubMenu';
 import { handleLink } from '../../core/util';
 import TOC from '../../containers/layout/toc';
+
+const SubMenu = Menu.SubMenu;
 
 const renderContact = () => {
   return (
