@@ -2,7 +2,9 @@
 
 .markdown-navigation {
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Helvetica", "Arial", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica',
+    'Arial', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'WenQuanYi Micro Hei', sans-serif;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -77,4 +79,26 @@
   font-size: 0.72em;
   /* padding-left: 9em; */
   padding-left: 11em;
+}
+
+@media (min-width: 768px) {
+  .markdown-navigation .title-level2 {
+    padding-left: 1em;
+  }
+
+  .markdown-navigation .title-level3 {
+    padding-left: 3em;
+  }
+
+  .markdown-navigation .title-level4 {
+    padding-left: 5em;
+  }
+
+  .markdown-navigation .title-level5 {
+    padding-left: 7em;
+  }
+
+  .markdown-navigation .title-level6 {
+    padding-left: 9em;
+  }
 }

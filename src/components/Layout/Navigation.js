@@ -86,7 +86,8 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           />
 
           <Button type="link" size="large" onClick={handleBottomDrawer}>
-            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : pathname} <CaretDownOutlined />
+            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : pathname}{' '}
+            <CaretDownOutlined />
           </Button>
         </div>
 
@@ -132,7 +133,11 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
       >
         <Menu selectedKeys={[pathname]} mode="vertical">
           {pagesIndex.map(item => (
-            <Item onClick={handleBottomDrawer} key={item.key}>
+            <Item
+              onClick={handleBottomDrawer}
+              icon={<item.Icon />}
+              key={item.key}
+            >
               <Link href={item.key}>
                 <a>{item.value}</a>
               </Link>
@@ -148,7 +153,9 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           position: fixed;
           top: 0;
           z-index: 1;
-          box-shadow: ${isShowTopShadow ? '0 2px 6px rgba(0, 0, 0, 0.35)' : 'null'};
+          box-shadow: ${isShowTopShadow
+      ? '0 2px 6px rgba(0, 0, 0, 0.35)'
+      : 'null'};
           background-color: #fff;
           width: 100%;
         }

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Drawer from '../../containers/layout/drawer';
 import Navigation from '../../containers/layout/navigation';
 import Header from '../../containers/layout/header';
-import SideNavigation from './SideNavigation';
+import SideNavigation from '../../containers/layout/side-navigation';
+// import SideNavigation from './SideNavigation';
 
 const Layout = ({ children }) => {
   return (

@@ -127,10 +127,25 @@ const Drawer = ({
 };
 
 Drawer.propTypes = {
+  /**
+   * 控制是否展示抽屉
+   */
   isShowDrawer: PropTypes.bool.isRequired,
+  /**
+   * 关闭抽屉回调
+   */
   closeDrawer: PropTypes.func.isRequired,
+  /**
+   * 搜索内容的 onChange
+   */
   handleSearchTextChange: PropTypes.func.isRequired,
+  /**
+   * 搜索文本
+   */
   searchText: PropTypes.string,
+  /**
+   * markdown 文本源
+   */
   mdSource: PropTypes.string,
 };
 

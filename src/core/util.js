@@ -21,6 +21,13 @@ export const filterObject = (o, filter) => {
   return r;
 };
 
+/** 处理链接，不同前缀的链接会有不同处理
+ *
+ * @method handleLink
+ * @param {string} link 接收一个字符串
+ * @returns {string} 返回源字符串
+ *
+ */
 export const handleLink = link => {
   if (typeof link === 'string') {
     let startsWith;
@@ -38,11 +45,48 @@ export const handleLink = link => {
       return link;
     } else if ((startsWith = handleHrefStr(copyPending, link))) {
       if (require('copy-to-clipboard')(link.replace(startsWith, ''))) {
-        message.success('已经复制到剪贴板');
+        message.success('Copied！');
       } else {
-        message.error('哎呀，出错了');
+        message.error('Error！');
       }
     }
   }
-  return null;
+  throw new Error(`Not a string`);
+};
+
+/** 处理 <desc> 标签的内容，提取或者去除
+ *
+ * @method handleDescContent
+ * @param {string} source 要处理的字符串
+ * @param {'get' | 'exec'} action 进行的操作，'get': 获取 desc 中的内容，'exec': 去除 desc
+ * @returns {string} 返回 <desc> 标签中的内容
+ *
+ */
+export const handleDescContent = (source = ``, action = `get`) => {
+  const actions = ['get', 'exec'];
+  if (typeof source !== `string` || typeof action !== `string`) {
+    throw new Error(`Not a string`);
+  }
+  if (!actions.includes(action)) {
+    throw new Error(`Require 'get' or 'exec'`);
+  }
+  const reg = /<desc>([\s\S]+)<\/desc>/g;
+  let desc = ``;
+  let descWithTag = ``;
+  if ((desc = reg.exec(source))) {
+    descWithTag = desc[0];
+    desc = desc[1];
+  }
+
+  switch (action) {
+    case `get`:
+      return desc;
+    case `exec`:
+      if (descWithTag) {
+        return source.replace(descWithTag, '');
+      }
+      return source;
+    default:
+      break;
+  }
 };
