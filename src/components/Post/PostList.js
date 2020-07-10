@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import { Spin, List } from 'antd';
 import Router from 'next/router';
-import { handleDescContent } from '../../core/util';
+import { handleDescContent, utc2beijing } from '../../core/util';
+import { color_primary } from '../../constants/CustomTheme';
 
 const PostList = ({ list: postList }) => {
   const handleClick = (e, href) => {
@@ -22,7 +23,10 @@ const PostList = ({ list: postList }) => {
                 onClick={e => handleClick(e, `/post/${number}`)}
               >
                 <List.Item>
-                  <List.Item.Meta title={title} description={updated_at} />
+                  <List.Item.Meta
+                    title={<span className="title">{title}</span>}
+                    description={utc2beijing(updated_at)}
+                  />
                   <p className="description">{handleDescContent(body)}</p>
                 </List.Item>
               </a>
@@ -38,7 +42,18 @@ const PostList = ({ list: postList }) => {
           margin: 12px 0;
         }
 
+        .title {
+          color: ${color_primary};
+          font-size: 16px;
+        }
+
         .description {
+          color: rgba(0, 0, 0, 0.65);
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
           margin: 0;
         }
       `}</style>
@@ -47,27 +62,6 @@ const PostList = ({ list: postList }) => {
 };
 
 export default PostList;
-
-// export default class PostList extends React.Component {
-// renderPostList = item => {
-// const { number, title } = item;
-// return (
-// <Link href={`/post/[number]`} as={`/post/${number}`} key={number}>
-// <a>{title}</a>
-// </Link>
-// );
-// };
-
-// render() {
-// const { list: postList } = this.props;
-
-// return (
-// <Spin delay={1000} spinning={postList.length === 0}>
-// <div>{postList.map(item => this.renderPostList(item))}</div>
-// </Spin>
-// );
-// }
-// }
 
 PostList.propTypes = {
   list: PropTypes.array.isRequired,

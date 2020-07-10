@@ -59,7 +59,7 @@ export const handleLink = link => {
  * @method handleDescContent
  * @param {string} source 要处理的字符串
  * @param {'get' | 'exec'} action 进行的操作，'get': 获取 desc 中的内容，'exec': 去除 desc
- * @returns {string} 返回 <desc> 标签中的内容
+ * @returns {string} 返回 <desc> 标签中的内容或去除 <desc> 后的内容
  *
  */
 export const handleDescContent = (source = ``, action = `get`) => {
@@ -89,4 +89,42 @@ export const handleDescContent = (source = ``, action = `get`) => {
     default:
       break;
   }
+};
+
+/** UTC转北京时间
+ *
+ * @method utc2beijing
+ * @param {string} utc_datetime
+ * @returns {string} 北京时间
+ *
+ */
+export const utc2beijing = utc_datetime => {
+  if (typeof utc_datetime !== `string`) {
+    throw new Error(`Not a string`);
+  }
+  if (utc_datetime.indexOf(`T`) === -1 || utc_datetime.indexOf(`Z`) === -1) {
+    throw new Error(`Not a UTC`);
+  }
+  // 转为正常的时间格式 年-月-日 时:分:秒
+  const T_pos = utc_datetime.indexOf('T');
+  const Z_pos = utc_datetime.indexOf('Z');
+  const year_month_day = utc_datetime.substr(0, T_pos);
+  const hour_minute_second = utc_datetime.substr(T_pos + 1, Z_pos - T_pos - 1);
+  const new_datetime = year_month_day + ' ' + hour_minute_second; // 2017-03-31 08:02:06
+
+  // 处理成为时间戳
+  let timestamp = new Date(Date.parse(new_datetime));
+  timestamp = timestamp.getTime();
+  timestamp = timestamp / 1000;
+
+  // 增加8个小时，北京时间比utc时间多八个时区
+  timestamp = timestamp + 8 * 60 * 60;
+
+  // 时间戳转为时间
+  const beijing_datetime = new Date(
+    parseInt(timestamp) * 1000,
+  ).toLocaleString();
+  // .replace(/年|月/g, '-')
+  // .replace(/日/g, ' ');
+  return beijing_datetime;
 };

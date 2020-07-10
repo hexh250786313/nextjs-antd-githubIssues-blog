@@ -130,6 +130,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
         bodyStyle={{ padding: 0 }}
         headerStyle={{ paddingLeft: 16, border: 0 }}
         title="Index"
+        height={210}
       >
         <Menu selectedKeys={[pathname]} mode="vertical">
           {pagesIndex.map(item => (

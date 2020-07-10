@@ -35,7 +35,7 @@ const PostDetail = ({ detail, setTOC, handleHeaderChange }) => {
             code: CodeBlock,
           }}
           escapeHtml={false}
-        ></ReactMarkdown>
+        />
       </Spin>
     </div>
   );
