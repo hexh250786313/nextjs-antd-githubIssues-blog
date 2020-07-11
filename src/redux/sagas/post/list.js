@@ -14,7 +14,11 @@ export function* fetchPostList() {
     try {
       // const res = yield trackPromise(fetch(api.getGitHubIssues));
       const res = yield fetch(api.getGitHubIssues);
-      const data = yield res.json();
+      let data = yield res.json();
+      // data = data.filter(item => {
+      //   const { labels } = item;
+      //   return labels && labels.some(label => label.name === 'blog');
+      // });
       yield put(fetchPostListSuccess(data));
     } catch (e) {
       yield put(fetchPostListFail());

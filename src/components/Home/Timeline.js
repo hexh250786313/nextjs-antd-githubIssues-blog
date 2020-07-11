@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Timeline as AntTimeline } from 'antd';
+import { Spin, Timeline as AntTimeline } from 'antd';
 import { handleDescContent, utc2locale } from '../../core/util';
 // import { ClockCircleOutlined } from '@ant-design/icons';
 // import { color_primary } from '../../constants/CustomTheme';
@@ -23,47 +23,36 @@ const Timeline = ({ list: POSTList }) => {
   }, []);
 
   return (
-    <AntTimeline mode={timeLineMode}>
-      {POSTList.map(item => {
-        const { number, title, updated_at, body } = item;
-        return (
-          <Item key={title}>
+    <Spin spinning={POSTList.length === 0}>
+      <AntTimeline mode={timeLineMode}>
+        {POSTList.map(item => {
+          const { number, title, updated_at, body } = item;
+          return (
+            <Item key={title}>
+              <span className="type">POST</span>
+              <a
+                href={`/post/${number}`}
+                onClick={e => handleClick(e, `/post/${number}`)}
+              >
+                <span className="title">{title}</span>
+                <br />
+                <span className="time">{utc2locale(updated_at)}</span>
+                <p className="content">{handleDescContent(body)}</p>
+              </a>
+            </Item>
+          );
+        })}
+        {POSTList.length !== 0 ? (
+          <Item>
             <span className="type">POST</span>
-            <a
-              href={`/post/${number}`}
-              onClick={e => handleClick(e, `/post/${number}`)}
-            >
-              <span className="title">{title}</span>
+            <a>
+              <span className="title">hexh's page deployed.</span>
               <br />
-              <span className="time">{utc2locale(updated_at)}</span>
-              <p className="content">{handleDescContent(body)}</p>
+              <span className="time">2020/07/11</span>
             </a>
           </Item>
-        );
-      })}
-      <Item>
-        <span className="type">POST</span>
-        <a>
-          <span className="title">hexh's page deployed.</span>
-          <br />
-          <span className="time">2020/07/11</span>
-        </a>
-      </Item>
-      {
-        // <Item>Create a services site 2015-09-01</Item>
-        // <Item color="green">Solve initial network problems 2015-09-01</Item>
-        // <Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-        //   Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-        //   accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae
-        //   ab illo inventore veritatis et quasi architecto beatae vitae dicta
-        //   sunt explicabo.
-        // </Item>
-        // <Item color="red">Network problems being solved 2015-09-01</Item>
-        // <Item>Create a services site 2015-09-01</Item>
-        // <Item dot={<ClockCircleOutlined style={{ fontSize: '16px' }} />}>
-        //   Technical testing 2015-09-01
-        // </Item>
-      }
+        ) : null}
+      </AntTimeline>
       <style jsx>{`
         .title {
           font-weight: bold;
@@ -90,7 +79,7 @@ const Timeline = ({ list: POSTList }) => {
           text-overflow: ellipsis;
         }
       `}</style>
-    </AntTimeline>
+    </Spin>
   );
 };
 
