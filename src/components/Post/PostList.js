@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Spin, List } from 'antd';
 import Router from 'next/router';
-import { handleDescContent, utc2beijing } from '../../core/util';
+import { handleDescContent, utc2locale } from '../../core/util';
 import { color_primary } from '../../constants/CustomTheme';
 
 const PostList = ({ list: postList }) => {
@@ -24,8 +24,11 @@ const PostList = ({ list: postList }) => {
               >
                 <List.Item>
                   <List.Item.Meta
+                    // title={<span className="title">{title}</span>}
                     title={<span className="title">{title}</span>}
-                    description={utc2beijing(updated_at)}
+                    description={
+                      <span className="time">{utc2locale(updated_at)}</span>
+                    }
                   />
                   <p className="description">{handleDescContent(body)}</p>
                 </List.Item>
@@ -39,12 +42,37 @@ const PostList = ({ list: postList }) => {
           flex-direction: column;
           align-items: flex-start;
           padding: 0;
-          margin: 12px 0;
+          margin: 0 0 25px;
+        }
+
+        :global(.container .ant-list-item-meta, .container
+            .ant-list-item-meta-content) {
+          width: 100%;
+        }
+
+        :global(.container .ant-list-item-meta-title) {
+          line-height: 1.1;
+          margin: 0;
+        }
+
+        :global(.container .ant-list-item-meta-description) {
+          line-height: 1;
+          margin: 0 0 5px;
+        }
+
+        .time {
+          font-size: 14px;
         }
 
         .title {
+          display: inline-block;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
           color: ${color_primary};
-          font-size: 16px;
+          font-size: 18px;
+          font-weight: bold;
         }
 
         .description {

@@ -2,7 +2,7 @@
 // import Link from 'next/link';
 // import IfComp from 'if-comp';
 // import Counter from '../../containers/home/counter';
-// import Timeline from './Timeline';
+import Timeline from '../../containers/home/timeline';
 
 const Home = () => (
   <div className="home">
@@ -23,9 +23,7 @@ const Home = () => (
       // />
       // </>
     }
-    {
-      // <Timeline />
-    }
+    <Timeline />
     <style jsx>{`
       .home {
         width: 100%;
