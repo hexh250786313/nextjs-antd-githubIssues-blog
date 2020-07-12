@@ -25,7 +25,7 @@ const Timeline = ({ list: POSTList }) => {
     <Spin spinning={POSTList.length === 0}>
       <AntTimeline mode={timeLineMode}>
         {POSTList.map(item => {
-          const { number, title, updated_at, body } = item;
+          const { number, title, created_at, body } = item;
           return (
             <Item key={title}>
               <span className="type">POST</span>
@@ -35,7 +35,7 @@ const Timeline = ({ list: POSTList }) => {
               >
                 <span className="title">{title}</span>
                 <br />
-                <span className="time">{utc2locale(updated_at)}</span>
+                <span className="time">{utc2locale(created_at)}</span>
                 <p className="content">{handleDescContent(body)}</p>
               </a>
             </Item>

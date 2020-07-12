@@ -14,7 +14,7 @@ const PostList = ({ list: postList }) => {
       <Spin spinning={postList.length === 0}>
         <List>
           {postList.map(item => {
-            const { number, title, body, updated_at } = item;
+            const { number, title, body, created_at } = item;
             return (
               <a
                 key={number}
@@ -26,7 +26,7 @@ const PostList = ({ list: postList }) => {
                     // title={<span className="title">{title}</span>}
                     title={<span className="title">{title}</span>}
                     description={
-                      <span className="time">{utc2locale(updated_at)}</span>
+                      <span className="time">{utc2locale(created_at)}</span>
                     }
                   />
                   <p className="description">{handleDescContent(body)}</p>

@@ -19,12 +19,12 @@ HTTP_METHOD.forEach(method => {
       method,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
-        Accept: 'application/json'
+        Accept: 'application/json',
       },
-      credentials: 'include',
+      // credentials: 'include',
       timeout,
       mode: 'cors',
-      cache: 'no-cache'
+      cache: 'no-cache',
     };
 
     if (query) {
@@ -33,24 +33,28 @@ HTTP_METHOD.forEach(method => {
       )}`;
     }
 
+    console.log(query);
+
     if (canSend && data) {
       opts.body = qs.stringify(filterObject(data, Boolean));
+      // opts.body = JSON.stringify(data);
     }
 
     console.info('Request Url:', url);
 
-    return fetch(url, opts)
-      .then(res => res.json())
-      .then(({ errcode = 0, errmsg, data }) => {
-        if (errcode !== 0) {
-          const err = new Error(errmsg);
-          err.message = errmsg;
-          err.code = errcode;
-          err.data = data;
-          throw err;
-        }
-        return data;
-      });
+    return fetch(url, opts).then(res => {
+      return res.json();
+    });
+    // .then(({ errcode = 0, errmsg, data }) => {
+    //   if (errcode !== 0) {
+    //     const err = new Error(errmsg);
+    //     err.message = errmsg;
+    //     err.code = errcode;
+    //     err.data = data;
+    //     throw err;
+    //   }
+    //   return data;
+    // });
   };
 });
 

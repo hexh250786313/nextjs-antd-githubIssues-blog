@@ -7,9 +7,10 @@ import {
   FETCH_POST_DETAIL_SUCCESS,
 } from '../../constants/ActionTypes';
 
-export function fetchPostList() {
+export function fetchPostList(payload) {
   return {
     type: FETCH_POST_LIST,
+    payload,
   };
 }
 

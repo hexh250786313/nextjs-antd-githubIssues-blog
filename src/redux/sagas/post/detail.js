@@ -16,7 +16,6 @@ export function* fetchPostDetail() {
     const {
       payload: { number = '0' },
     } = yield take(FETCH_POST_DETAIL);
-    console.log(number);
     try {
       // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
       const res = yield fetch(`${api.getGitHubIssue}/${number}`);
