@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { Spin, List } from 'antd';
 import Router from 'next/router';
 import { handleDescContent, utc2locale } from '../../core/util';
-import { color_primary } from '../../constants/CustomTheme';
 
 const PostList = ({ list: postList }) => {
   const handleClick = (e, href) => {
@@ -51,6 +50,7 @@ const PostList = ({ list: postList }) => {
         }
 
         :global(.container .ant-list-item-meta-title) {
+          color: inherit;
           line-height: 1.1;
           margin: 0;
         }
@@ -70,7 +70,6 @@ const PostList = ({ list: postList }) => {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          color: ${color_primary};
           font-size: 18px;
           font-weight: bold;
         }

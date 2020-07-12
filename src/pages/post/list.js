@@ -3,7 +3,12 @@ import { fetchPostList } from '../../redux/actions/post';
 
 PostList.getInitialProps = async props => {
   const { store, isServer } = props.ctx;
-  store.dispatch(fetchPostList());
+  const payload = {
+    labels: `blog`,
+    page: 1,
+    per_page: 1,
+  };
+  store.dispatch(fetchPostList(payload));
   return { isServer };
 };
 

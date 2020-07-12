@@ -18,7 +18,6 @@ const Timeline = ({ list: POSTList }) => {
 
   useEffect(() => {
     const deviceWidth = window.screen.width || 0;
-    console.log(deviceWidth);
     setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate');
   }, []);
 

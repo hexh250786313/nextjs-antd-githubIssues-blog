@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPostDetail(order) {
-    dispatch(fetchPostDetail(order));
+  fetchPostDetail(number) {
+    dispatch(fetchPostDetail(number));
   },
   setTOC(source) {
     dispatch(setTOC(source));

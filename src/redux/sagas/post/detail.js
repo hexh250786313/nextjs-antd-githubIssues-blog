@@ -13,10 +13,13 @@ import api from '../../../constants/ApiUrlForBE';
  */
 export function* fetchPostDetail() {
   while (true) {
-    const { payload: { number: order = '0' } } = yield take(FETCH_POST_DETAIL);
+    const {
+      payload: { number = '0' },
+    } = yield take(FETCH_POST_DETAIL);
+    console.log(number);
     try {
-      // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${order}`));
-      const res = yield fetch(`${api.getGitHubIssues}/${order}`);
+      // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
+      const res = yield fetch(`${api.getGitHubIssue}/${number}`);
       const data = yield res.json();
       yield put(fetchPostDetailSuccess(data));
     } catch (e) {
