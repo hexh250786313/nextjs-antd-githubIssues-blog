@@ -45,9 +45,9 @@ const Timeline = ({ list: POSTList }) => {
           <Item>
             <span className="type">POST</span>
             <a>
-              <span className="title">hexh's page deployed.</span>
+              <span className="title">hexh's blog deployed.</span>
               <br />
-              <span className="time">2020/07/11</span>
+              <span className="time">2020/4/26 Monday</span>
             </a>
           </Item>
         ) : null}

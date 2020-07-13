@@ -33,14 +33,12 @@ HTTP_METHOD.forEach(method => {
       )}`;
     }
 
-    console.log(query);
-
     if (canSend && data) {
       opts.body = qs.stringify(filterObject(data, Boolean));
       // opts.body = JSON.stringify(data);
     }
 
-    console.info('Request Url:', url);
+    // console.info('Request Url:', url);
 
     return fetch(url, opts).then(res => {
       return res.json();

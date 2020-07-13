@@ -6,6 +6,10 @@ export const RESET = 'RESET';
 
 // ================= Post Part ==================== //
 
+export const FETCH_BLOG_INFO = 'FETCH_BLOG_INFO';
+export const FETCH_BLOG_INFO_SUCCESS = 'FETCH_BLOG_INFO_SUCCESS';
+export const FETCH_BLOG_INFO_FAIL = 'FETCH_BLOG_INFO_FAIL';
+
 export const FETCH_POST_LIST = 'FETCH_POST_LIST';
 export const FETCH_POST_LIST_FAIL = 'FETCH_POST_LIST_FAIL';
 export const FETCH_POST_LIST_SUCCESS = 'FETCH_POST_LIST_SUCCESS';

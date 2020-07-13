@@ -6,7 +6,7 @@ PostList.getInitialProps = async props => {
   const payload = {
     // labels: `post`,
     page: 1,
-    // per_page: 1,
+    per_page: 1,
     creator: `hexh250786313`,
     sort: `created`,
     direction: `desc`,

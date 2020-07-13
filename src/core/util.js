@@ -9,6 +9,37 @@ const handleHrefStr = (passStartsWithArr, link) => {
   }
   return null;
 };
+/** 返回周几
+ *
+ * @method getDay
+ * @param {0 | 1 | 2 | 3 | 4 | 5 | 6} day
+ * @returns {"Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"} 返回周几
+ *
+ */
+const getDay = day => {
+  if (typeof day !== `number`) {
+    throw new Error(`Not a number`);
+  }
+
+  switch (day) {
+    case 0:
+      return `Monday`;
+    case 1:
+      return `Tuesday`;
+    case 2:
+      return `Wednesday`;
+    case 3:
+      return `Thursday`;
+    case 4:
+      return `Friday`;
+    case 5:
+      return `Saturday`;
+    case 6:
+      return `Sunday`;
+    default:
+      return ``;
+  }
+};
 
 // transform the http query & params
 export const filterObject = (o, filter) => {
@@ -107,8 +138,20 @@ export const utc2locale = utc_datetime => {
   }
 
   let localeDate = '';
-  if (utc2locale) {
-    localeDate = new Date(utc_datetime).toLocaleDateString();
+  if (utc_datetime) {
+    const date = new Date(utc_datetime);
+    // localeDate = new Date(utc_datetime).toLocaleDateString(); // 格式: '2020/7/01' 或者 '7/01/2020'
+    localeDate = `${date.getFullYear()}/${date.getMonth() +
+      1}/${date.getDate()} ${getDay(date.getDay())}`;
+    // 这一步是为了保证不同语言环境显示同样的日期格式
+    // const dateArr = localeDate.split(`/`);
+    // if (dateArr[2].length === 4) {
+    //   // Server End
+    //   dateArr.splice(0, 0, dateArr.splice(2, 1)[0]);
+    // } else if (dateArr[0].length === 4) {
+    //   // Client End
+    // }
+    // localeDate = dateArr.join('/');
   }
 
   return localeDate;

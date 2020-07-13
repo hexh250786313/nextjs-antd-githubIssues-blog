@@ -9,7 +9,7 @@ import nextFetch from '../../../core/nextFetch';
 /**
  * postList saga
  */
-export function* fetchPostList() {
+export function * fetchPostList () {
   while (true) {
     const { payload } = yield take(FETCH_POST_LIST);
     try {
@@ -17,12 +17,21 @@ export function* fetchPostList() {
       // const res = yield fetch(api.getGitHubIssues);
       // const res = yield nextFetch()
       // let data = yield res.json();
-      const data = yield nextFetch.get(api.getGitHubIssues, { query: payload });
+      const list = yield nextFetch.get(api.getGitHubIssues, { query: payload });
+      const { open_issues_count: openIssuesCount } = yield nextFetch.get(
+        api.getGitHub,
+      ) || {};
       // data = data.filter(item => {
       //   const { labels } = item;
       //   return labels && labels.some(label => label.name === 'blog');
       // });
-      yield put(fetchPostListSuccess(data || []));
+      console.log(openIssuesCount);
+      yield put(
+        fetchPostListSuccess({
+          list,
+          openIssuesCount,
+        }),
+      );
     } catch (e) {
       yield put(fetchPostListFail());
     }

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Spin, List } from 'antd';
+import { Spin, List, Pagination } from 'antd';
 import Router from 'next/router';
 import { handleDescContent, utc2locale } from '../../core/util';
 
@@ -35,6 +35,7 @@ const PostList = ({ list: postList }) => {
             );
           })}
         </List>
+        <Pagination defaultCurrent={1} total={500} showSizeChanger={false} />
       </Spin>
       <style jsx>{`
         :global(.container .ant-list-item) {
