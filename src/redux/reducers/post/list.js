@@ -16,6 +16,7 @@ const list = (state = initialState, { type, payload }) => {
     case FETCH_POST_LIST_FAIL:
       return initialState;
     case FETCH_POST_LIST_SUCCESS:
+      console.log(payload);
       return {
         ...state,
         ...payload,

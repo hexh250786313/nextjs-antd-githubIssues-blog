@@ -4,11 +4,12 @@ import PostList from '../../components/Post/PostList';
 
 const mapStateToProps = state => ({
   list: state.post.list.list,
+  openIssuesCount: state.post.list.openIssuesCount,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPostList() {
-    dispatch(fetchPostList());
+  fetchPostList(payload) {
+    dispatch(fetchPostList(payload));
   }
 });
 

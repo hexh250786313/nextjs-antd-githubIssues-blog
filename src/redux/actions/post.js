@@ -7,10 +7,23 @@ import {
   FETCH_POST_DETAIL_SUCCESS,
 } from '../../constants/ActionTypes';
 
+const initialPostListQueryParams = {
+  // labels: `post`,
+  page: 1,
+  per_page: 1,
+  creator: `hexh250786313`,
+  sort: `created`,
+  direction: `desc`,
+  state: `open`,
+};
+
 export function fetchPostList(payload) {
   return {
     type: FETCH_POST_LIST,
-    payload,
+    payload: {
+      ...initialPostListQueryParams,
+      ...payload,
+    },
   };
 }
 

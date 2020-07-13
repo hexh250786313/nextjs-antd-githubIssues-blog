@@ -1,42 +1,62 @@
 import PropTypes from 'prop-types';
-import { Spin, List, Pagination } from 'antd';
+import { Spin, List, Pagination, Skeleton } from 'antd';
 import Router from 'next/router';
 import { handleDescContent, utc2locale } from '../../core/util';
+import { useEffect, useState } from 'react';
 
-const PostList = ({ list: postList }) => {
+const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
+  const [count, setCount] = useState(0);
+
   const handleClick = (e, href) => {
     e.preventDefault();
     Router.push(`/post/[number]`, href);
   };
 
+  useEffect(() => {
+    setCount(openIssuesCount);
+  }, []);
+
   return (
     <div className="container">
       <Spin spinning={postList.length === 0}>
-        <List>
-          {postList.map(item => {
-            const { number, title, body, created_at } = item;
-            return (
-              <a
-                key={number}
-                href={`/post/${number}`}
-                onClick={e => handleClick(e, `/post/${number}`)}
-              >
-                <List.Item>
-                  <List.Item.Meta
-                    // title={<span className="title">{title}</span>}
-                    title={<span className="title">{title}</span>}
-                    description={
-                      <span className="time">{utc2locale(created_at)}</span>
-                    }
-                  />
-                  <p className="description">{handleDescContent(body)}</p>
-                </List.Item>
-              </a>
-            );
-          })}
-        </List>
-        <Pagination defaultCurrent={1} total={500} showSizeChanger={false} />
+        {postList.length !== 0 ? (
+          <List>
+            {postList.map(item => {
+              const { number, title, body, created_at } = item;
+              return (
+                <a
+                  key={number}
+                  href={`/post/${number}`}
+                  onClick={e => handleClick(e, `/post/${number}`)}
+                >
+                  <List.Item>
+                    <List.Item.Meta
+                      // title={<span className="title">{title}</span>}
+                      title={<span className="title">{title}</span>}
+                      description={
+                        <span className="time">{utc2locale(created_at)}</span>
+                      }
+                    />
+                    <p className="description">{handleDescContent(body)}</p>
+                  </List.Item>
+                </a>
+              );
+            })}
+          </List>
+        ) : (
+          <Skeleton />
+        )}
       </Spin>
+      <Pagination
+        onChange={e => {
+          console.log(e);
+          fetchPostList({ page: e });
+        }}
+        pageSize={1}
+        defaultCurrent={1}
+        total={count}
+        showSizeChanger={false}
+      />
       <style jsx>{`
         :global(.container .ant-list-item) {
           flex-direction: column;
@@ -93,4 +113,6 @@ export default PostList;
 
 PostList.propTypes = {
   list: PropTypes.array.isRequired,
+  openIssuesCount: PropTypes.number.isRequired,
+  fetchPostList: PropTypes.func.isRequired,
 };
