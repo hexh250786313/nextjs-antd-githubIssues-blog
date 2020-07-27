@@ -44,7 +44,13 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
             })}
           </List>
         ) : (
-          <Skeleton />
+          <>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </>
         )}
       </Spin>
       <Pagination

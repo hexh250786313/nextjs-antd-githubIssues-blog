@@ -126,7 +126,7 @@ export const handleDescContent = (source = ``, action = `get`) => {
  *
  * @method utc2locale
  * @param {string} utc_datetime
- * @returns {string} 北京时间
+ * @returns {string} 格式化日期
  *
  */
 export const utc2locale = utc_datetime => {
