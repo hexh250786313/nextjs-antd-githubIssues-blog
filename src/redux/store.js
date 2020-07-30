@@ -4,11 +4,13 @@ import rootReducer from './reducers/index';
 import rootSaga from './sagas/index';
 import postListMiddleware from '../middlewares/client/post/list';
 import postDetailMiddleware from '../middlewares/client/post/detail';
+import blogInfoMiddleware from '../middlewares/client/blog/info';
 
 const bindMiddleware = middleware => {
   // add route middleware
   middleware.push(postListMiddleware);
   middleware.push(postDetailMiddleware);
+  middleware.push(blogInfoMiddleware);
   if (process.env.NODE_ENV !== 'production') {
     const { composeWithDevTools } = require('redux-devtools-extension');
     // development use logger

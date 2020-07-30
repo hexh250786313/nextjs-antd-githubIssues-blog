@@ -7,7 +7,6 @@ import {
 const initialState = {
   list: [],
   detail: {},
-  openIssuesCount: 0,
 };
 
 const list = (state = initialState, { type, payload }) => {
@@ -16,7 +15,6 @@ const list = (state = initialState, { type, payload }) => {
     case FETCH_POST_LIST_FAIL:
       return initialState;
     case FETCH_POST_LIST_SUCCESS:
-      console.log(payload);
       return {
         ...state,
         ...payload,

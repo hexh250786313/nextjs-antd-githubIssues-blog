@@ -48,7 +48,7 @@
     "block-spacing": [2, "always"],
     "no-else-return": 2
   },
-  "extends": "eslint:recommended",
+  // "extends": "eslint:recommended",
   "plugins": ["react"],
   "settings": {
     "react": {

@@ -2,19 +2,13 @@ import PropTypes from 'prop-types';
 import { Spin, List, Pagination, Skeleton } from 'antd';
 import Router from 'next/router';
 import { handleDescContent, utc2locale } from '../../core/util';
-import { useEffect, useState } from 'react';
 
 const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
-  const [count, setCount] = useState(0);
 
   const handleClick = (e, href) => {
     e.preventDefault();
     Router.push(`/post/[number]`, href);
   };
-
-  useEffect(() => {
-    setCount(openIssuesCount);
-  }, []);
 
   return (
     <div className="container">
@@ -44,13 +38,7 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
             })}
           </List>
         ) : (
-          <>
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-            <Skeleton />
-          </>
+          <Skeleton />
         )}
       </Spin>
       <Pagination
@@ -60,7 +48,7 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
         }}
         pageSize={1}
         defaultCurrent={1}
-        total={count}
+        total={openIssuesCount}
         showSizeChanger={false}
       />
       <style jsx>{`
