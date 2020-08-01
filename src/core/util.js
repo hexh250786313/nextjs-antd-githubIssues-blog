@@ -80,6 +80,7 @@ export const handleLink = link => {
       } else {
         message.error('Error！');
       }
+      return link;
     }
   }
   throw new Error(`Not a string`);

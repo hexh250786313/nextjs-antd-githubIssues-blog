@@ -4,21 +4,15 @@ import {
   FETCH_POST_LIST_SUCCESS,
 } from '../../../constants/ActionTypes';
 
-const initialState = {
-  list: [],
-  detail: {},
-};
+const initialState = [];
 
-const list = (state = initialState, { type, payload }) => {
+const list = (state = initialState, { type, payload: list }) => {
   switch (type) {
     case FETCH_POST_LIST:
     case FETCH_POST_LIST_FAIL:
       return initialState;
     case FETCH_POST_LIST_SUCCESS:
-      return {
-        ...state,
-        ...payload,
-      };
+      return list;
     default:
       return state;
   }

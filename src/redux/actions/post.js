@@ -5,25 +5,20 @@ import {
   FETCH_POST_DETAIL,
   FETCH_POST_DETAIL_FAIL,
   FETCH_POST_DETAIL_SUCCESS,
+  SAVE_QUERY_PARAMS,
 } from '../../constants/ActionTypes';
 
-const initialPostListQueryParams = {
-  // labels: `post`,
-  page: 1,
-  per_page: 1,
-  creator: `hexh250786313`,
-  sort: `created`,
-  direction: `desc`,
-  state: `open`,
-};
+export function saveQueryParams(payload) {
+  return {
+    type: SAVE_QUERY_PARAMS,
+    payload: payload,
+  };
+}
 
 export function fetchPostList(payload) {
   return {
     type: FETCH_POST_LIST,
-    payload: {
-      ...initialPostListQueryParams,
-      ...payload,
-    },
+    payload: payload,
   };
 }
 

@@ -19,8 +19,8 @@ export function* fetchPostDetail() {
     try {
       // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
       const res = yield fetch(`${api.getGitHubIssue}/${number}`);
-      const data = yield res.json();
-      yield put(fetchPostDetailSuccess(data));
+      const detail = yield res.json();
+      yield put(fetchPostDetailSuccess(detail));
     } catch (e) {
       yield put(fetchPostDetailFail());
     }

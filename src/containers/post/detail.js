@@ -4,7 +4,7 @@ import PostDetail from '../../components/Post/PostDetail';
 import { setTOC, handleHeaderChange } from '../../redux/actions/layout';
 
 const mapStateToProps = state => ({
-  detail: state.post.detail.detail,
+  detail: state.post.detail,
 });
 
 const mapDispatchToProps = dispatch => ({

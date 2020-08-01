@@ -3,8 +3,8 @@ import { Spin, List, Pagination, Skeleton } from 'antd';
 import Router from 'next/router';
 import { handleDescContent, utc2locale } from '../../core/util';
 
-const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
-
+const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage }) => {
+  console.log(`sdfsdfsdfsdfsdfsdfsdfsdfsdf`, currentPage);
   const handleClick = (e, href) => {
     e.preventDefault();
     Router.push(`/post/[number]`, href);
@@ -42,13 +42,12 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount }) => {
         )}
       </Spin>
       <Pagination
-        onChange={e => {
-          console.log(e);
-          fetchPostList({ page: e });
-        }}
+        onChange={e => fetchPostList({ page: e })}
         pageSize={1}
         defaultCurrent={1}
-        total={openIssuesCount}
+        current={currentPage}
+        total={Math.floor(openIssuesCount / 3) + 1}
+        // total={openIssuesCount}
         showSizeChanger={false}
       />
       <style jsx>{`
@@ -108,5 +107,6 @@ export default PostList;
 PostList.propTypes = {
   list: PropTypes.array.isRequired,
   openIssuesCount: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
   fetchPostList: PropTypes.func.isRequired,
 };
