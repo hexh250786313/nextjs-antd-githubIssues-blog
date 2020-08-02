@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 // 设置高亮样式
-import vsDark from 'react-syntax-highlighter/dist/cjs/styles/prism/vs-dark'
+import vsDark from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedlight'
 // 设置高亮的语言
 import {
   jsx,
