@@ -3,7 +3,7 @@ import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
 import { handleDescContent, utc2locale } from '../../core/util'
 
-const PostList = ({ fetchPostList, perPage, list: postList, openIssuesCount, currentPage }) => {
+const PostList = ({ fetchPostList, perPage, list: postList, postsAmount, currentPage }) => {
   const handleClick = (e, href) => {
     e.preventDefault()
     Router.push(`/post/[number]`, href)
@@ -45,7 +45,7 @@ const PostList = ({ fetchPostList, perPage, list: postList, openIssuesCount, cur
         pageSize={perPage}
         defaultCurrent={1}
         current={currentPage}
-        total={openIssuesCount}
+        total={postsAmount}
         // total={openIssuesCount}
         showSizeChanger={false}
       />
@@ -105,7 +105,7 @@ export default PostList
 
 PostList.propTypes = {
   list: PropTypes.array.isRequired,
-  openIssuesCount: PropTypes.number.isRequired,
+  postsAmount: PropTypes.number.isRequired,
   perPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   fetchPostList: PropTypes.func.isRequired,

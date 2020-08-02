@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
   list: state.post.list,
   currentPage: state.post.query.page,
   perPage: state.post.query.per_page,
-  openIssuesCount: state.blog.info.openIssuesCount,
+  // openIssuesCount: state.blog.info.openIssuesCount,
+  postsAmount: state.post.amount,
 })
 
 const mapDispatchToProps = dispatch => ({
