@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 // import theme from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedlight'
 import theme from 'react-syntax-highlighter/dist/cjs/styles/prism/vs-dark'
-import {
-  jsx,
-  javascript,
-  bash,
-} from 'react-syntax-highlighter/dist/cjs/languages/prism'
+// import {
+// jsx,
+// javascript,
+// bash,
+// } from 'react-syntax-highlighter/dist/cjs/languages/prism'
 
 class CodeBlock extends React.PureComponent {
   static propTypes = {
@@ -19,14 +19,14 @@ class CodeBlock extends React.PureComponent {
     language: null,
   }
 
-  componentDidMount() {
-    // 注册要高亮的语法，
-    // 注意：如果不设置打包后供第三方使用是不起作用的
-    SyntaxHighlighter.registerLanguage('jsx', jsx)
-    SyntaxHighlighter.registerLanguage('javascript', javascript)
-    SyntaxHighlighter.registerLanguage('js', javascript)
-    SyntaxHighlighter.registerLanguage('shell', bash)
-  }
+  // componentDidMount() {
+  // // 注册要高亮的语法，
+  // // 注意：如果不设置打包后供第三方使用是不起作用的
+  // SyntaxHighlighter.registerLanguage('jsx', jsx)
+  // SyntaxHighlighter.registerLanguage('javascript', javascript)
+  // SyntaxHighlighter.registerLanguage('js', javascript)
+  // SyntaxHighlighter.registerLanguage('shell', bash)
+  // }
 
   render() {
     const { language, value } = this.props
