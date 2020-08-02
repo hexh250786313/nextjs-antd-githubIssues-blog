@@ -1,31 +1,31 @@
-import PropTypes from 'prop-types';
-import { Spin, Timeline as AntTimeline } from 'antd';
-import { handleDescContent, utc2locale } from '../../core/util';
+import PropTypes from 'prop-types'
+import { Spin, Timeline as AntTimeline } from 'antd'
+import { handleDescContent, utc2locale } from '../../core/util'
 // import { ClockCircleOutlined } from '@ant-design/icons';
 // import { color_primary } from '../../constants/CustomTheme';
-import { useEffect, useState } from 'react';
-import Router from 'next/router';
+import { useEffect, useState } from 'react'
+import Router from 'next/router'
 
-const { Item } = AntTimeline;
+const { Item } = AntTimeline
 
 const Timeline = ({ list: POSTList }) => {
-  const [timeLineMode, setTimeLineMode] = useState('alternate');
+  const [timeLineMode, setTimeLineMode] = useState('alternate')
 
   const handleClick = (e, href) => {
-    e.preventDefault();
-    Router.push(`/post/[number]`, href);
-  };
+    e.preventDefault()
+    Router.push(`/post/[number]`, href)
+  }
 
   useEffect(() => {
-    const deviceWidth = window.screen.width || 0;
-    setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate');
-  }, []);
+    const deviceWidth = window.screen.width || 0
+    setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate')
+  }, [])
 
   return (
     <Spin spinning={POSTList.length === 0}>
       <AntTimeline mode={timeLineMode}>
         {POSTList.map(item => {
-          const { number, title, created_at, body } = item;
+          const { number, title, created_at, body } = item
           return (
             <Item key={title}>
               <span className="type">POST</span>
@@ -39,7 +39,7 @@ const Timeline = ({ list: POSTList }) => {
                 <p className="content">{handleDescContent(body)}</p>
               </a>
             </Item>
-          );
+          )
         })}
         {POSTList.length !== 0 ? (
           <Item>
@@ -79,11 +79,11 @@ const Timeline = ({ list: POSTList }) => {
         }
       `}</style>
     </Spin>
-  );
-};
+  )
+}
 
-export default Timeline;
+export default Timeline
 
 Timeline.propTypes = {
   list: PropTypes.array.isRequired,
-};
+}

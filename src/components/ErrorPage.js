@@ -1,10 +1,10 @@
 // import { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Button } from 'antd';
-import Router from 'next/router';
+import PropTypes from 'prop-types'
+import { Button } from 'antd'
+import Router from 'next/router'
 
 const ErrorPage = ({ statusCode }) => {
-  let RenderComp;
+  let RenderComp
   switch (statusCode) {
     case 200:
     case 404: {
@@ -35,8 +35,8 @@ const ErrorPage = ({ statusCode }) => {
             Back Home
           </Button>
         </div>
-      );
-      break;
+      )
+      break
     }
     case 500: {
       RenderComp = () => (
@@ -68,22 +68,22 @@ const ErrorPage = ({ statusCode }) => {
             Back Home
           </Button>
         </div>
-      );
-      break;
+      )
+      break
     }
     default:
-      break;
+      break
   }
-  return <RenderComp />;
-};
+  return <RenderComp />
+}
 
 ErrorPage.propTypes = {
   statusCode: PropTypes.number,
-};
+}
 
 ErrorPage.defaultProps = {
   statusCode: 200,
-};
+}
 
 // class ErrorPage extends Component {
 // static propTypes = {
@@ -167,4 +167,4 @@ ErrorPage.defaultProps = {
 // }
 // }
 
-export default ErrorPage;
+export default ErrorPage

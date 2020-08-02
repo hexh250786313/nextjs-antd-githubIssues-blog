@@ -1,9 +1,9 @@
-import { HANDLE_HEADER_CHANGE } from '../../../constants/ActionTypes';
+import { HANDLE_HEADER_CHANGE } from '../../../constants/ActionTypes'
 
 const initialState = {
   pic: '',
   title: '',
-};
+}
 
 const header = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -11,10 +11,10 @@ const header = (state = initialState, { type, payload }) => {
       return {
         ...state,
         ...payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default header;
+export default header

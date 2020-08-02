@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
-import Link from 'next/link';
-import { Drawer as AntDrawer, Menu, Input } from 'antd';
-import { OrderedListOutlined, MailOutlined, SearchOutlined } from '@ant-design/icons';
-import { color_primary } from '../../constants/CustomTheme';
-import { contactTypes, blogName } from '../../constants/ConstTypes';
-import { handleLink } from '../../core/util';
-import TOC from '../../containers/layout/toc';
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import { Drawer as AntDrawer, Menu, Input } from 'antd'
+import { OrderedListOutlined, MailOutlined, SearchOutlined } from '@ant-design/icons'
+import { color_primary } from '../../constants/CustomTheme'
+import { contactTypes, blogName } from '../../constants/ConstTypes'
+import { handleLink } from '../../core/util'
+import TOC from '../../containers/layout/toc'
 
-const SubMenu = Menu.SubMenu;
+const SubMenu = Menu.SubMenu
 
 const renderContact = () => {
   return (
@@ -21,16 +21,16 @@ const renderContact = () => {
       }
     >
       {contactTypes.map(item => {
-        const { text, link, Icon } = item;
+        const { text, link, Icon } = item
         return (
           <Menu.Item key={link} icon={<Icon />}>
             {text}
           </Menu.Item>
-        );
+        )
       })}
     </SubMenu>
-  );
-};
+  )
+}
 
 const renderTOC = () => {
   return (
@@ -45,8 +45,8 @@ const renderTOC = () => {
     >
       <TOC />
     </SubMenu>
-  );
-};
+  )
+}
 
 const Drawer = ({
   isShowDrawer,
@@ -88,7 +88,7 @@ const Drawer = ({
                     e.currentTarget &&
                     typeof e.currentTarget.value === 'string'
                   ) {
-                    handleSearchTextChange(e.currentTarget.value);
+                    handleSearchTextChange(e.currentTarget.value)
                   }
                 }}
               />
@@ -123,8 +123,8 @@ const Drawer = ({
         `}</style>
       </div>
     </AntDrawer>
-  );
-};
+  )
+}
 
 Drawer.propTypes = {
   /**
@@ -147,15 +147,15 @@ Drawer.propTypes = {
    * markdown 文本源
    */
   mdSource: PropTypes.string,
-};
+}
 
 Drawer.defaultProps = {
   searchText: '',
   mdSource: '',
-};
+}
 
-export default Drawer;
+export default Drawer
 
 const linkTo = ({ key }) => {
-  handleLink(key);
-};
+  handleLink(key)
+}

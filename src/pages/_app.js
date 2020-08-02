@@ -1,33 +1,33 @@
-import App from 'next/app';
-import Head from 'next/head';
-import { Provider } from 'react-redux';
-import withRedux from 'next-redux-wrapper';
-import withReduxSaga from 'next-redux-saga';
-import createStore from '../redux/store';
-import Layout from '../components/Layout';
-import '../../assets/self-styles.less';
-import Router from 'next/router';
-import NProgress from 'nprogress'; // nprogress module
-import '../../assets/progress.less'; // styles of nprogress
+import App from 'next/app'
+import Head from 'next/head'
+import { Provider } from 'react-redux'
+import withRedux from 'next-redux-wrapper'
+import withReduxSaga from 'next-redux-saga'
+import createStore from '../redux/store'
+import Layout from '../components/Layout'
+import '../../assets/self-styles.less'
+import Router from 'next/router'
+import NProgress from 'nprogress' // nprogress module
+import '../../assets/progress.less' // styles of nprogress
 
 // Binding events.
-Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
-Router.events.on('routeChangeError', () => NProgress.done());
+Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 class NextApp extends App {
   static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
+    let pageProps = {}
 
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx });
+      pageProps = await Component.getInitialProps({ ctx })
     }
 
-    return { pageProps };
+    return { pageProps }
   }
 
   render() {
-    const { Component, pageProps, store, router } = this.props;
+    const { Component, pageProps, store, router } = this.props
     return (
       <>
         <Head>
@@ -54,8 +54,8 @@ class NextApp extends App {
           </Layout>
         </Provider>
       </>
-    );
+    )
   }
 }
 
-export default withRedux(createStore)(withReduxSaga({ async: true })(NextApp));
+export default withRedux(createStore)(withReduxSaga({ async: true })(NextApp))

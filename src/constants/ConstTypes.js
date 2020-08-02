@@ -1,12 +1,12 @@
-import GithubOutlined from '@ant-design/icons/GithubOutlined';
-import WeiboOutlined from '@ant-design/icons/WeiboOutlined';
-import MailFilled from '@ant-design/icons/MailFilled';
-import CalendarFilled from '@ant-design/icons/CalendarFilled';
-import EditFilled from '@ant-design/icons/EditFilled';
-import QuestionCircleFilled from '@ant-design/icons/QuestionCircleFilled';
+import GithubOutlined from '@ant-design/icons/GithubOutlined'
+import WeiboOutlined from '@ant-design/icons/WeiboOutlined'
+import MailFilled from '@ant-design/icons/MailFilled'
+import CalendarFilled from '@ant-design/icons/CalendarFilled'
+import EditFilled from '@ant-design/icons/EditFilled'
+import QuestionCircleFilled from '@ant-design/icons/QuestionCircleFilled'
 
 // 博客名称
-export const blogName = "hexh's blog";
+export const blogName = "hexh's blog"
 
 // 联系方式
 export const contactTypes = [
@@ -25,7 +25,7 @@ export const contactTypes = [
     link: 'mailto:250786313@qq.com',
     Icon: MailFilled,
   },
-];
+]
 
 // 页面索引
 export const pagesIndex = [
@@ -44,4 +44,4 @@ export const pagesIndex = [
     value: 'About',
     Icon: QuestionCircleFilled,
   },
-];
+]

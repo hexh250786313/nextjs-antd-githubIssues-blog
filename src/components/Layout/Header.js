@@ -1,6 +1,6 @@
-import Router from 'next/router';
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import Router from 'next/router'
+import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
@@ -10,24 +10,24 @@ const Header = ({ handleHeaderChange, pic, title }) => {
           title: "I'm looking for something fun. Are you going with me?",
           pic:
             'http://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg',
-        });
-        break;
+        })
+        break
 
       default:
         handleHeaderChange({
           title: 'Posts List',
           pic:
             'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg',
-        });
+        })
     }
-  };
+  }
 
   useEffect(() => {
     Router.events.on('routeChangeComplete', pathname => {
-      handleChange(pathname);
-    });
-    handleChange(window.location.pathname);
-  }, []);
+      handleChange(pathname)
+    })
+    handleChange(window.location.pathname)
+  }, [])
 
   return pic ? (
     <div className="header" style={{ backgroundImage: `url(${pic})` }}>
@@ -65,18 +65,18 @@ const Header = ({ handleHeaderChange, pic, title }) => {
         `}
       </style>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
 Header.propTypes = {
   handleHeaderChange: PropTypes.func.isRequired,
   pic: PropTypes.string,
   title: PropTypes.string,
-};
+}
 
 Header.defaultProps = {
   pic: '',
   title: '',
-};
+}
 
-export default Header;
+export default Header

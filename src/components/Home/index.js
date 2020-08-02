@@ -2,7 +2,7 @@
 // import Link from 'next/link';
 // import IfComp from 'if-comp';
 // import Counter from '../../containers/home/counter';
-import Timeline from '../../containers/home/timeline';
+import Timeline from '../../containers/home/timeline'
 
 const Home = () => (
   <div className="home">
@@ -31,5 +31,5 @@ const Home = () => (
       }
     `}</style>
   </div>
-);
-export default Home;
+)
+export default Home

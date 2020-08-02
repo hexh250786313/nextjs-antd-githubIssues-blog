@@ -1,55 +1,55 @@
-import { color_primary } from '../../constants/CustomTheme';
-import { useState, useEffect } from 'react';
-import { Button, Input, Dropdown, Menu, Drawer } from 'antd';
-import PropTypes from 'prop-types';
-import { blogName, contactTypes, pagesIndex } from '../../constants/ConstTypes';
-import Link from 'next/link';
-import SearchOutlined from '@ant-design/icons/SearchOutlined';
-import MenuOutlined from '@ant-design/icons/MenuOutlined';
-import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined';
-import { handleLink } from '../../core/util';
-import Router from 'next/router';
+import { color_primary } from '../../constants/CustomTheme'
+import { useState, useEffect } from 'react'
+import { Button, Input, Dropdown, Menu, Drawer } from 'antd'
+import PropTypes from 'prop-types'
+import { blogName, contactTypes, pagesIndex } from '../../constants/ConstTypes'
+import Link from 'next/link'
+import SearchOutlined from '@ant-design/icons/SearchOutlined'
+import MenuOutlined from '@ant-design/icons/MenuOutlined'
+import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined'
+import { handleLink } from '../../core/util'
+import Router from 'next/router'
 
-const Item = Menu.Item;
-const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37];
+const Item = Menu.Item
+const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37]
 const mapPagesIndex = (() => {
-  const obj = {};
-  pagesIndex.forEach(item => (obj[item.key] = item.value));
-  return obj;
-})();
+  const obj = {}
+  pagesIndex.forEach(item => (obj[item.key] = item.value))
+  return obj
+})()
 
 const _Menu = () => {
   return (
     <Menu onClick={linkTo}>
       {contactTypes.map(item => {
-        const { text, link, Icon } = item;
+        const { text, link, Icon } = item
         return (
           <Menu.Item key={link} icon={<Icon />}>
             {text}
           </Menu.Item>
-        );
+        )
       })}
     </Menu>
-  );
-};
+  )
+}
 
 const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
-  const [isShowTopShadow, setTopShadow] = useState(false);
-  const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH);
-  const [isShowBottomDrawer, setShowBottomDrawer] = useState(false);
-  const [pathname, setPathname] = useState('/');
-  let scrollTop = 0;
+  const [isShowTopShadow, setTopShadow] = useState(false)
+  const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH)
+  const [isShowBottomDrawer, setShowBottomDrawer] = useState(false)
+  const [pathname, setPathname] = useState('/')
+  let scrollTop = 0
 
   const setSearchBarOpen = () => {
     if (searchBarWidth === OPENED_SEARCH_BAR_WIDTH) {
-      return null;
+      return null
     }
-    setSearchWidth(OPENED_SEARCH_BAR_WIDTH);
-  };
+    setSearchWidth(OPENED_SEARCH_BAR_WIDTH)
+  }
 
   const handleBottomDrawer = () => {
-    setShowBottomDrawer(!isShowBottomDrawer);
-  };
+    setShowBottomDrawer(!isShowBottomDrawer)
+  }
 
   useEffect(() => {
     window.addEventListener(
@@ -59,20 +59,20 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           window.pageYOffset ||
           document.documentElement.scrollTop ||
           document.body.scrollTop ||
-          0;
+          0
         if (currtScrollTop > 0 && scrollTop === 0) {
-          scrollTop = 1;
-          setTopShadow(true);
+          scrollTop = 1
+          setTopShadow(true)
         } else if (currtScrollTop === 0 && scrollTop > 0) {
-          scrollTop = 0;
-          setTopShadow(false);
+          scrollTop = 0
+          setTopShadow(false)
         }
       },
       false,
-    );
-    setPathname(window.location.pathname);
-    Router.events.on('routeChangeComplete', pathname => setPathname(pathname));
-  }, []);
+    )
+    setPathname(window.location.pathname)
+    Router.events.on('routeChangeComplete', pathname => setPathname(pathname))
+  }, [])
 
   return (
     <div className="container">
@@ -110,7 +110,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
                   e.currentTarget &&
                   typeof e.currentTarget.value === 'string'
                 ) {
-                  handleSearchTextChange(e.currentTarget.value);
+                  handleSearchTextChange(e.currentTarget.value)
                 }
               }}
             />
@@ -244,21 +244,21 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
 Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
   handleSearchTextChange: PropTypes.func.isRequired,
   searchText: PropTypes.string,
-};
+}
 
 Navigation.defaultProps = {
   searchText: '',
-};
+}
 
-export default Navigation;
+export default Navigation
 
 const linkTo = ({ key }) => {
-  handleLink(key);
-};
+  handleLink(key)
+}

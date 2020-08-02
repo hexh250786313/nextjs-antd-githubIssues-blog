@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
-import info from './info';
+import { combineReducers } from 'redux'
+import info from './info'
 
-export default combineReducers({ info });
+export default combineReducers({ info })

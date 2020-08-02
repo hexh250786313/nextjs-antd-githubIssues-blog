@@ -1,6 +1,6 @@
-import MarkdownNavbar from 'markdown-navbar';
-import './TOC.less';
-import PropTypes from 'prop-types';
+import MarkdownNavbar from 'markdown-navbar'
+import './TOC.less'
+import PropTypes from 'prop-types'
 
 const removeHash = e => {
   setTimeout(() => {
@@ -8,14 +8,14 @@ const removeHash = e => {
       window.location.href.toString().replace(window.location.hash, '') +
         '#' +
         e,
-    );
+    )
     // console.log(
     // window.location.href.toString().replace(window.location.hash, '') +
     // '#' +
     // e,
     // );
-  }, 100);
-};
+  }, 100)
+}
 
 const TOC = ({ source }) => {
   return (
@@ -27,11 +27,11 @@ const TOC = ({ source }) => {
       source={source}
       onHashChange={removeHash}
     />
-  );
-};
+  )
+}
 
 TOC.propTypes = {
   source: PropTypes.string.isRequired,
-};
+}
 
-export default TOC;
+export default TOC

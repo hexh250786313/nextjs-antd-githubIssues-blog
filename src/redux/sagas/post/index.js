@@ -1,6 +1,6 @@
-import list from './list';
-import detail from './detail';
+import list from './list'
+import detail from './detail'
 
-const postSagas = [...list, ...detail];
+const postSagas = [...list, ...detail]
 
-export default postSagas;
+export default postSagas

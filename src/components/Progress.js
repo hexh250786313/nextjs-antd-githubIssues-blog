@@ -1,49 +1,49 @@
 // import PropTypes from 'prop-types';
 // import { Button } from 'antd';
-import { Progress } from 'antd';
-import { usePromiseTracker } from 'react-promise-tracker';
-import { useState, useEffect, useRef } from 'react';
+import { Progress } from 'antd'
+import { usePromiseTracker } from 'react-promise-tracker'
+import { useState, useEffect, useRef } from 'react'
 
 function useInterval(callback, delay) {
-  const savedCallback = useRef();
+  const savedCallback = useRef()
 
   // Remember the latest function.
   useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+    savedCallback.current = callback
+  }, [callback])
 
   // Set up the interval.
   useEffect(() => {
     function tick() {
-      savedCallback.current();
+      savedCallback.current()
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      let id = setInterval(tick, delay)
+      return () => clearInterval(id)
     }
-  }, [delay]);
+  }, [delay])
 }
 
 const _Progress = () => {
-  const { promiseInProgress } = usePromiseTracker();
-  let [count, setCount] = useState(0);
-  let [status, setStatus] = useState(false);
+  const { promiseInProgress } = usePromiseTracker()
+  let [count, setCount] = useState(0)
+  let [status, setStatus] = useState(false)
 
   if (promiseInProgress !== status) {
-    setCount(0);
-    setStatus(promiseInProgress);
+    setCount(0)
+    setStatus(promiseInProgress)
   }
 
   useInterval(
     () => {
-      console.log(count);
+      console.log(count)
       // Your custom logic here
       if (count < 90) {
-        setCount(count + 20);
+        setCount(count + 20)
       }
     },
     promiseInProgress ? 1000 : null,
-  );
+  )
 
   return (
     <div
@@ -167,10 +167,10 @@ const _Progress = () => {
         />
       }
     </div>
-  );
-};
+  )
+}
 
-export default _Progress;
+export default _Progress
 
 _Progress.propTypes = {
   // increment: PropTypes.func.isRequired,
@@ -178,4 +178,4 @@ _Progress.propTypes = {
   // reset: PropTypes.func.isRequired,
   // count: PropTypes.number.isRequired,
   // percent: PropTypes.number.isRequired,
-};
+}

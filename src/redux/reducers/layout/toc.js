@@ -1,8 +1,8 @@
-import { SET_TOC } from '../../../constants/ActionTypes';
+import { SET_TOC } from '../../../constants/ActionTypes'
 
 const initialState = {
   source: '',
-};
+}
 
 const toc = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -10,10 +10,10 @@ const toc = (state = initialState, { type, payload }) => {
       return {
         ...state,
         source: payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default toc;
+export default toc

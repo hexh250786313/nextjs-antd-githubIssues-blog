@@ -1,7 +1,7 @@
 // import { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import theme from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedlight';
+import PropTypes from 'prop-types'
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
+import theme from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedlight'
 // import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 // import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
 // import bash from 'react-syntax-highlighter/dist/cjs/languages/prism/bash';
@@ -23,17 +23,17 @@ const CodeBlock = ({ value, language }) => {
         {value}
       </SyntaxHighlighter>
     </figure>
-  );
-};
+  )
+}
 
 CodeBlock.defaultProps = {
   language: null,
-};
+}
 
 CodeBlock.propTypes = {
   value: PropTypes.string.isRequired,
   language: PropTypes.string,
-};
+}
 
 // class CodeBlock extends React.PureComponent {
 // static propTypes = {
@@ -66,4 +66,4 @@ CodeBlock.propTypes = {
 // }
 // }
 
-export default CodeBlock;
+export default CodeBlock

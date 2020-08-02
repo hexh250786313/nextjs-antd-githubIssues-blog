@@ -1,8 +1,8 @@
-import { HANDLE_SEARCH_TEXT_CHANGE } from '../../../constants/ActionTypes';
+import { HANDLE_SEARCH_TEXT_CHANGE } from '../../../constants/ActionTypes'
 
 const initialState = {
   searchText: '',
-};
+}
 
 const search = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -10,10 +10,10 @@ const search = (state = initialState, { type, payload }) => {
       return {
         ...state,
         searchText: payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default search;
+export default search

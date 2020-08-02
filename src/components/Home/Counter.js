@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import { Button } from 'antd';
+import PropTypes from 'prop-types'
+import { Button } from 'antd'
 
 const Counter = ({ increment, decrement, reset, count }) => (
   <div>
@@ -17,13 +17,13 @@ const Counter = ({ increment, decrement, reset, count }) => (
       Reset
     </Button>
   </div>
-);
+)
 
-export default Counter;
+export default Counter
 
 Counter.propTypes = {
   increment: PropTypes.func.isRequired,
   decrement: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   count: PropTypes.number.isRequired,
-};
+}

@@ -1,5 +1,5 @@
-import info from './info';
+import info from './info'
 
-const blogSagas = [...info];
+const blogSagas = [...info]
 
-export default blogSagas;
+export default blogSagas

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 // import DynamicAntdTheme from 'dynamic-antd-theme';
-import Drawer from '../../containers/layout/drawer';
-import Navigation from '../../containers/layout/navigation';
-import Header from '../../containers/layout/header';
-import SideNavigation from '../../containers/layout/side-navigation';
+import Drawer from '../../containers/layout/drawer'
+import Navigation from '../../containers/layout/navigation'
+import Header from '../../containers/layout/header'
+import SideNavigation from '../../containers/layout/side-navigation'
 // import SideNavigation from './SideNavigation';
 
 const Layout = ({ children }) => {
@@ -101,8 +101,8 @@ const Layout = ({ children }) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
 // themeChangeCallback = primaryColor => {
 // const progress = document.getElementsByClassName('ant-progress-bg')[0];
@@ -111,12 +111,12 @@ const Layout = ({ children }) => {
 // }
 // };
 
-export default Layout;
+export default Layout
 
 Layout.propTypes = {
   children: PropTypes.any,
-};
+}
 
 Layout.defaultProps = {
   children: null,
-};
+}

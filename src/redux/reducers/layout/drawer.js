@@ -1,8 +1,8 @@
-import { OPEN_DRAWER, CLOSE_DRAWER } from '../../../constants/ActionTypes';
+import { OPEN_DRAWER, CLOSE_DRAWER } from '../../../constants/ActionTypes'
 
 const initialState = {
   isShowDrawer: false,
-};
+}
 
 const drawer = (state = initialState, { type }) => {
   switch (type) {
@@ -10,15 +10,15 @@ const drawer = (state = initialState, { type }) => {
       return {
         ...state,
         isShowDrawer: true,
-      };
+      }
     case CLOSE_DRAWER:
       return {
         ...state,
         isShowDrawer: false,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default drawer;
+export default drawer

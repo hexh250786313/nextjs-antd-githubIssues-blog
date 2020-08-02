@@ -1,4 +1,4 @@
-import { SAVE_QUERY_PARAMS } from '../../../constants/ActionTypes';
+import { SAVE_QUERY_PARAMS } from '../../../constants/ActionTypes'
 
 const initialState = {
   // labels: `post`,
@@ -9,7 +9,7 @@ const initialState = {
   sort: `created`,
   direction: `desc`,
   state: `open`,
-};
+}
 
 const query = (state = initialState, { type, payload: params }) => {
   switch (type) {
@@ -17,10 +17,10 @@ const query = (state = initialState, { type, payload: params }) => {
       return {
         ...initialState,
         ...params,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default query;
+export default query

@@ -1,1 +1,1 @@
-import "@babel/polyfill/noConflict";
+import "@babel/polyfill/noConflict"

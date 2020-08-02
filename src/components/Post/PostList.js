@@ -1,14 +1,13 @@
-import PropTypes from 'prop-types';
-import { Spin, List, Pagination, Skeleton } from 'antd';
-import Router from 'next/router';
-import { handleDescContent, utc2locale } from '../../core/util';
+import PropTypes from 'prop-types'
+import { Spin, List, Pagination, Skeleton } from 'antd'
+import Router from 'next/router'
+import { handleDescContent, utc2locale } from '../../core/util'
 
-const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage }) => {
-  console.log(`sdfsdfsdfsdfsdfsdfsdfsdfsdf`, currentPage);
+const PostList = ({ fetchPostList, perPage, list: postList, openIssuesCount, currentPage }) => {
   const handleClick = (e, href) => {
-    e.preventDefault();
-    Router.push(`/post/[number]`, href);
-  };
+    e.preventDefault()
+    Router.push(`/post/[number]`, href)
+  }
 
   return (
     <div className="container">
@@ -16,7 +15,7 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage 
         {postList.length !== 0 ? (
           <List>
             {postList.map(item => {
-              const { number, title, body, created_at } = item;
+              const { number, title, body, created_at } = item
               return (
                 <a
                   key={number}
@@ -34,7 +33,7 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage 
                     <p className="description">{handleDescContent(body)}</p>
                   </List.Item>
                 </a>
-              );
+              )
             })}
           </List>
         ) : (
@@ -43,10 +42,10 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage 
       </Spin>
       <Pagination
         onChange={e => fetchPostList({ page: e })}
-        pageSize={1}
+        pageSize={perPage}
         defaultCurrent={1}
         current={currentPage}
-        total={Math.floor(openIssuesCount / 3) + 1}
+        total={openIssuesCount}
         // total={openIssuesCount}
         showSizeChanger={false}
       />
@@ -99,14 +98,15 @@ const PostList = ({ fetchPostList, list: postList, openIssuesCount, currentPage 
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
-export default PostList;
+export default PostList
 
 PostList.propTypes = {
   list: PropTypes.array.isRequired,
   openIssuesCount: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   fetchPostList: PropTypes.func.isRequired,
-};
+}

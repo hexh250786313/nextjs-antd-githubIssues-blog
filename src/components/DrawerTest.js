@@ -1,45 +1,45 @@
-import Link from 'next/link';
+import Link from 'next/link'
 import {
   // Drawer as AntDrawer,
   Input,
   Menu,
   Dropdown,
-} from 'antd';
-import { useState, useEffect } from 'react';
-import { SearchOutlined } from '@ant-design/icons';
-import { color_primary } from '../constants/CustomTheme';
-import { contactTypes, blogName } from '../constants/ConstTypes';
-import PropTypes from 'prop-types';
+} from 'antd'
+import { useState, useEffect } from 'react'
+import { SearchOutlined } from '@ant-design/icons'
+import { color_primary } from '../constants/CustomTheme'
+import { contactTypes, blogName } from '../constants/ConstTypes'
+import PropTypes from 'prop-types'
 
 // const { Search } = Input;
 
-const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37];
+const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37]
 
 const iconStyle = {
   fontSize: 15,
-};
+}
 
 const handleLink = link => {
   // link = 'https://weibo.com/HanaSoup';
   if (link) {
-    let eleLink = document.createElement('a');
-    eleLink.style.display = 'none';
-    eleLink.href = link;
-    eleLink.target = '_blank';
+    let eleLink = document.createElement('a')
+    eleLink.style.display = 'none'
+    eleLink.href = link
+    eleLink.target = '_blank'
     // 受浏览器安全策略的因素，动态创建的元素必须添加到浏览器后才能实施点击
-    document.body.appendChild(eleLink);
+    document.body.appendChild(eleLink)
     // 触发点击
-    eleLink.click();
+    eleLink.click()
     // 然后移除
-    document.body.removeChild(eleLink);
+    document.body.removeChild(eleLink)
   }
-};
+}
 
 const _Menu = () => {
   return (
     <Menu>
       {contactTypes.map(item => {
-        const { text, link, Icon } = item;
+        const { text, link, Icon } = item
         return (
           <Menu.Item
             key={link}
@@ -48,24 +48,24 @@ const _Menu = () => {
           >
             {text}
           </Menu.Item>
-        );
+        )
       })}
     </Menu>
-  );
-};
+  )
+}
 
 const Drawer = ({ isShowDrawer, closeDrawer }) => {
-  const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH);
-  const [searchText, setSearchText] = useState('');
-  const [isShowDropDownContact, setShowDropDownContact] = useState(false);
-  const [isMobileEnd, setMobileEnd] = useState(false);
+  const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH)
+  const [searchText, setSearchText] = useState('')
+  const [isShowDropDownContact, setShowDropDownContact] = useState(false)
+  const [isMobileEnd, setMobileEnd] = useState(false)
 
   const setSearchBarOpen = () => {
     if (searchBarWidth === OPENED_SEARCH_BAR_WIDTH) {
-      return null;
+      return null
     }
-    setSearchWidth(OPENED_SEARCH_BAR_WIDTH);
-  };
+    setSearchWidth(OPENED_SEARCH_BAR_WIDTH)
+  }
 
   // const setSearchBarClose = () => {
   // if (searchBarWidth === CLOSED_SEARCH_BAR_WIDTH || searchText) {
@@ -75,18 +75,18 @@ const Drawer = ({ isShowDrawer, closeDrawer }) => {
   // };
 
   const handleDropDownContact = () => {
-    isMobileEnd && setShowDropDownContact(!isShowDropDownContact);
-  };
+    isMobileEnd && setShowDropDownContact(!isShowDropDownContact)
+  }
 
   useEffect(() => {
-    const deviceWidth = window.screen.width || 0;
+    const deviceWidth = window.screen.width || 0
     if (deviceWidth && deviceWidth < 768) {
-      setSearchWidth(OPENED_SEARCH_BAR_WIDTH);
-      setMobileEnd(true);
+      setSearchWidth(OPENED_SEARCH_BAR_WIDTH)
+      setMobileEnd(true)
 
       document.addEventListener('click', event => {
-        const cDom = document.getElementById('popup');
-        const tDom = event.target;
+        const cDom = document.getElementById('popup')
+        const tDom = event.target
         if (
           cDom === tDom ||
           cDom.contains(tDom) ||
@@ -94,15 +94,15 @@ const Drawer = ({ isShowDrawer, closeDrawer }) => {
         ) {
           // ...
         } else {
-          setShowDropDownContact(false);
+          setShowDropDownContact(false)
         }
-      });
+      })
     }
-  }, []);
+  }, [])
 
   const handleSearchText = ({ currentTarget: { value } }) => {
-    setSearchText(value);
-  };
+    setSearchText(value)
+  }
 
   return (
     <div className="wrap">
@@ -354,12 +354,12 @@ const Drawer = ({ isShowDrawer, closeDrawer }) => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
 Drawer.propTypes = {
   isShowDrawer: PropTypes.bool.isRequired,
   closeDrawer: PropTypes.func.isRequired,
-};
+}
 
-export default Drawer;
+export default Drawer
