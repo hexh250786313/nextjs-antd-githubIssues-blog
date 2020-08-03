@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { Drawer as AntDrawer, Menu, Input } from 'antd'
-import { OrderedListOutlined, MailOutlined, SearchOutlined } from '@ant-design/icons'
+import {
+  OrderedListOutlined,
+  MailOutlined,
+  SearchOutlined,
+  FileTextOutlined,
+} from '@ant-design/icons'
 import { color_primary } from '../../constants/CustomTheme'
 import { contactTypes, blogName } from '../../constants/ConstTypes'
 import { handleLink } from '../../core/util'
@@ -94,6 +99,12 @@ const Drawer = ({
               />
             </Menu.Item>
             {renderContact()}
+            <Menu.Item
+              key={`https://github.com/hexh250786313/Blog/issues`}
+              icon={<FileTextOutlined />}
+            >
+              ARCHIEVE
+            </Menu.Item>
             {mdSource ? renderTOC() : null}
           </Menu>
         </div>

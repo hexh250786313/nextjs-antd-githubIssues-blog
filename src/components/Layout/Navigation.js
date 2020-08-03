@@ -118,7 +118,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           <Dropdown overlay={_Menu}>
             <li className="contact">CONTACT</li>
           </Dropdown>
-          <li className="contact">ABOUT</li>
+          <li className="contact" onClick={linkToArchive}>ARCHIVE</li>
         </ul>
       </div>
 
@@ -261,4 +261,8 @@ export default Navigation
 
 const linkTo = ({ key }) => {
   handleLink(key)
+}
+
+const linkToArchive = () => {
+  handleLink(`https://github.com/hexh250786313/Blog/issues`)
 }

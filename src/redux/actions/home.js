@@ -1,20 +1,9 @@
-import { INCREMENT, DECREMENT, RESET } from '../../constants/ActionTypes'
+import { SAVE_TIME_LINE } from '../../constants/ActionTypes'
 
-export function increment() {
+export function saveTimeLine(payload) {
   return {
-    type: INCREMENT,
-  }
-}
-
-export function decrement() {
-  return {
-    type: DECREMENT,
-  }
-}
-
-export function reset() {
-  return {
-    type: RESET,
+    type: SAVE_TIME_LINE,
+    payload: payload,
   }
 }
 

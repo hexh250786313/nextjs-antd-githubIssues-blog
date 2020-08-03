@@ -1,14 +1,16 @@
 import { connect } from 'react-redux'
-import { fetchPostList } from '../../redux/actions/post'
+import { saveTimeLine } from '../../redux/actions/home'
 import Timeline from '../../components/Home/Timeline'
 
 const mapStateToProps = state => ({
-  list: state.post.list,
+  prevList: state.home.timeline.list,
+  prevPage: state.home.timeline.page,
+  openIssuesCount: state.blog.info.openIssuesCount,
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchPostList() {
-    dispatch(fetchPostList())
+  saveTimeLine(payload) {
+    dispatch(saveTimeLine(payload))
   }
 })
 

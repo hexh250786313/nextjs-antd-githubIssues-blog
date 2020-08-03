@@ -1,30 +1,63 @@
 import PropTypes from 'prop-types'
-import { Spin, Timeline as AntTimeline } from 'antd'
+import { Spin, Timeline as AntTimeline, message } from 'antd'
 import { handleDescContent, utc2locale } from '../../core/util'
 // import { ClockCircleOutlined } from '@ant-design/icons';
 // import { color_primary } from '../../constants/CustomTheme';
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
+import nextFetch from '../../core/nextFetch'
+import api from '../../constants/ApiUrlForBE'
 
 const { Item } = AntTimeline
 
-const Timeline = ({ list: POSTList }) => {
+const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
+  console.log(openIssuesCount)
   const [timeLineMode, setTimeLineMode] = useState('alternate')
+  const [showSeeMore, setShowSeeMore] = useState(1)
+  const [postList, setPostList] = useState([])
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const handleClick = (e, href) => {
     e.preventDefault()
     Router.push(`/post/[number]`, href)
   }
 
+  const fetchPostList = async () => {
+    setLoading(true)
+    try {
+      const list = await nextFetch.get(api.getGitHubIssues, {
+        query: { page, per_page: 1 },
+      })
+      const nextList = postList.concat(list)
+      setPage(page + 1)
+      setPostList(nextList)
+      saveTimeLine({
+        list: nextList,
+        page: page,
+      })
+    } catch (e) {
+      message.error(`你能跟上我的思必得吗~`)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     const deviceWidth = window.screen.width || 0
     setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate')
+    if (prevList.length) {
+      setPage(prevPage + 1)
+      setPostList(prevList)
+    } else {
+      fetchPostList()
+    }
   }, [])
 
   return (
-    <Spin spinning={POSTList.length === 0}>
+    <Spin spinning={postList.length === 0}>
       <AntTimeline mode={timeLineMode}>
-        {POSTList.map(item => {
+        {postList.map(item => {
           const { number, title, created_at, body } = item
           return (
             <Item key={title}>
@@ -41,16 +74,22 @@ const Timeline = ({ list: POSTList }) => {
             </Item>
           )
         })}
-        {POSTList.length !== 0 ? (
+        {postList.length >= 4 ? (
           <Item>
             <span className="type">POST</span>
-            <a>
+            <a onClick={() => setShowSeeMore(!showSeeMore)}>
               <span className="title">hexh's blog deployed.</span>
               <br />
               <span className="time">2020/4/26 Monday</span>
             </a>
           </Item>
-        ) : null}
+        ) : (
+          <Spin spinning={loading}>
+            <div className="see_more">
+              <a onClick={fetchPostList}>See more...</a>
+            </div>
+          </Spin>
+        )}
       </AntTimeline>
       <style jsx>{`
         .title {
@@ -77,6 +116,13 @@ const Timeline = ({ list: POSTList }) => {
           color: rgba(0, 0, 0, 0.65);
           text-overflow: ellipsis;
         }
+
+        .see_more {
+          margin-top: 10px;
+          width: 100%;
+          display: fles;
+          justify-content: center;
+        }
       `}</style>
     </Spin>
   )
@@ -85,5 +131,8 @@ const Timeline = ({ list: POSTList }) => {
 export default Timeline
 
 Timeline.propTypes = {
-  list: PropTypes.array.isRequired,
+  prevList: PropTypes.array.isRequired,
+  prevPage: PropTypes.number.isRequired,
+  openIssuesCount: PropTypes.number.isRequired,
+  saveTimeLine: PropTypes.func.isRequired,
 }
