@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { Spin, Timeline as AntTimeline, message } from 'antd'
-import { handleDescContent, utc2locale } from '../../core/util'
+import { handleTagContent, utc2locale } from '../../core/util'
 // import { ClockCircleOutlined } from '@ant-design/icons';
 // import { color_primary } from '../../constants/CustomTheme';
 import { useEffect, useState } from 'react'
@@ -11,7 +11,7 @@ import api from '../../constants/ApiUrlForBE'
 const { Item } = AntTimeline
 
 const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
-  console.log(openIssuesCount)
+  console.log(`TODO`, openIssuesCount)
   const [timeLineMode, setTimeLineMode] = useState('alternate')
   const [showSeeMore, setShowSeeMore] = useState(1)
   const [postList, setPostList] = useState([])
@@ -59,6 +59,10 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
       <AntTimeline mode={timeLineMode}>
         {postList.map(item => {
           const { number, title, created_at, body } = item
+          let images = handleTagContent(body, `image`)
+          if (images) {
+            images = images.split(`--split--`)
+          }
           return (
             <Item key={title}>
               <span className="type">POST</span>
@@ -69,7 +73,10 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
                 <span className="title">{title}</span>
                 <br />
                 <span className="time">{utc2locale(created_at)}</span>
-                <p className="content">{handleDescContent(body)}</p>
+                <p className="content">{handleTagContent(body)}</p>
+                {Array.isArray(images)
+                  ? images.map((url, index) => ( <img key={index} src={url} alt="url" className="image" />))
+                  : null}
               </a>
             </Item>
           )
@@ -122,6 +129,11 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
           width: 100%;
           display: fles;
           justify-content: center;
+        }
+
+        .image {
+          width: 100px;
+          margin: 0 10px 10px 0;
         }
       `}</style>
     </Spin>

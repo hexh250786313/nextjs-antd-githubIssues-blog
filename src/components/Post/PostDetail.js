@@ -2,13 +2,13 @@ import { Spin } from 'antd'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { handleDescContent } from '../../core/util'
+import { handleTagContent } from '../../core/util'
 import CodeBlock from '../CodeBlock'
 import './index.less'
 
 const PostDetail = ({ detail, setTOC, handleHeaderChange }) => {
   const { title = '', body: _body } = detail
-  const body = _body ? handleDescContent(_body, `exec`) : ``
+  const body = _body ? handleTagContent(_body, `desc`, `exec`) : ``
 
   useEffect(() => {
     if (body) {

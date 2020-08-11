@@ -86,15 +86,16 @@ export const handleLink = link => {
   throw new Error(`Not a string`)
 }
 
-/** 处理 <desc> 标签的内容，提取或者去除
+/** 处理特殊标签标签的内容，提取或者去除
  *
- * @method handleDescContent
+ * @method handleTagContent
  * @param {string} source 要处理的字符串
- * @param {'get' | 'exec'} action 进行的操作，'get': 获取 desc 中的内容，'exec': 去除 desc
- * @returns {string} 返回 <desc> 标签中的内容或去除 <desc> 后的内容
+ * @param {'get' | 'exec'} action 进行的操作，'get': 获取特殊标签中的内容，'exec': 去除特殊标签
+ * @param {string} tag 进行的操作，'get': 获取特殊标签中的内容，'exec': 去除特殊标签
+ * @returns {string} 返回特殊标签标签中的内容或去除特殊标签后的内容
  *
  */
-export const handleDescContent = (source = ``, action = `get`) => {
+export const handleTagContent = (source = ``, tag = `desc`, action = `get`) => {
   const actions = ['get', 'exec']
   if (typeof source !== `string` || typeof action !== `string`) {
     throw new Error(`Not a string`)
@@ -102,20 +103,20 @@ export const handleDescContent = (source = ``, action = `get`) => {
   if (!actions.includes(action)) {
     throw new Error(`Require 'get' or 'exec'`)
   }
-  const reg = /<desc>([\s\S]+)<\/desc>/g
-  let desc = ``
-  let descWithTag = ``
-  if ((desc = reg.exec(source))) {
-    descWithTag = desc[0]
-    desc = desc[1]
+  const reg = new RegExp(`<${tag}>([\\s\\S]+)<\\/${tag}>`, `g`)
+  let str = ``
+  let strWithTag = ``
+  if ((str = reg.exec(source))) {
+    strWithTag = str[0]
+    str = str[1]
   }
 
   switch (action) {
     case `get`:
-      return desc
+      return str
     case `exec`:
-      if (descWithTag) {
-        return source.replace(descWithTag, '')
+      if (strWithTag) {
+        return source.replace(strWithTag, '')
       }
       return source
     default:

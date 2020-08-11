@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
-import { handleDescContent, utc2locale } from '../../core/util'
+import { handleTagContent, utc2locale } from '../../core/util'
 
 const PostList = ({ fetchPostList, perPage, list: postList, postsAmount, currentPage }) => {
   const handleClick = (e, href) => {
@@ -30,7 +30,7 @@ const PostList = ({ fetchPostList, perPage, list: postList, postsAmount, current
                         <span className="time">{utc2locale(created_at)}</span>
                       }
                     />
-                    <p className="description">{handleDescContent(body)}</p>
+                    <p className="description">{handleTagContent(body)}</p>
                   </List.Item>
                 </a>
               )
