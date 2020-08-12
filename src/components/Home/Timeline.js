@@ -54,34 +54,61 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
     }
   }, [])
 
+  const handleLink = link => {
+    // link = 'https://weibo.com/HanaSoup';
+    if (link) {
+      let eleLink = document.createElement('a')
+      eleLink.style.display = 'none'
+      eleLink.href = link
+      eleLink.target = '_blank'
+      // 受浏览器安全策略的因素，动态创建的元素必须添加到浏览器后才能实施点击
+      document.body.appendChild(eleLink)
+      // 触发点击
+      eleLink.click()
+      // 然后移除
+      document.body.removeChild(eleLink)
+    }
+  }
+
   return (
     <Spin spinning={postList.length === 0}>
       <AntTimeline mode={timeLineMode}>
         {postList.map(item => {
-          const { number, title, created_at, body } = item
+          const {
+            number,
+            title,
+            created_at,
+            body,
+            labels: [label],
+          } = item
           let images = handleTagContent(body, `image`)
+          const tag = label ? label.name.toUpperCase() : `POST`
           if (images) {
             images = images.split(`--split--`)
           }
           return (
             <Item key={title}>
-              <span className="type">POST</span>
+              <span className="type">{tag}</span>
               <a
                 href={`/post/${number}`}
-                onClick={e => handleClick(e, `/post/${number}`)}
+                onClick={e =>
+                  tag === `POST`
+                    ? handleClick(e, `/post/${number}`)
+                    : e.preventDefault()
+                }
               >
                 <span className="title">{title}</span>
                 <br />
                 <span className="time">{utc2locale(created_at)}</span>
                 <p className="content">{handleTagContent(body)}</p>
                 {Array.isArray(images)
-                  ? images.map((url, index) => ( <img key={index} src={url} alt="url" className="image" />))
+                  ? images.map((url, index) => ( <img key={index} src={url} alt="url" onClick={() => handleLink(url)} className="image" />))
                   : null}
               </a>
             </Item>
           )
         })}
-        {postList.length >= 4 ? (
+        {prevPage <= Math.ceil(openIssuesCount / 1) - 1 ? (
           <Item>
             <span className="type">POST</span>
             <a onClick={() => setShowSeeMore(!showSeeMore)}>
