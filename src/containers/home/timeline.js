@@ -1,17 +1,21 @@
 import { connect } from 'react-redux'
-import { saveTimeLine } from '../../redux/actions/home'
+import { saveTimeline } from '../../redux/actions/TimelineAction'
+import { fetchBlogInfo } from '../../redux/actions/CommonAction'
 import Timeline from '../../components/Home/Timeline'
 
 const mapStateToProps = state => ({
-  prevList: state.home.timeline.list,
-  prevPage: state.home.timeline.page,
-  openIssuesCount: state.blog.info.openIssuesCount,
+  prevList: state.home.timeline.currentList,
+  prevPage: state.home.timeline.currentPage,
+  open_issues_count: state.blog.info.open_issues_count,
 })
 
 const mapDispatchToProps = dispatch => ({
   saveTimeLine(payload) {
-    dispatch(saveTimeLine(payload))
-  }
+    return dispatch(saveTimeline(payload))
+  },
+  fetchBlogInfo(payload) {
+    return dispatch(fetchBlogInfo(payload))
+  },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Timeline)

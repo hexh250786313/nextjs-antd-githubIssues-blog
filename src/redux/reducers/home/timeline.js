@@ -1,16 +1,19 @@
-import { SAVE_TIME_LINE } from '../../../constants/ActionTypes'
+import { SAVE_TIMELINE } from '../../../constants/ActionTypes'
 
 const initialState = {
-  list: [],
-  page: 1,
+  currentList: [],
+  currentPage: 1,
 }
 
-const timeline = (state = initialState, { type, payload }) => {
+const timeline = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
-    case SAVE_TIME_LINE:
-      return payload
+    case SAVE_TIMELINE:
+      return {
+        ...prevState,
+        ...nextState,
+      }
     default:
-      return state
+      return prevState
   }
 }
 

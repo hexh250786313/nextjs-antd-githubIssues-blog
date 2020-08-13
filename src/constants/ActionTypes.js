@@ -4,7 +4,7 @@ export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const RESET = 'RESET'
 
-export const SAVE_TIME_LINE = 'SAVE_TIME_LINE'
+export const SAVE_TIMELINE = 'SAVE_TIMELINE'
 
 // ================= Post Part ==================== //
 

@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import { Spin, Timeline as AntTimeline, message } from 'antd'
 import { handleTagContent, utc2locale } from '../../core/util'
-// import { ClockCircleOutlined } from '@ant-design/icons';
-// import { color_primary } from '../../constants/CustomTheme';
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
 import nextFetch from '../../core/nextFetch'
@@ -10,7 +8,13 @@ import api from '../../constants/ApiUrlForBE'
 
 const { Item } = AntTimeline
 
-const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
+const Timeline = ({
+  prevList,
+  prevPage,
+  openIssuesCount,
+  saveTimeLine,
+  fetchBlogInfo,
+}) => {
   console.log(`TODO`, openIssuesCount)
   const [timeLineMode, setTimeLineMode] = useState('alternate')
   const [showSeeMore, setShowSeeMore] = useState(1)
@@ -46,12 +50,14 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
   useEffect(() => {
     const deviceWidth = window.screen.width || 0
     setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate')
-    if (prevList.length) {
-      setPage(prevPage + 1)
-      setPostList(prevList)
-    } else {
-      fetchPostList()
-    }
+    // if (prevList.length) {
+    // setPage(prevPage + 1)
+    // setPostList(prevList)
+    // } else {
+    // fetchPostList()
+    // }
+
+    fetchBlogInfo()
   }, [])
 
   const handleLink = link => {
@@ -102,7 +108,15 @@ const Timeline = ({ prevList, prevPage, openIssuesCount, saveTimeLine }) => {
                 <span className="time">{utc2locale(created_at)}</span>
                 <p className="content">{handleTagContent(body)}</p>
                 {Array.isArray(images)
-                  ? images.map((url, index) => ( <img key={index} src={url} alt="url" onClick={() => handleLink(url)} className="image" />))
+                  ? images.map((url, index) => (
+                    <img
+                      key={index}
+                      src={url}
+                      alt="url"
+                      onClick={() => handleLink(url)}
+                      className="image"
+                    />
+                  ))
                   : null}
               </a>
             </Item>
@@ -174,4 +188,5 @@ Timeline.propTypes = {
   prevPage: PropTypes.number.isRequired,
   openIssuesCount: PropTypes.number.isRequired,
   saveTimeLine: PropTypes.func.isRequired,
+  fetchBlogInfo: PropTypes.func.isRequired,
 }
