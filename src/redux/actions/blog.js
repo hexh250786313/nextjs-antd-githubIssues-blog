@@ -4,24 +4,19 @@ import {
   FETCH_BLOG_INFO_SUCCESS,
 } from '../../constants/ActionTypes'
 
-export function fetchBlogInfo(payload) {
-  return {
-    type: FETCH_BLOG_INFO,
-    payload,
-  }
-}
+// 获取博客的信息
 
-export function fetchBlogInfoFail(payload) {
-  return {
-    type: FETCH_BLOG_INFO_FAIL,
-    payload,
-  }
-}
+export const fetchBlogInfo = payload => ({
+  type: FETCH_BLOG_INFO,
+  payload,
+})
 
-export function fetchBlogInfoSuccess(payload) {
-  return {
-    type: FETCH_BLOG_INFO_SUCCESS,
-    payload,
-  }
-}
+export const fetchBlogInfoFail = payload => ({
+  type: FETCH_BLOG_INFO_FAIL,
+  payload,
+})
 
+export const fetchBlogInfoSuccess = payload => ({
+  type: FETCH_BLOG_INFO_SUCCESS,
+  payload,
+})

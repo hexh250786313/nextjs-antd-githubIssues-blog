@@ -5,21 +5,20 @@ import {
 } from '../../../constants/ActionTypes'
 
 const initialState = {
-  openIssuesCount: 1,
+  open_issues_count: 1,
 }
 
-const info = (state = initialState, { type, payload }) => {
+const info = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
-    case FETCH_BLOG_INFO:
-    case FETCH_BLOG_INFO_FAIL:
-      return initialState
     case FETCH_BLOG_INFO_SUCCESS:
       return {
-        ...state,
-        ...payload,
+        ...prevState,
+        ...nextState,
       }
+    case FETCH_BLOG_INFO:
+    case FETCH_BLOG_INFO_FAIL:
     default:
-      return state
+      return prevState
   }
 }
 

@@ -1,85 +1,70 @@
 import PropTypes from 'prop-types'
-import { Spin, Timeline as AntTimeline, message } from 'antd'
-import { handleTagContent, utc2locale } from '../../core/util'
+import { Spin, Timeline as AntTimeline } from 'antd'
+import { handleTagContent, utc2locale, handleLink } from '../../core/util'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
-import nextFetch from '../../core/nextFetch'
-import api from '../../constants/ApiUrlForBE'
+
+const PAGE_SIZE = 10
 
 const { Item } = AntTimeline
 
+const query = {
+  labels: undefined,
+  page: 1,
+  per_page: PAGE_SIZE,
+  noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+}
+
+const handleClick = (e, href) => {
+  e.preventDefault()
+  Router.push(`/post/[number]`, href)
+}
+
 const Timeline = ({
-  prevList,
-  prevPage,
-  openIssuesCount,
-  saveTimeLine,
+  currentList,
+  currentPage,
+  open_issues_count,
+  saveTimeline,
   fetchBlogInfo,
+  fetchPostList,
 }) => {
-  console.log(`TODO`, openIssuesCount)
   const [timeLineMode, setTimeLineMode] = useState('alternate')
   const [showSeeMore, setShowSeeMore] = useState(1)
-  const [postList, setPostList] = useState([])
-  const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(false)
 
-  const handleClick = (e, href) => {
-    e.preventDefault()
-    Router.push(`/post/[number]`, href)
+  const fetchList = async reqData => {
+    setLoading(true)
+    fetchPostList(reqData, list => {
+      saveTimeline({
+        currentList: currentList.concat(list),
+        currentPage: reqData.page,
+      })
+      setLoading(false)
+    })
   }
 
-  const fetchPostList = async () => {
-    setLoading(true)
-    try {
-      const list = await nextFetch.get(api.getGitHubIssues, {
-        query: { page, per_page: 1 },
-      })
-      const nextList = postList.concat(list)
-      setPage(page + 1)
-      setPostList(nextList)
-      saveTimeLine({
-        list: nextList,
-        page: page,
-      })
-    } catch (e) {
-      message.error(`你能跟上我的思必得吗~`)
-    } finally {
-      setLoading(false)
+  const handleSeeMoreClick = () => {
+    const nextReqData = {
+      ...query,
+      page: currentPage + 1,
     }
+    fetchList(nextReqData)
   }
 
   useEffect(() => {
     const deviceWidth = window.screen.width || 0
     setTimeLineMode(deviceWidth && deviceWidth < 768 ? 'left' : 'alternate')
-    // if (prevList.length) {
-    // setPage(prevPage + 1)
-    // setPostList(prevList)
-    // } else {
-    // fetchPostList()
-    // }
 
-    fetchBlogInfo()
+    if (!currentList.length) {
+      fetchBlogInfo()
+      fetchList(query)
+    }
   }, [])
 
-  const handleLink = link => {
-    // link = 'https://weibo.com/HanaSoup';
-    if (link) {
-      let eleLink = document.createElement('a')
-      eleLink.style.display = 'none'
-      eleLink.href = link
-      eleLink.target = '_blank'
-      // 受浏览器安全策略的因素，动态创建的元素必须添加到浏览器后才能实施点击
-      document.body.appendChild(eleLink)
-      // 触发点击
-      eleLink.click()
-      // 然后移除
-      document.body.removeChild(eleLink)
-    }
-  }
-
   return (
-    <Spin spinning={postList.length === 0}>
+    <Spin spinning={currentList.length === 0}>
       <AntTimeline mode={timeLineMode}>
-        {postList.map(item => {
+        {currentList.map(item => {
           const {
             number,
             title,
@@ -109,20 +94,20 @@ const Timeline = ({
                 <p className="content">{handleTagContent(body)}</p>
                 {Array.isArray(images)
                   ? images.map((url, index) => (
-                    <img
-                      key={index}
-                      src={url}
-                      alt="url"
-                      onClick={() => handleLink(url)}
-                      className="image"
-                    />
-                  ))
+                      <img
+                        key={index}
+                        src={url}
+                        alt="url"
+                        onClick={() => handleLink(url)}
+                        className="image"
+                      />
+                    ))
                   : null}
               </a>
             </Item>
           )
         })}
-        {prevPage <= Math.ceil(openIssuesCount / 1) - 1 ? (
+        {currentPage > Math.ceil(open_issues_count / PAGE_SIZE) - 1 ? (
           <Item>
             <span className="type">POST</span>
             <a onClick={() => setShowSeeMore(!showSeeMore)}>
@@ -134,7 +119,7 @@ const Timeline = ({
         ) : (
           <Spin spinning={loading}>
             <div className="see_more">
-              <a onClick={fetchPostList}>See more...</a>
+              <a onClick={handleSeeMoreClick}>See more...</a>
             </div>
           </Spin>
         )}
@@ -184,9 +169,10 @@ const Timeline = ({
 export default Timeline
 
 Timeline.propTypes = {
-  prevList: PropTypes.array.isRequired,
-  prevPage: PropTypes.number.isRequired,
-  openIssuesCount: PropTypes.number.isRequired,
-  saveTimeLine: PropTypes.func.isRequired,
+  currentList: PropTypes.array.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  open_issues_count: PropTypes.number.isRequired,
+  saveTimeline: PropTypes.func.isRequired,
   fetchBlogInfo: PropTypes.func.isRequired,
+  fetchPostList: PropTypes.func.isRequired,
 }

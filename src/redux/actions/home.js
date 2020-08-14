@@ -1,9 +1,6 @@
-import { SAVE_TIME_LINE } from '../../constants/ActionTypes'
+import { SAVE_TIMELINE } from '../../constants/ActionTypes'
 
-export function saveTimeLine(payload) {
-  return {
-    type: SAVE_TIME_LINE,
-    payload: payload,
-  }
-}
-
+export const saveTimeline = payload => ({
+  type: SAVE_TIMELINE,
+  payload,
+})

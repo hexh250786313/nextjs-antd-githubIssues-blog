@@ -153,7 +153,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           align-items: center;
           position: fixed;
           top: 0;
-          z-index: 1;
+          z-index: 5;
           box-shadow: ${isShowTopShadow
       ? '0 2px 6px rgba(0, 0, 0, 0.35)'
       : 'null'};

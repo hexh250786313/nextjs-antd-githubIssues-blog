@@ -1,4 +1,4 @@
-import { take, put, fork, select } from 'redux-saga/effects'
+import { take, put, fork, select, call } from 'redux-saga/effects'
 import { FETCH_POST_LIST } from '../../../constants/ActionTypes'
 import {
   fetchPostListFail,
@@ -13,21 +13,24 @@ import nextFetch from '../../../core/nextFetch'
  */
 export function* fetchPostList() {
   while (true) {
-    const { payload: currentQueryParams } = yield take(FETCH_POST_LIST)
+    const { payload: nextQueryParams, callback } = yield take(FETCH_POST_LIST)
     const prevQueryParams = yield select(state => state.post.query)
-    const nextQueryParams = {
+    const query = {
       ...prevQueryParams,
-      ...currentQueryParams,
+      ...nextQueryParams,
     }
     try {
-      const list = yield nextFetch.get(api.getGitHubIssues, {
-        query: nextQueryParams,
-      })
+      const list = yield nextFetch.get(api.getGitHubIssues, { query })
+      if (!!callback) {
+        yield call(() => {
+          callback(list)
+        })
+      }
       yield put(fetchPostListSuccess(list))
     } catch (e) {
       yield put(fetchPostListFail())
     } finally {
-      yield put(saveQueryParams(nextQueryParams))
+      yield put(saveQueryParams(query))
     }
   }
 }

@@ -6,7 +6,8 @@ import EditFilled from '@ant-design/icons/EditFilled'
 import QuestionCircleFilled from '@ant-design/icons/QuestionCircleFilled'
 
 // 博客名称
-export const blogName = "hexh's blog"
+// export const blogName = "hexh's blog"
+export const blogName = "non"
 
 // 联系方式
 export const contactTypes = [

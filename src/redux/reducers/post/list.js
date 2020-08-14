@@ -6,15 +6,14 @@ import {
 
 const initialState = []
 
-const list = (state = initialState, { type, payload: list }) => {
+const list = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
+    case FETCH_POST_LIST_SUCCESS:
+      return nextState
     case FETCH_POST_LIST:
     case FETCH_POST_LIST_FAIL:
-      return initialState
-    case FETCH_POST_LIST_SUCCESS:
-      return list
     default:
-      return state
+      return prevState
   }
 }
 
