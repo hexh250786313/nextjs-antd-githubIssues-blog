@@ -6,8 +6,8 @@ PostList.getInitialProps = async props => {
   const { store, isServer } = props.ctx
   store.dispatch(fetchPostList())
   store.dispatch(getPostsAmount())
-  debugger
   return { isServer }
 }
 
 export default PostList
+

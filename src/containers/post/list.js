@@ -10,9 +10,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchPostList(payload) {
-    dispatch(fetchPostList(payload))
-  },
+  fetchPostList: (payload, callback) =>
+    dispatch(fetchPostList(payload, callback)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)

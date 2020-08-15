@@ -3,17 +3,9 @@ import { Spin, Timeline as AntTimeline } from 'antd'
 import { handleTagContent, utc2locale, handleLink } from '../../core/util'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
-
-const PAGE_SIZE = 10
+import { timelineQuery } from '../../constants/ConstTypes'
 
 const { Item } = AntTimeline
-
-const query = {
-  labels: undefined,
-  page: 1,
-  per_page: PAGE_SIZE,
-  noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
-}
 
 const handleClick = (e, href) => {
   e.preventDefault()
@@ -45,7 +37,7 @@ const Timeline = ({
 
   const handleSeeMoreClick = () => {
     const nextReqData = {
-      ...query,
+      ...timelineQuery,
       page: currentPage + 1,
     }
     fetchList(nextReqData)
@@ -57,7 +49,7 @@ const Timeline = ({
 
     if (!currentList.length) {
       fetchBlogInfo()
-      fetchList(query)
+      fetchList(timelineQuery)
     }
   }, [])
 
@@ -107,7 +99,7 @@ const Timeline = ({
             </Item>
           )
         })}
-        {currentPage > Math.ceil(open_issues_count / PAGE_SIZE) - 1 ? (
+        {currentPage > Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
           <Item>
             <span className="type">POST</span>
             <a onClick={() => setShowSeeMore(!showSeeMore)}>

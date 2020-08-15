@@ -2,12 +2,40 @@ import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
 import { handleTagContent, utc2locale } from '../../core/util'
+import { useEffect } from 'react'
 
-const PostList = ({ fetchPostList, perPage, list: postList, postsAmount, currentPage }) => {
+const PostList = ({
+  fetchPostList,
+  perPage,
+  list: postList,
+  postsAmount,
+  currentPage,
+}) => {
   const handleClick = (e, href) => {
     e.preventDefault()
     Router.push(`/post/[number]`, href)
   }
+  console.log(`渲染`)
+
+  // useEffect(() => {
+  // setPostsAmount({ page: 1, noCache: true, per_page: 100000 })
+  // setTimeout(
+  // () =>
+  // fetchPostList({
+  // // labels: `post`,
+  // // labels: `bug`,
+  // page: 1,
+  // per_page: 1,
+  // // per_page: 10,
+  // creator: `hexh250786313`,
+  // sort: `created`,
+  // direction: `desc`,
+  // state: `open`,
+  // noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+  // }),
+  // 1000,
+  // )
+  // }, [])
 
   return (
     <div className="container">

@@ -6,8 +6,7 @@ import EditFilled from '@ant-design/icons/EditFilled'
 import QuestionCircleFilled from '@ant-design/icons/QuestionCircleFilled'
 
 // 博客名称
-// export const blogName = "hexh's blog"
-export const blogName = "non"
+export const blogName = "hexh's blog"
 
 // 联系方式
 export const contactTypes = [
@@ -46,3 +45,11 @@ export const pagesIndex = [
     Icon: QuestionCircleFilled,
   },
 ]
+
+// 首页时间轴查询条件
+export const timelineQuery = {
+  labels: undefined,
+  page: 1,
+  per_page: 10,
+  noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+}

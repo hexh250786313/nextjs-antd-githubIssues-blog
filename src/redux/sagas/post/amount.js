@@ -22,6 +22,7 @@ export function* func() {
       const list = yield nextFetch.get(api.getGitHubIssues, {
         query: nextQueryParams,
       }) || []
+      console.log(`数量`, list.length)
       yield put(getPostsAmountSuccess(list.length))
     } catch (e) {
       yield put(getPostsAmountFail())

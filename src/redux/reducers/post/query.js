@@ -1,11 +1,11 @@
 import { SAVE_QUERY_PARAMS } from '../../../constants/ActionTypes'
 
 const initialState = {
-  labels: `post`,
+  // labels: `post`,
   // labels: `bug`,
   page: 1,
-  // per_page: 1,
-  per_page: 10,
+  per_page: 1,
+  // per_page: 10,
   creator: `hexh250786313`,
   sort: `created`,
   direction: `desc`,
