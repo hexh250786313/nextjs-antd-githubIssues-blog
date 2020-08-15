@@ -12,7 +12,12 @@ import '../../assets/progress.less' // styles of nprogress
 
 // Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())
-Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeComplete', path => {
+  if (path.match(/^\/post\/\d/) && window) {
+    window.scrollTo({ top: 0, behavior: `smooth` })
+  }
+  NProgress.done()
+})
 Router.events.on('routeChangeError', () => NProgress.done())
 
 class NextApp extends App {

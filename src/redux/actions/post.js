@@ -10,6 +10,7 @@ import {
   GET_POSTS_AMOUNT_SUCCESS,
   GET_POSTS_AMOUNT_FAIL,
 } from '../../constants/ActionTypes'
+import { postsAmountQuery } from '../../constants/ConstTypes'
 
 export const saveQueryParams = payload =>
   !!payload.noCache
@@ -54,18 +55,10 @@ export const fetchPostDetailSuccess = payload => ({
 })
 
 // 该方法用于获取标签为 post 的 issue 的总数
-export const getPostsAmount = payload => {
-  console.log(`action 触发`)
-  return {
-    type: GET_POSTS_AMOUNT,
-    payload: payload || {
-      // labels: `post`,
-      per_page: 10000,
-      page: 1,
-      noCache: true,
-    },
-  }
-}
+export const getPostsAmount = payload => ({
+  type: GET_POSTS_AMOUNT,
+  payload: payload || postsAmountQuery,
+})
 
 export const getPostsAmountSuccess = payload => ({
   type: GET_POSTS_AMOUNT_SUCCESS,
@@ -76,4 +69,3 @@ export const getPostsAmountFail = payload => ({
   type: GET_POSTS_AMOUNT_FAIL,
   payload,
 })
-

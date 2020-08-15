@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
 import { handleTagContent, utc2locale } from '../../core/util'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const PostList = ({
   fetchPostList,
@@ -10,36 +10,30 @@ const PostList = ({
   list: postList,
   postsAmount,
   currentPage,
+  getPostsAmount,
 }) => {
+  const [loading, setLoading] = useState(false)
+
   const handleClick = (e, href) => {
     e.preventDefault()
     Router.push(`/post/[number]`, href)
   }
-  console.log(`渲染`)
 
-  // useEffect(() => {
-  // setPostsAmount({ page: 1, noCache: true, per_page: 100000 })
-  // setTimeout(
-  // () =>
-  // fetchPostList({
-  // // labels: `post`,
-  // // labels: `bug`,
-  // page: 1,
-  // per_page: 1,
-  // // per_page: 10,
-  // creator: `hexh250786313`,
-  // sort: `created`,
-  // direction: `desc`,
-  // state: `open`,
-  // noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
-  // }),
-  // 1000,
-  // )
-  // }, [])
+  const handlePaginationClick = page => {
+    setLoading(true)
+    fetchPostList({ page }, () => setLoading(false))
+  }
+
+  useEffect(() => {
+    fetchPostList()
+    if (!postsAmount) {
+      getPostsAmount()
+    }
+  }, [])
 
   return (
     <div className="container">
-      <Spin spinning={postList.length === 0}>
+      <Spin spinning={postList.length === 0 || loading}>
         {postList.length !== 0 ? (
           <List>
             {postList.map(item => {
@@ -69,7 +63,7 @@ const PostList = ({
         )}
       </Spin>
       <Pagination
-        onChange={e => fetchPostList({ page: e })}
+        onChange={handlePaginationClick}
         pageSize={perPage}
         defaultCurrent={1}
         current={currentPage}
@@ -92,7 +86,7 @@ const PostList = ({
 
         :global(.container .ant-list-item-meta-title) {
           color: inherit;
-          line-height: 1.1;
+          line-height: 1.2;
           margin: 0;
         }
 
@@ -137,4 +131,5 @@ PostList.propTypes = {
   perPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   fetchPostList: PropTypes.func.isRequired,
+  getPostsAmount: PropTypes.func.isRequired,
 }

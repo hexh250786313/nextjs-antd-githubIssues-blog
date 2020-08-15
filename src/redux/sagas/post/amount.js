@@ -1,9 +1,6 @@
 import { take, put, fork, select } from 'redux-saga/effects'
 import { GET_POSTS_AMOUNT } from '../../../constants/ActionTypes'
-import {
-  getPostsAmountSuccess,
-  getPostsAmountFail,
-} from '../../actions/post'
+import { getPostsAmountSuccess, getPostsAmountFail } from '../../actions/post'
 import api from '../../../constants/ApiUrlForBE'
 import nextFetch from '../../../core/nextFetch'
 
@@ -21,8 +18,7 @@ export function* func() {
     try {
       const list = yield nextFetch.get(api.getGitHubIssues, {
         query: nextQueryParams,
-      }) || []
-      console.log(`数量`, list.length)
+      })
       yield put(getPostsAmountSuccess(list.length))
     } catch (e) {
       yield put(getPostsAmountFail())

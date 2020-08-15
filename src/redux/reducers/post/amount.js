@@ -4,7 +4,7 @@ import {
   GET_POSTS_AMOUNT_SUCCESS,
 } from '../../../constants/ActionTypes'
 
-const initialState = 1
+const initialState = 0
 
 const amount = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {

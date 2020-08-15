@@ -53,3 +53,24 @@ export const timelineQuery = {
   per_page: 10,
   noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
+
+// post 列表查询条件
+export const postsListQuery = {
+  labels: `post`,
+  // labels: `bug`,
+  page: 1,
+  // per_page: 2,
+  per_page: 10,
+  creator: `hexh250786313`,
+  sort: `created`,
+  direction: `desc`,
+  state: `open`,
+  noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+}
+
+// post 数量查询条件
+export const postsAmountQuery = {
+  per_page: 10000,
+  page: 1,
+  noCache: true,
+}

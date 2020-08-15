@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchPostList } from '../../redux/actions/post'
+import { fetchPostList, getPostsAmount } from '../../redux/actions/post'
 import PostList from '../../components/Post/PostList'
 
 const mapStateToProps = state => ({
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchPostList: (payload, callback) =>
     dispatch(fetchPostList(payload, callback)),
+  getPostsAmount: payload => dispatch(getPostsAmount(payload)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostList)
