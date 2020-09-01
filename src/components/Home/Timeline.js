@@ -18,7 +18,7 @@ const Timeline = ({
   open_issues_count,
   saveTimeline,
   fetchBlogInfo,
-  fetchPostList,
+  fetchTimeline,
 }) => {
   const [timeLineMode, setTimeLineMode] = useState('alternate')
   const [showSeeMore, setShowSeeMore] = useState(1)
@@ -26,7 +26,7 @@ const Timeline = ({
 
   const fetchList = async reqData => {
     setLoading(true)
-    fetchPostList(reqData, list => {
+    fetchTimeline(reqData, list => {
       saveTimeline({
         currentList: currentList.concat(list),
         currentPage: reqData.page,
@@ -75,7 +75,7 @@ const Timeline = ({
               <a
                 href={`/post/${number}`}
                 onClick={e =>
-                  tag === `POST`
+                  tag === `POST` || tag === `ABOUT`
                     ? handleClick(e, `/post/${number}`)
                     : e.preventDefault()
                 }
@@ -99,9 +99,10 @@ const Timeline = ({
             </Item>
           )
         })}
-        {currentPage > Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
+        {currentPage >
+        Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
           <Item>
-            <span className="type">POST</span>
+            <span className="type">DEPLOY</span>
             <a onClick={() => setShowSeeMore(!showSeeMore)}>
               <span className="title">hexh's blog deployed.</span>
               <br />
@@ -166,5 +167,5 @@ Timeline.propTypes = {
   open_issues_count: PropTypes.number.isRequired,
   saveTimeline: PropTypes.func.isRequired,
   fetchBlogInfo: PropTypes.func.isRequired,
-  fetchPostList: PropTypes.func.isRequired,
+  fetchTimeline: PropTypes.func.isRequired,
 }

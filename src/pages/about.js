@@ -1,13 +1,11 @@
 import PostDetail from '../containers/post/detail'
-import { fetchPostList, fetchPostDetailSuccess } from '../redux/actions/post'
+import { fetchAbout } from '../redux/actions/about'
 
 PostDetail.getInitialProps = async props => {
   const { store, isServer } = props.ctx
-  store.dispatch(
-    fetchPostList({ labels: `about`, noCache: true }, list =>
-      store.dispatch(fetchPostDetailSuccess(list[0] || {})),
-    ),
-  )
+  console.log(`object`)
+  debugger
+  store.dispatch(fetchAbout())
   return { isServer }
 }
 

@@ -5,6 +5,9 @@ export const DECREMENT = 'DECREMENT'
 export const RESET = 'RESET'
 
 export const SAVE_TIMELINE = 'SAVE_TIMELINE'
+export const FETCH_TIMELINE = 'FETCH_TIMELINE'
+export const FETCH_TIMELINE_SUCCESS = 'FETCH_TIMELINE_SUCCESS'
+export const FETCH_TIMELINE_FAIL = 'FETCH_TIMELINE_FAIL'
 
 // ================= Post Part ==================== //
 
@@ -42,3 +45,9 @@ export const HANDLE_HEADER_CHANGE = 'HANDLE_HEADER_CHANGE'
 // ================= TOC Part ==================== //
 
 export const SET_TOC = 'SET_TOC'
+
+// ================= ABOUT Part ==================== //
+
+export const FETCH_ABOUT = 'FETCH_ABOUT'
+export const FETCH_ABOUT_SUCCESS = 'FETCH_ABOUT_SUCCESS'
+export const FETCH_ABOUT_FAIL = 'FETCH_ABOUT_FAIL'
