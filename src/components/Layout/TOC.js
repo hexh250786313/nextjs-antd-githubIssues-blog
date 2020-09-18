@@ -9,11 +9,6 @@ const removeHash = e => {
         '#' +
         e,
     )
-    // console.log(
-    // window.location.href.toString().replace(window.location.hash, '') +
-    // '#' +
-    // e,
-    // );
   }, 100)
 }
 
