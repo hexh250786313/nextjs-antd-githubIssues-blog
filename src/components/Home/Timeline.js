@@ -75,9 +75,10 @@ const Timeline = ({
               <a
                 href={`/post/${number}`}
                 onClick={e =>
-                  tag === `POST` || tag === `ABOUT`
-                    ? handleClick(e, `/post/${number}`)
-                    : e.preventDefault()
+                  // tag === `POST` || tag === `ABOUT`
+                  //   ? handleClick(e, `/post/${number}`)
+                  //   : e.preventDefault()
+                  handleClick(e, `/post/${number}`)
                 }
               >
                 <span className="title">{title}</span>
