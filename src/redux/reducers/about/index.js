@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux'
 import {
   FETCH_ABOUT,
   FETCH_ABOUT_FAIL,
@@ -18,4 +17,4 @@ const about = (prevState = initialState, { type, payload: nextState }) => {
   }
 }
 
-export default combineReducers({ about })
+export default about

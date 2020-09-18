@@ -5,5 +5,7 @@ import homeSagas from './home/index'
 import aboutSagas from './about/index'
 
 export default function* rootSagas() {
-  yield all([...postSagas, ...blogSagas, ...homeSagas, ...aboutSagas])
+  yield all([...postSagas, ...blogSagas, ...homeSagas
+    , ...aboutSagas
+  ])
 }

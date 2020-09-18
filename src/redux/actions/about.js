@@ -4,9 +4,10 @@ import {
   FETCH_ABOUT_FAIL,
 } from '../../constants/ActionTypes'
 
-export const fetchAbout = payload => ({
+export const fetchAbout = (payload, callback) => ({
   type: FETCH_ABOUT,
   payload,
+  callback,
 })
 
 export const fetchAboutSuccess = payload => ({

@@ -9,7 +9,6 @@ const initialState = 0
 const amount = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
     case GET_POSTS_AMOUNT_SUCCESS:
-      debugger
       return nextState
     case GET_POSTS_AMOUNT:
     case GET_POSTS_AMOUNT_FAIL:
