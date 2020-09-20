@@ -9,7 +9,14 @@ const { Item } = AntTimeline
 
 const handleClick = (e, href) => {
   e.preventDefault()
+  debugger
   Router.push(`/post/[number]`, href)
+}
+
+const routerToAbout = e => {
+  e.preventDefault()
+  debugger
+  Router.push(`/about`, `/about`)
 }
 
 const Timeline = ({
@@ -75,10 +82,9 @@ const Timeline = ({
               <a
                 href={`/post/${number}`}
                 onClick={e =>
-                  // tag === `POST` || tag === `ABOUT`
-                  //   ? handleClick(e, `/post/${number}`)
-                  //   : e.preventDefault()
-                  handleClick(e, `/post/${number}`)
+                  tag === `ABOUT`
+                    ? routerToAbout(e)
+                    : handleClick(e, `/post/${number}`)
                 }
               >
                 <span className="title">{title}</span>
