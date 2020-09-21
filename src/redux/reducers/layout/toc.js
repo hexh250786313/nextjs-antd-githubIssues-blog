@@ -1,4 +1,4 @@
-import { SET_TOC } from '../../../constants/ActionTypes'
+import { SET_TOC } from '@/constants/ActionTypes'
 
 const initialState = {
   source: '',

@@ -1,5 +1,5 @@
-import PostDetail from '../../containers/post/detail'
-import { fetchPostDetail } from '../../redux/actions/post'
+import PostDetail from '@/containers/post/detail'
+import { fetchPostDetail } from '@/redux/actions/post'
 
 PostDetail.getInitialProps = async props => {
   const {

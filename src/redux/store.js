@@ -2,10 +2,10 @@ import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducers/index'
 import rootSaga from './sagas/index'
-import postListMiddleware from '../middlewares/client/post/list'
-import postDetailMiddleware from '../middlewares/client/post/detail'
-import postAmountMiddleware from '../middlewares/client/post/amount'
-import blogInfoMiddleware from '../middlewares/client/blog/info'
+import postListMiddleware from '@/middlewares/client/post/list'
+import postDetailMiddleware from '@/middlewares/client/post/detail'
+import postAmountMiddleware from '@/middlewares/client/post/amount'
+import blogInfoMiddleware from '@/middlewares/client/blog/info'
 
 const bindMiddleware = middleware => {
   // add route middleware

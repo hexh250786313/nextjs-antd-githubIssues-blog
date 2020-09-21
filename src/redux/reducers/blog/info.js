@@ -2,7 +2,7 @@ import {
   FETCH_BLOG_INFO,
   FETCH_BLOG_INFO_FAIL,
   FETCH_BLOG_INFO_SUCCESS,
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 const initialState = {
   open_issues_count: 1,

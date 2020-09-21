@@ -2,7 +2,7 @@ import {
   FETCH_BLOG_INFO,
   FETCH_BLOG_INFO_FAIL,
   FETCH_BLOG_INFO_SUCCESS,
-} from '../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 // 获取博客的信息
 

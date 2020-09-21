@@ -2,7 +2,7 @@ import {
   FETCH_ABOUT,
   FETCH_ABOUT_FAIL,
   FETCH_ABOUT_SUCCESS,
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 const initialState = {}
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { fetchPostList, getPostsAmount } from '../../redux/actions/post'
-import PostList from '../../components/Post/PostList'
+import { fetchPostList, getPostsAmount } from '@/redux/actions/post'
+import PostList from '@/components/Post/PostList'
 
 const mapStateToProps = state => ({
   list: state.post.list,

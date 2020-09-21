@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
-import { handleTagContent, utc2locale } from '../../core/util'
+import { handleTagContent, utc2locale } from '@/core/util'
 import { useEffect, useState } from 'react'
 
 const PostList = ({

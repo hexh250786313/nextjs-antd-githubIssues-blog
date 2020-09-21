@@ -2,7 +2,7 @@ import {
   FETCH_ABOUT,
   FETCH_ABOUT_SUCCESS,
   FETCH_ABOUT_FAIL,
-} from '../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 export const fetchAbout = (payload, callback) => ({
   type: FETCH_ABOUT,

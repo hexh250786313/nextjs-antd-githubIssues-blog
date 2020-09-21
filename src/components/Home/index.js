@@ -1,4 +1,4 @@
-import Timeline from '../../containers/home/timeline'
+import Timeline from '@/containers/home/timeline'
 
 const Home = () => (
   <div className="home">

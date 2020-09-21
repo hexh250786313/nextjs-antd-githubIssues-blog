@@ -3,7 +3,7 @@ import {
   FETCH_TIMELINE_SUCCESS,
   FETCH_TIMELINE_FAIL,
   FETCH_TIMELINE,
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 const initialState = {
   currentList: [],

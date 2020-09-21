@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import {
   closeDrawer,
   handleSearchTextChange,
-} from '../../redux/actions/layout'
-import Drawer from '../../components/Layout/Drawer'
+} from '@/redux/actions/layout'
+import Drawer from '@/components/Layout/Drawer'
 
 const mapStateToProps = state => ({
   isShowDrawer: state.layout.drawer.isShowDrawer,

@@ -1,12 +1,12 @@
 import { take, put, fork, select, call, takeEvery } from 'redux-saga/effects'
-import { FETCH_POST_LIST } from '../../../constants/ActionTypes'
+import { FETCH_POST_LIST } from '@/constants/ActionTypes'
 import {
   fetchPostListFail,
   fetchPostListSuccess,
   saveQueryParams,
-} from '../../actions/post'
-import api from '../../../constants/ApiUrlForBE'
-import nextFetch from '../../../core/nextFetch'
+} from '@/redux/actions/post'
+import api from '@/constants/ApiUrlForBE'
+import nextFetch from '@/core/nextFetch'
 
 const fetchList = query => {
   return nextFetch.get(api.getGitHubIssues, { query })

@@ -8,6 +8,18 @@ import QuestionCircleFilled from '@ant-design/icons/QuestionCircleFilled'
 // 博客名称
 export const blogName = "hexh's blog"
 
+// 默认图片
+export const indexPic =
+  'http://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg'
+
+// 关于页面图片
+export const aboutPic =
+  'http://pic.yupoo.com/sinaweibo4907754196_v/a9592e94/41111f63.png'
+
+// 默认图片
+export const defaultPic =
+  'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg'
+
 // 联系方式
 export const contactTypes = [
   {

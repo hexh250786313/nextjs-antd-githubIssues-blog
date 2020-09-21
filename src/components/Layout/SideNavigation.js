@@ -3,8 +3,8 @@ import { Affix, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { pagesIndex } from '../../constants/ConstTypes'
-import TOC from '../../containers/layout/toc'
+import { pagesIndex } from '@/constants/ConstTypes'
+import TOC from '@/containers/layout/toc'
 import OrderedListOutlined from '@ant-design/icons/OrderedListOutlined'
 
 const Item = Menu.Item

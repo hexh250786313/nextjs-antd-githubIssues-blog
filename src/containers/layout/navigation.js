@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
-import { openDrawer, handleSearchTextChange } from '../../redux/actions/layout'
-// import Navigation from '../../components/Layout/Navigation';
-import Navigation from '../../components/Layout/Navigation'
+import { openDrawer, handleSearchTextChange } from '@/redux/actions/layout'
+import Navigation from '@/components/Layout/Navigation'
 
 const mapStateToProps = state => ({
   searchText: state.layout.search.searchText,

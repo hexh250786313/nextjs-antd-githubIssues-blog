@@ -1,11 +1,11 @@
 import fetch from 'isomorphic-unfetch'
 import { take, put, fork } from 'redux-saga/effects'
-import { FETCH_POST_DETAIL } from '../../../constants/ActionTypes'
+import { FETCH_POST_DETAIL } from '@/constants/ActionTypes'
 import {
   fetchPostDetailFail,
   fetchPostDetailSuccess,
 } from '../../actions/post'
-import api from '../../../constants/ApiUrlForBE'
+import api from '@/constants/ApiUrlForBE'
 // import { trackPromise } from 'react-promise-tracker';
 
 /**

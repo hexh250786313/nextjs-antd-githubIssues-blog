@@ -2,7 +2,7 @@ import { Spin } from 'antd'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { handleTagContent } from '../../core/util'
+import { handleTagContent } from '@/core/util'
 import CodeBlock from '../CodeBlock'
 import './index.less'
 

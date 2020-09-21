@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { Spin, Timeline as AntTimeline } from 'antd'
-import { handleTagContent, utc2locale, handleLink } from '../../core/util'
+import { handleTagContent, utc2locale, handleLink } from '@/core/util'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
-import { timelineQuery } from '../../constants/ConstTypes'
+import { timelineQuery } from '@/constants/ConstTypes'
 
 const { Item } = AntTimeline
 

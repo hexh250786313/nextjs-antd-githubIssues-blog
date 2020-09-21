@@ -2,7 +2,7 @@ import {
   FETCH_POST_DETAIL,
   FETCH_POST_DETAIL_FAIL,
   FETCH_POST_DETAIL_SUCCESS,
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 const initialState = {}
 

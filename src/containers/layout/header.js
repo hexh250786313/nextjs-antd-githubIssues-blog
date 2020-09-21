@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { handleHeaderChange } from '../../redux/actions/layout'
-import Header from '../../components/Layout/Header'
+import { handleHeaderChange } from '@/redux/actions/layout'
+import Header from '@/components/Layout/Header'
 
 const mapStateToProps = state => ({
   pic: state.layout.header.pic,

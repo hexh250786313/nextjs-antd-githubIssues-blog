@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { saveTimeline, fetchTimeline } from '../../redux/actions/home'
-import { fetchBlogInfo } from '../../redux/actions/blog'
-import Timeline from '../../components/Home/Timeline'
+import { saveTimeline, fetchTimeline } from '@/redux/actions/home'
+import { fetchBlogInfo } from '@/redux/actions/blog'
+import Timeline from '@/components/Home/Timeline'
 
 const mapStateToProps = state => ({
   currentList: state.home.timeline.currentList,

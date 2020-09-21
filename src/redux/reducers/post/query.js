@@ -1,5 +1,5 @@
-import { SAVE_QUERY_PARAMS } from '../../../constants/ActionTypes'
-import { postsListQuery } from '../../../constants/ConstTypes'
+import { SAVE_QUERY_PARAMS } from '@/constants/ActionTypes'
+import { postsListQuery } from '@/constants/ConstTypes'
 
 const query = (state = postsListQuery, { type, payload: params }) => {
   switch (type) {

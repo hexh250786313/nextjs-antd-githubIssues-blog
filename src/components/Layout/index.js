@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 // import DynamicAntdTheme from 'dynamic-antd-theme';
-import Drawer from '../../containers/layout/drawer'
-import Navigation from '../../containers/layout/navigation'
-import Header from '../../containers/layout/header'
-import SideNavigation from '../../containers/layout/side-navigation'
+import Drawer from '@/containers/layout/drawer'
+import Navigation from '@/containers/layout/navigation'
+import Header from '@/containers/layout/header'
+import SideNavigation from '@/containers/layout/side-navigation'
 // import SideNavigation from './SideNavigation';
 
 const Layout = ({ children }) => {

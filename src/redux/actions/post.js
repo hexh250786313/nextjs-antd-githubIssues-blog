@@ -9,8 +9,8 @@ import {
   GET_POSTS_AMOUNT,
   GET_POSTS_AMOUNT_SUCCESS,
   GET_POSTS_AMOUNT_FAIL,
-} from '../../constants/ActionTypes'
-import { postsAmountQuery } from '../../constants/ConstTypes'
+} from '@/constants/ActionTypes'
+import { postsAmountQuery } from '@/constants/ConstTypes'
 
 export const saveQueryParams = payload =>
   !!payload.noCache

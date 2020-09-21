@@ -1,11 +1,11 @@
 import { take, put, fork } from 'redux-saga/effects'
-import { FETCH_BLOG_INFO } from '../../../constants/ActionTypes'
+import { FETCH_BLOG_INFO } from '@/constants/ActionTypes'
 import {
   fetchBlogInfoFail,
   fetchBlogInfoSuccess,
-} from '../../actions/blog'
-import api from '../../../constants/ApiUrlForBE'
-import nextFetch from '../../../core/nextFetch'
+} from '@/redux/actions/blog'
+import api from '@/constants/ApiUrlForBE'
+import nextFetch from '@/core/nextFetch'
 
 export function* fetchBlogInfo() {
   while (true) {

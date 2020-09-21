@@ -3,7 +3,7 @@ import {
   FETCH_TIMELINE,
   FETCH_TIMELINE_SUCCESS,
   FETCH_TIMELINE_FAIL,
-} from '../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 export const saveTimeline = payload => ({
   type: SAVE_TIMELINE,

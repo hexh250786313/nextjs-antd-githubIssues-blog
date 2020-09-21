@@ -1,13 +1,13 @@
-import { color_primary } from '../../constants/CustomTheme'
+import { color_primary } from '@/constants/CustomTheme'
 import { useState, useEffect } from 'react'
 import { Button, Input, Dropdown, Menu, Drawer } from 'antd'
 import PropTypes from 'prop-types'
-import { blogName, contactTypes, pagesIndex } from '../../constants/ConstTypes'
+import { blogName, contactTypes, pagesIndex } from '@/constants/ConstTypes'
 import Link from 'next/link'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import MenuOutlined from '@ant-design/icons/MenuOutlined'
 import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined'
-import { handleLink } from '../../core/util'
+import { handleLink } from '@/core/util'
 import Router from 'next/router'
 
 const Item = Menu.Item

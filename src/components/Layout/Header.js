@@ -1,6 +1,7 @@
 import Router from 'next/router'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
+import { indexPic, aboutPic, defaultPic } from '@/constants/ConstTypes.js'
 
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
@@ -8,16 +9,20 @@ const Header = ({ handleHeaderChange, pic, title }) => {
       case '/':
         handleHeaderChange({
           title: "I'm looking for something fun. Are you going with me?",
-          pic:
-            'http://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg',
+          pic: indexPic,
+        })
+        break
+
+      case '/about':
+        handleHeaderChange({
+          pic: aboutPic,
         })
         break
 
       default:
         handleHeaderChange({
           title: 'Posts List',
-          pic:
-            'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg',
+          pic: defaultPic,
         })
     }
   }

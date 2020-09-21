@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { FETCH_BLOG_INFO_FAIL } from '../../../constants/ActionTypes'
+import { FETCH_BLOG_INFO_FAIL } from '@/constants/ActionTypes'
 
 export default () => next => action => {
   const ret = next(action)

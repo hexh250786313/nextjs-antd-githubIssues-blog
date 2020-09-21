@@ -1,7 +1,7 @@
 import { message } from 'antd'
 import {
   FETCH_POST_LIST_FAIL
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 export default () => next => action => {
   const ret = next(action)

@@ -1,4 +1,4 @@
-import { HANDLE_SEARCH_TEXT_CHANGE } from '../../../constants/ActionTypes'
+import { HANDLE_SEARCH_TEXT_CHANGE } from '@/constants/ActionTypes'
 
 const initialState = {
   searchText: '',

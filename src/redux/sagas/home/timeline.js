@@ -1,11 +1,11 @@
 import { take, put, fork, select, call } from 'redux-saga/effects'
-import { FETCH_TIMELINE } from '../../../constants/ActionTypes'
+import { FETCH_TIMELINE } from '@/constants/ActionTypes'
 import {
   fetchTimelineSuccess,
   fetchTimelineFail
-} from '../../actions/home'
-import api from '../../../constants/ApiUrlForBE'
-import nextFetch from '../../../core/nextFetch'
+} from '@/redux/actions/home'
+import api from '@/constants/ApiUrlForBE'
+import nextFetch from '@/core/nextFetch'
 
 const fetchList = query => {
   return nextFetch.get(api.getGitHubIssues, { query })

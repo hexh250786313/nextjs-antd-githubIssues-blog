@@ -4,7 +4,7 @@ import {
   CLOSE_DRAWER,
   HANDLE_SEARCH_TEXT_CHANGE,
   SET_TOC,
-} from '../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 export function openDrawer() {
   return {

@@ -2,7 +2,7 @@ import {
   GET_POSTS_AMOUNT,
   GET_POSTS_AMOUNT_FAIL,
   GET_POSTS_AMOUNT_SUCCESS,
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 
 const initialState = 0
 

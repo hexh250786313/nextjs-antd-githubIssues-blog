@@ -1,8 +1,8 @@
 import { take, put, fork, select } from 'redux-saga/effects'
-import { GET_POSTS_AMOUNT } from '../../../constants/ActionTypes'
+import { GET_POSTS_AMOUNT } from '@/constants/ActionTypes'
 import { getPostsAmountSuccess, getPostsAmountFail } from '../../actions/post'
-import api from '../../../constants/ApiUrlForBE'
-import nextFetch from '../../../core/nextFetch'
+import api from '@/constants/ApiUrlForBE'
+import nextFetch from '@/core/nextFetch'
 
 /**
  * postAmount saga

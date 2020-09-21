@@ -1,4 +1,4 @@
-import { HANDLE_HEADER_CHANGE } from '../../../constants/ActionTypes'
+import { HANDLE_HEADER_CHANGE } from '@/constants/ActionTypes'
 
 const initialState = {
   pic: '',
