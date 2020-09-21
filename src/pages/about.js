@@ -1,11 +1,10 @@
-// import PostDetail from '../containers/post/detail'
-import ErrorPage from '../components/ErrorPage'
+import About from '../containers/about/about'
 import { fetchAbout } from '../redux/actions/about'
 
-ErrorPage.getInitialProps = async props => {
+About.getInitialProps = async props => {
   const { store, isServer } = props.ctx
   store.dispatch(fetchAbout())
   return { isServer }
 }
 
-export default ErrorPage
+export default About

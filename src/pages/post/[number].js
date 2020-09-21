@@ -8,8 +8,6 @@ PostDetail.getInitialProps = async props => {
     query: { number },
   } = props.ctx
   const payload = { number }
-  // 进入 about 为何会经过这里
-  debugger
   store.dispatch(fetchPostDetail(payload))
   return { isServer }
 }
