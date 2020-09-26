@@ -6,7 +6,7 @@ import { handleTagContent } from '@/core/util'
 import CodeBlock from '../CodeBlock'
 import './index.less'
 
-const PostDetail = ({ detail, setTOC, handleHeaderChange }) => {
+const PostDetail = ({ detail, setTOC, handleHeaderChange, clearDetail }) => {
   const { title = '', body: _body } = detail
   const body = _body ? handleTagContent(_body, `desc`, `exec`) : ``
 
@@ -22,6 +22,7 @@ const PostDetail = ({ detail, setTOC, handleHeaderChange }) => {
   useEffect(() => {
     return () => {
       setTOC('')
+      clearDetail()
     }
   }, [])
 
@@ -47,4 +48,5 @@ PostDetail.propTypes = {
   detail: PropTypes.object.isRequired,
   setTOC: PropTypes.func.isRequired,
   handleHeaderChange: PropTypes.func.isRequired,
+  clearDetail: PropTypes.func.isRequired,
 }

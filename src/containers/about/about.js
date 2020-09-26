@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import PostDetail from '@/components/Post/PostDetail'
 import { setTOC, handleHeaderChange } from '@/redux/actions/layout'
+import { fetchPostDetailSuccess } from '@/redux/actions/post'
 
 const mapStateToProps = state => ({
   detail: state.post.detail,
@@ -12,6 +13,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleHeaderChange(payload) {
     dispatch(handleHeaderChange(payload))
+  },
+  clearDetail() {
+    dispatch(fetchPostDetailSuccess({}))
   },
 })
 

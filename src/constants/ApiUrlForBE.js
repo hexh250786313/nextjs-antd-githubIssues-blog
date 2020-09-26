@@ -9,4 +9,5 @@ export default {
   getGitHubIssues: `https://api.github.com/repos/hexh250786313/Blog/issues`,
   getGitHub: `https://api.github.com/repos/hexh250786313/Blog`,
   getGitHubIssue: `https://api.github.com/repos/hexh250786313/Blog/issues`,
+  searchGitHubIssue: `https://api.github.com/search/issues`,
 }

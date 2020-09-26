@@ -13,7 +13,7 @@ import '../../assets/progress.less' // styles of nprogress
 // Binding events.
 Router.events.on('routeChangeStart', () => NProgress.start())
 Router.events.on('routeChangeComplete', path => {
-  if (path.match(/^\/post\/\d/) && window) {
+  if (path.match(/^\/about/) || (path.match(/^\/post\/\d/) && window)) {
     window.scrollTo({ top: 0, behavior: `smooth` })
   }
   NProgress.done()

@@ -1,4 +1,5 @@
 import { message } from 'antd'
+import { queryLabel } from '@/constants/ConstTypes'
 
 const linkToPending = ['http://', 'https://']
 const copyPending = ['mailto:']
@@ -157,4 +158,17 @@ export const utc2locale = utc_datetime => {
   }
 
   return localeDate
+}
+
+/** 处理列表搜索条件
+ *
+ * @method handleQueryParams
+ * @param {string} source 要处理的字符串
+ * @returns {string} 返回经过拼接处理的搜索条件
+ *
+ */
+export const handleQueryParams = (keyword = `wsl   配置`) => {
+  let query = `state:open+label:${queryLabel}+`
+  keyword = keyword.replace(/\s+/g, `+`)
+  return query + keyword
 }
