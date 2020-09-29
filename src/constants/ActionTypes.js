@@ -34,10 +34,6 @@ export const FETCH_POST_DETAIL_SUCCESS = 'FETCH_POST_DETAIL_SUCCESS'
 export const OPEN_DRAWER = 'OPEN_DRAWER'
 export const CLOSE_DRAWER = 'CLOSE_DRAWER'
 
-// ================= Search Part ==================== //
-
-export const HANDLE_SEARCH_TEXT_CHANGE = 'HANDLE_SEARCH_TEXT_CHANGE'
-
 // ================= Header Part ==================== //
 
 export const HANDLE_HEADER_CHANGE = 'HANDLE_HEADER_CHANGE'
@@ -51,3 +47,13 @@ export const SET_TOC = 'SET_TOC'
 export const FETCH_ABOUT = 'FETCH_ABOUT'
 export const FETCH_ABOUT_SUCCESS = 'FETCH_ABOUT_SUCCESS'
 export const FETCH_ABOUT_FAIL = 'FETCH_ABOUT_FAIL'
+
+// ================= Search Part ==================== //
+
+export const HANDLE_SEARCH_TEXT_CHANGE = 'HANDLE_SEARCH_TEXT_CHANGE'
+
+export const FETCH_SEARCH_RESULT = 'FETCH_SEARCH_RESULT'
+export const FETCH_SEARCH_RESULT_FAIL = 'FETCH_SEARCH_RESULT_FAIL'
+export const FETCH_SEARCH_RESULT_SUCCESS = 'FETCH_SEARCH_RESULT_SUCCESS'
+
+export const SAVE_SEARCH_QUERY_PARAMS = 'SAVE_SEARCH_QUERY_PARAMS'

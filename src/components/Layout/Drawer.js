@@ -59,6 +59,7 @@ const Drawer = ({
   searchText,
   handleSearchTextChange,
   mdSource,
+  fetchSearchResult,
 }) => {
   return (
     <AntDrawer
@@ -86,7 +87,10 @@ const Drawer = ({
                 className="drawer-search"
                 prefix={<SearchOutlined style={{ color: color_primary }} />}
                 placeholder="Make your life easier..."
-                // onPressEnter={}
+                onPressEnter={() => {
+                  closeDrawer()
+                  fetchSearchResult(searchText)
+                }}
                 value={searchText}
                 onChange={e => {
                   if (
@@ -158,6 +162,7 @@ Drawer.propTypes = {
    * markdown 文本源
    */
   mdSource: PropTypes.string,
+  fetchSearchResult: PropTypes.func.isRequired,
 }
 
 Drawer.defaultProps = {
@@ -168,5 +173,8 @@ Drawer.defaultProps = {
 export default Drawer
 
 const linkTo = ({ key }) => {
+  if (key === `search`) {
+    return
+  }
   handleLink(key)
 }

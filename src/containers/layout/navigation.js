@@ -1,5 +1,9 @@
 import { connect } from 'react-redux'
-import { openDrawer, handleSearchTextChange } from '@/redux/actions/layout'
+import {
+  openDrawer,
+  handleSearchTextChange,
+  fetchSearchResult,
+} from '@/redux/actions/layout'
 import Navigation from '@/components/Layout/Navigation'
 
 const mapStateToProps = state => ({
@@ -12,6 +16,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSearchTextChange(searchText) {
     dispatch(handleSearchTextChange(searchText))
+  },
+  fetchSearchResult(searchText) {
+    dispatch(fetchSearchResult)
   },
 })
 

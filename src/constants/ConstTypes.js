@@ -68,16 +68,19 @@ export const timelineQuery = {
 
 // post 列表查询条件
 export const postsListQuery = {
-  labels: `post`,
-  // labels: `bug`,
+  // labels: `post`,
+  // // labels: `bug`,
   page: 1,
-  // per_page: 2,
-  per_page: 10,
-  creator: `hexh250786313`,
+  per_page: 1,
+  // per_page: 10,
+  // creator: `hexh250786313`,
+  // sort: `created`,
+  // direction: `desc`,
+  // state: `open`,
+  // noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+  q: `state:open+label:qZy6GBWGe`,
   sort: `created`,
-  direction: `desc`,
-  state: `open`,
-  noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+  order: `desc`,
 }
 
 // post 数量查询条件

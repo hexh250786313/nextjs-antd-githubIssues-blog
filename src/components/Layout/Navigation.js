@@ -33,7 +33,12 @@ const _Menu = () => {
   )
 }
 
-const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
+const Navigation = ({
+  openDrawer,
+  handleSearchTextChange,
+  searchText,
+  fetchSearchResult,
+}) => {
   const [isShowTopShadow, setTopShadow] = useState(false)
   const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH)
   const [isShowBottomDrawer, setShowBottomDrawer] = useState(false)
@@ -102,7 +107,7 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
               // onBlur={setSearchBarClose}
               // placeholder="Search for something interesting?"
               placeholder="Make your life easier..."
-              // onPressEnter={}
+              onPressEnter={() => fetchSearchResult(searchText)}
               style={{ width: searchBarWidth }}
               value={searchText}
               onChange={e => {
@@ -118,7 +123,9 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           <Dropdown overlay={_Menu}>
             <li className="contact">CONTACT</li>
           </Dropdown>
-          <li className="contact" onClick={linkToArchive}>ARCHIVE</li>
+          <li className="contact" onClick={linkToArchive}>
+            ARCHIVE
+          </li>
         </ul>
       </div>
 
@@ -155,8 +162,8 @@ const Navigation = ({ openDrawer, handleSearchTextChange, searchText }) => {
           top: 0;
           z-index: 5;
           box-shadow: ${isShowTopShadow
-      ? '0 2px 6px rgba(0, 0, 0, 0.35)'
-      : 'null'};
+            ? '0 2px 6px rgba(0, 0, 0, 0.35)'
+            : 'null'};
           background-color: #fff;
           width: 100%;
         }
@@ -251,6 +258,7 @@ Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
   handleSearchTextChange: PropTypes.func.isRequired,
   searchText: PropTypes.string,
+  fetchSearchResult: PropTypes.func.isRequired,
 }
 
 Navigation.defaultProps = {

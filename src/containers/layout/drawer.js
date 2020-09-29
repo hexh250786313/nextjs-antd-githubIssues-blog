@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import {
   closeDrawer,
   handleSearchTextChange,
+  fetchSearchResult,
 } from '@/redux/actions/layout'
 import Drawer from '@/components/Layout/Drawer'
 
@@ -17,6 +18,9 @@ const mapDispatchToProps = dispatch => ({
   },
   handleSearchTextChange(searchText) {
     dispatch(handleSearchTextChange(searchText))
+  },
+  fetchSearchResult(searchText) {
+    dispatch(fetchSearchResult)
   },
 })
 

@@ -10,7 +10,6 @@ const PostList = ({
   list: postList,
   postsAmount,
   currentPage,
-  getPostsAmount,
 }) => {
   const [loading, setLoading] = useState(false)
 
@@ -26,9 +25,6 @@ const PostList = ({
 
   useEffect(() => {
     fetchPostList()
-    if (!postsAmount) {
-      getPostsAmount()
-    }
   }, [])
 
   return (
@@ -131,5 +127,4 @@ PostList.propTypes = {
   perPage: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   fetchPostList: PropTypes.func.isRequired,
-  getPostsAmount: PropTypes.func.isRequired,
 }

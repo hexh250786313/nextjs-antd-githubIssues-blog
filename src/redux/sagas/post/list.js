@@ -4,12 +4,13 @@ import {
   fetchPostListFail,
   fetchPostListSuccess,
   saveQueryParams,
+  getPostsAmountSuccess,
 } from '@/redux/actions/post'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 
 const fetchList = query => {
-  return nextFetch.get(api.getGitHubIssues, { query })
+  return nextFetch.get(api.searchGitHubIssue, { query })
 }
 
 /**
@@ -25,13 +26,15 @@ function* fetchPostList() {
       ...nextQueryParams,
     }
     try {
-      const list = yield call(fetchList, query)
+      const res = yield call(fetchList, query)
+      const { total_count, items } = res
       if (!!callback) {
         yield call(() => {
-          callback(list)
+          callback(res)
         })
       }
-      yield put(fetchPostListSuccess(list))
+      yield put(fetchPostListSuccess(items))
+      yield put(getPostsAmountSuccess(total_count))
     } catch (e) {
       yield put(fetchPostListFail())
     } finally {
