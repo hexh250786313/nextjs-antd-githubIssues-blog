@@ -11,6 +11,7 @@ const list = (prevState = initialState, { type, payload: nextState }) => {
     case FETCH_POST_LIST_SUCCESS:
       return nextState
     case FETCH_POST_LIST:
+      return prevState
     case FETCH_POST_LIST_FAIL:
     default:
       return prevState

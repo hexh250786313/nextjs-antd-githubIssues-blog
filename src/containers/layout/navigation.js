@@ -1,25 +1,33 @@
 import { connect } from 'react-redux'
+import { openDrawer } from '@/redux/actions/layout'
 import {
-  openDrawer,
-  handleSearchTextChange,
-  fetchSearchResult,
-} from '@/redux/actions/layout'
+  fetchSearch,
+  changeSearchKeyword,
+  saveSearch,
+} from '@/redux/actions/search'
 import Navigation from '@/components/Layout/Navigation'
+import { changeQuery, changeHash, handleQueryParams } from '@/core/util'
 
 const mapStateToProps = state => ({
-  searchText: state.layout.search.searchText,
+  searchKeyword: state.search.query.keyword,
 })
 
 const mapDispatchToProps = dispatch => ({
-  openDrawer() {
-    dispatch(openDrawer())
+  openDrawer: () => dispatch(openDrawer()),
+  fetchSearch: keyword => {
+    dispatch(
+      saveSearch({
+        loading: true,
+      }),
+    )
+    dispatch(
+      fetchSearch({ q: handleQueryParams(keyword), page: 1 }, () => {
+        changeQuery(keyword)
+        changeHash(`1`)
+      }),
+    )
   },
-  handleSearchTextChange(searchText) {
-    dispatch(handleSearchTextChange(searchText))
-  },
-  fetchSearchResult(searchText) {
-    dispatch(fetchSearchResult)
-  },
+  changeSearchKeyword: keyword => dispatch(changeSearchKeyword(keyword)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

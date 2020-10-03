@@ -3,27 +3,37 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { indexPic, aboutPic, defaultPic } from '@/constants/ConstTypes.js'
 
+const exec = string => {
+  const reg1 = new RegExp(`\\/([\\s\\S]+)\\?`)
+  const reg2 = new RegExp(`\\/([\\s\\S]+)\\/`)
+
+  if (!!string.match(reg1)) {
+    return `/` + string.match(reg1)[1]
+  }
+  return `/`
+}
+
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
     switch (pathname) {
+      default:
       case '/':
         handleHeaderChange({
           title: "I'm looking for something fun. Are you going with me?",
           pic: indexPic,
         })
         break
-
       case '/about':
         handleHeaderChange({
           pic: aboutPic,
         })
         break
-
-      default:
+      case '/post/list':
         handleHeaderChange({
           title: 'Posts List',
           pic: defaultPic,
         })
+      case '/search':
     }
   }
 

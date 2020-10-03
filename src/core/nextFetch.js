@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-unfetch'
 import qs from 'query-string'
 import { filterObject } from './util'
+import { githubToken } from '@/constants/ConstTypes'
 
 // initial fetch
 const nextFetch = Object.create(null)
@@ -20,6 +21,7 @@ HTTP_METHOD.forEach(method => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Accept: 'application/json',
+        Authorization: `token ${githubToken}`
       },
       // credentials: 'include',
       timeout,
@@ -42,7 +44,7 @@ HTTP_METHOD.forEach(method => {
 
     // github 不会解析编码 + 号后的字符，所以不编码
     if (url.indexOf(`github`) !== -1) {
-      url = url.replace(`%2B`, `+`)
+      url = url.replaceAll(`%2B`, `+`)
     }
 
     return fetch(url, opts).then(res => {

@@ -35,9 +35,9 @@ const _Menu = () => {
 
 const Navigation = ({
   openDrawer,
-  handleSearchTextChange,
-  searchText,
-  fetchSearchResult,
+  fetchSearch,
+  changeSearchKeyword,
+  searchKeyword,
 }) => {
   const [isShowTopShadow, setTopShadow] = useState(false)
   const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH)
@@ -91,7 +91,7 @@ const Navigation = ({
           />
 
           <Button type="link" size="large" onClick={handleBottomDrawer}>
-            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : pathname}{' '}
+            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : decodeURI(pathname)}
             <CaretDownOutlined />
           </Button>
         </div>
@@ -107,15 +107,18 @@ const Navigation = ({
               // onBlur={setSearchBarClose}
               // placeholder="Search for something interesting?"
               placeholder="Make your life easier..."
-              onPressEnter={() => fetchSearchResult(searchText)}
+              onPressEnter={() => {
+                Router.push(`/search`, `/search`)
+                fetchSearch(searchKeyword)
+              }}
               style={{ width: searchBarWidth }}
-              value={searchText}
+              value={searchKeyword}
               onChange={e => {
                 if (
                   e.currentTarget &&
                   typeof e.currentTarget.value === 'string'
                 ) {
-                  handleSearchTextChange(e.currentTarget.value)
+                  changeSearchKeyword(e.currentTarget.value)
                 }
               }}
             />
@@ -256,13 +259,9 @@ const Navigation = ({
 
 Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
-  handleSearchTextChange: PropTypes.func.isRequired,
-  searchText: PropTypes.string,
-  fetchSearchResult: PropTypes.func.isRequired,
-}
-
-Navigation.defaultProps = {
-  searchText: '',
+  fetchSearch: PropTypes.func.isRequired,
+  changeSearchKeyword: PropTypes.func.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
 }
 
 export default Navigation

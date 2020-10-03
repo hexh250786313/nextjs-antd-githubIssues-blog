@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { queryLabel } from '@/constants/ConstTypes'
+import { queryParams } from '@/constants/ConstTypes'
 
 const linkToPending = ['http://', 'https://']
 const copyPending = ['mailto:']
@@ -167,8 +167,28 @@ export const utc2locale = utc_datetime => {
  * @returns {string} 返回经过拼接处理的搜索条件
  *
  */
-export const handleQueryParams = (keyword = `wsl   配置`) => {
-  let query = `state:open+label:${queryLabel}+`
-  keyword = keyword.replace(/\s+/g, `+`)
-  return query + keyword
+export const handleQueryParams = (keyword = ``) =>
+  keyword.replace(/\s+/g, `+`) + queryParams
+
+export const changeHash = hash => {
+  if (window) {
+    window.location.replace(
+      window.location.href.toString().replace(window.location.hash, '') +
+        '#' +
+        hash,
+    )
+  }
+}
+
+export const changeQuery = keyword => {
+  if (window) {
+    let url
+    const reg = new RegExp(`([\\s\\S]+)\\+state:open`)
+    if (!!keyword.match(reg)) {
+      url = window.location + '?q=' + keyword.match(reg)[1]
+    } else {
+      url = window.location.pathname + '?q=' + keyword
+    }
+    history.pushState({ url, title: document.title }, document.title, url)
+  }
 }

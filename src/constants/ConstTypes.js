@@ -78,9 +78,11 @@ export const postsListQuery = {
   // direction: `desc`,
   // state: `open`,
   // noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
-  q: `state:open+label:qZy6GBWGe`,
+  // q: `state:open+label:qZy6GBWGe`,
+  q: `state:open+repo:hexh250786313/Blog`,
   sort: `created`,
   order: `desc`,
+  keyword: ``,
 }
 
 // post 数量查询条件
@@ -104,3 +106,8 @@ export const aboutQuery = {
 
 // 查询标识
 export const queryLabel = `qZy6GBWGe`
+
+// token
+export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
+
+export const queryParams = `+state:open+repo:hexh250786313/Blog`

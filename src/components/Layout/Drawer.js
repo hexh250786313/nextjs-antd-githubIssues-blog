@@ -11,6 +11,7 @@ import { color_primary } from '@/constants/CustomTheme'
 import { contactTypes, blogName } from '@/constants/ConstTypes'
 import { handleLink } from '@/core/util'
 import TOC from '@/containers/layout/toc'
+import Router from 'next/router'
 
 const SubMenu = Menu.SubMenu
 
@@ -56,10 +57,10 @@ const renderTOC = () => {
 const Drawer = ({
   isShowDrawer,
   closeDrawer,
-  searchText,
-  handleSearchTextChange,
   mdSource,
-  fetchSearchResult,
+  fetchSearch,
+  changeSearchKeyword,
+  searchKeyword,
 }) => {
   return (
     <AntDrawer
@@ -88,16 +89,17 @@ const Drawer = ({
                 prefix={<SearchOutlined style={{ color: color_primary }} />}
                 placeholder="Make your life easier..."
                 onPressEnter={() => {
+                  Router.push(`/search`, `/search`)
                   closeDrawer()
-                  fetchSearchResult(searchText)
+                  fetchSearch(searchKeyword)
                 }}
-                value={searchText}
+                value={searchKeyword}
                 onChange={e => {
                   if (
                     e.currentTarget &&
                     typeof e.currentTarget.value === 'string'
                   ) {
-                    handleSearchTextChange(e.currentTarget.value)
+                    changeSearchKeyword(e.currentTarget.value)
                   }
                 }}
               />
@@ -142,31 +144,15 @@ const Drawer = ({
 }
 
 Drawer.propTypes = {
-  /**
-   * 控制是否展示抽屉
-   */
   isShowDrawer: PropTypes.bool.isRequired,
-  /**
-   * 关闭抽屉回调
-   */
   closeDrawer: PropTypes.func.isRequired,
-  /**
-   * 搜索内容的 onChange
-   */
-  handleSearchTextChange: PropTypes.func.isRequired,
-  /**
-   * 搜索文本
-   */
-  searchText: PropTypes.string,
-  /**
-   * markdown 文本源
-   */
   mdSource: PropTypes.string,
-  fetchSearchResult: PropTypes.func.isRequired,
+  fetchSearch: PropTypes.func.isRequired,
+  changeSearchKeyword: PropTypes.func.isRequired,
+  searchKeyword: PropTypes.string.isRequired,
 }
 
 Drawer.defaultProps = {
-  searchText: '',
   mdSource: '',
 }
 

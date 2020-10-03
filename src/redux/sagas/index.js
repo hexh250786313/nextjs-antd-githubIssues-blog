@@ -1,11 +1,16 @@
 import { all } from 'redux-saga/effects'
-import postSagas from './post/index'
-import blogSagas from './blog/index'
-import homeSagas from './home/index'
-import aboutSagas from './about/index'
+import postSagas from './post'
+import blogSagas from './blog'
+import homeSagas from './home'
+import aboutSagas from './about'
+import searchSagas from './search'
 
 export default function* rootSagas() {
-  yield all([...postSagas, ...blogSagas, ...homeSagas
-    , ...aboutSagas
+  yield all([
+    ...postSagas,
+    ...blogSagas,
+    ...homeSagas,
+    ...aboutSagas,
+    ...searchSagas,
   ])
 }
