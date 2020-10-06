@@ -44,7 +44,7 @@ HTTP_METHOD.forEach(method => {
 
     // github 不会解析编码 + 号后的字符，所以不编码
     if (url.indexOf(`github`) !== -1) {
-      url = url.replaceAll(`%2B`, `+`)
+      url = url.replace(/%2B/g, `+`)
     }
 
     return fetch(url, opts).then(res => {

@@ -16,7 +16,7 @@ export function* fetchPostDetail() {
     const searchList = yield select(state => state.search.items)
     const postList = yield select(state => state.post.list)
     const list = [...searchList, ...postList]
-    let detail = ``
+    let detail = {}
 
     try {
       // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
