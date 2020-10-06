@@ -3,7 +3,9 @@ import { fetchAbout } from '@/redux/actions/about'
 
 About.getInitialProps = async props => {
   const { store, isServer } = props.ctx
-  store.dispatch(fetchAbout())
+  if (isServer) {
+    store.dispatch(fetchAbout())
+  }
   return { isServer }
 }
 

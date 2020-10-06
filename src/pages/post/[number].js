@@ -8,7 +8,9 @@ PostDetail.getInitialProps = async props => {
     query: { number },
   } = props.ctx
   const payload = { number }
-  store.dispatch(fetchPostDetail(payload))
+  if (isServer) {
+    store.dispatch(fetchPostDetail(payload))
+  }
   return { isServer }
 }
 

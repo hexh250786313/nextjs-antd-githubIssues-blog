@@ -1,8 +1,14 @@
 import fetch from 'isomorphic-unfetch'
 import { take, put, fork, select } from 'redux-saga/effects'
 import { FETCH_POST_DETAIL } from '@/constants/ActionTypes'
-import { fetchPostDetailFail, fetchPostDetailSuccess } from '../../actions/post'
+import {
+  fetchPostDetailFail,
+  fetchPostDetailSuccess,
+} from '@/redux/actions/post'
+import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
 import api from '@/constants/ApiUrlForBE'
+import { handleTagContent } from '@/core/util'
+import { defaultPic } from '@/constants/ConstTypes'
 // import { trackPromise } from 'react-promise-tracker';
 
 /**
@@ -15,8 +21,9 @@ export function* fetchPostDetail() {
     } = yield take(FETCH_POST_DETAIL)
     const searchList = yield select(state => state.search.items)
     const postList = yield select(state => state.post.list)
-    const list = [...searchList, ...postList]
-    let detail = {}
+    const timelineList = yield select(state => state.home.timeline.currentList)
+    const list = [...searchList, ...postList, ...timelineList]
+    let detail
 
     try {
       // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
@@ -26,6 +33,13 @@ export function* fetchPostDetail() {
         detail = yield res.json()
       }
       yield put(fetchPostDetailSuccess(detail))
+      yield put(
+        handleHeaderChange({
+          title: detail.title,
+          pic: defaultPic,
+        }),
+      )
+      yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
     } catch (e) {
       yield put(fetchPostDetailFail())
     }

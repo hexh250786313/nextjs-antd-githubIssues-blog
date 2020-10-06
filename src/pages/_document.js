@@ -13,6 +13,7 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html>
+        <base target="_blank" />
         <Head>
           <style>{`
             body {

@@ -11,11 +11,6 @@ import {
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
     switch (pathname) {
-      case '/about':
-        handleHeaderChange({
-          pic: aboutPic,
-        })
-        break
       case '/post/list':
         handleHeaderChange({
           title: 'Posts List',

@@ -62,7 +62,8 @@ export const pagesIndex = [
 export const timelineQuery = {
   labels: undefined,
   page: 1,
-  per_page: 10,
+  // per_page: 10,
+  per_page: 1,
   noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
 
@@ -112,4 +113,4 @@ export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
 
 export const queryParams = `+state:open+repo:hexh250786313/Blog`
 
-export const pageWihtoutDefaultHeader = [`search`]
+export const pageWihtoutDefaultHeader = [`search`, `post`, `about`]

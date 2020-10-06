@@ -1,10 +1,13 @@
-import { put, fork, call, take } from 'redux-saga/effects'
+import { put, fork, call, select, take } from 'redux-saga/effects'
 import { fetchAboutFail } from '../../actions/about'
 import { fetchPostDetailSuccess } from '../../actions/post'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 import { aboutQuery } from '@/constants/ConstTypes'
 import { FETCH_ABOUT } from '@/constants/ActionTypes'
+import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
+import { aboutPic } from '@/constants/ConstTypes'
+import { handleTagContent } from '@/core/util'
 
 const fetchList = query => {
   return nextFetch.get(api.getGitHubIssues, { query })
@@ -15,18 +18,33 @@ const fetchList = query => {
  */
 function* fetchAbout() {
   while (true) {
-
-    const { callback } = yield take(FETCH_ABOUT)
+    yield take(FETCH_ABOUT)
     const query = aboutQuery
+    const searchList = yield select(state => state.search.items)
+    const postList = yield select(state => state.post.list)
+    const timelineList = yield select(state => state.home.timeline.currentList)
+    const list = [...searchList, ...postList, ...timelineList]
+    let detail, res
+
     try {
-      const list = yield call(fetchList, query)
-      if (!!callback) {
-        yield call(() => {
-          callback(list)
-        })
+      detail = list.find(item =>
+        item.labels.some(label => label.name === `about`),
+      )
+      if (!detail) {
+        res = yield call(fetchList, query)
+        if (Array.isArray(res)) {
+          detail = res[0]
+        }
       }
 
-      yield put(fetchPostDetailSuccess(list[0] || {}))
+      yield put(fetchPostDetailSuccess(detail))
+      yield put(
+        handleHeaderChange({
+          title: detail.title,
+          pic: aboutPic,
+        }),
+      )
+      yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
     } catch (e) {
       yield put(fetchAboutFail())
     }
