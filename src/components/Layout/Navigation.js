@@ -18,6 +18,18 @@ const mapPagesIndex = (() => {
   return obj
 })()
 
+const exec = string => {
+  const reg = new RegExp(`\\/([\\s\\S]+?)\\#`)
+
+  if (!!string.match(reg)) {
+    return `/` + string.match(reg)[1]
+    // .toLowerCase()
+    // .replace(/( |^)[a-z]/g, L => L.toUpperCase())
+  }
+
+  return string
+}
+
 const _Menu = () => {
   return (
     <Menu onClick={linkTo}>
@@ -35,7 +47,7 @@ const _Menu = () => {
 
 const Navigation = ({
   openDrawer,
-  fetchSearch,
+  setLoading,
   changeSearchKeyword,
   searchKeyword,
 }) => {
@@ -91,7 +103,7 @@ const Navigation = ({
           />
 
           <Button type="link" size="large" onClick={handleBottomDrawer}>
-            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : decodeURI(pathname)}
+            {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : exec(pathname)}
             <CaretDownOutlined />
           </Button>
         </div>
@@ -108,8 +120,8 @@ const Navigation = ({
               // placeholder="Search for something interesting?"
               placeholder="Make your life easier..."
               onPressEnter={() => {
-                Router.push(`/search`, `/search`)
-                fetchSearch(searchKeyword)
+                setLoading(searchKeyword)
+                Router.push(`/search#q=${searchKeyword}&page=1`)
               }}
               style={{ width: searchBarWidth }}
               value={searchKeyword}
@@ -259,7 +271,7 @@ const Navigation = ({
 
 Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
-  fetchSearch: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
   changeSearchKeyword: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
 }

@@ -58,7 +58,7 @@ const Drawer = ({
   isShowDrawer,
   closeDrawer,
   mdSource,
-  fetchSearch,
+  setLoading,
   changeSearchKeyword,
   searchKeyword,
 }) => {
@@ -89,9 +89,9 @@ const Drawer = ({
                 prefix={<SearchOutlined style={{ color: color_primary }} />}
                 placeholder="Make your life easier..."
                 onPressEnter={() => {
-                  Router.push(`/search`, `/search`)
+                  setLoading(searchKeyword)
+                  Router.push(`/search#q=${searchKeyword}&page=1`)
                   closeDrawer()
-                  fetchSearch(searchKeyword)
                 }}
                 value={searchKeyword}
                 onChange={e => {
@@ -147,7 +147,7 @@ Drawer.propTypes = {
   isShowDrawer: PropTypes.bool.isRequired,
   closeDrawer: PropTypes.func.isRequired,
   mdSource: PropTypes.string,
-  fetchSearch: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
   changeSearchKeyword: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
 }

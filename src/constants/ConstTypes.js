@@ -111,3 +111,5 @@ export const queryLabel = `qZy6GBWGe`
 export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
 
 export const queryParams = `+state:open+repo:hexh250786313/Blog`
+
+export const pageWihtoutDefaultHeader = [`search`]

@@ -14,7 +14,9 @@ const SideNavigation = ({ mdSource }) => {
 
   useEffect(() => {
     setPathname(window.location.pathname)
-    Router.events.on('routeChangeComplete', pathname => setPathname(pathname))
+    Router.events.on('routeChangeComplete', pathname => {
+      setPathname(pathname)
+    })
   }, [])
 
   return (

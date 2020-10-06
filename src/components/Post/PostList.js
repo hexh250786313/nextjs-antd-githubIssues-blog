@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import Router from 'next/router'
-import { handleTagContent, utc2locale, changeHash } from '@/core/util'
-import { useEffect, useState } from 'react'
+import { handleTagContent, utc2locale } from '@/core/util'
+import { useEffect } from 'react'
 
 const PostList = ({
   fetchPostList,
@@ -12,21 +12,15 @@ const PostList = ({
   currentPage,
   onLoad,
   loading,
-  setLoading,
+  handlePaginationClick,
 }) => {
   const handleClick = (e, href) => {
     e.preventDefault()
     Router.push(`/post/[number]`, href)
   }
 
-  const handlePaginationClick = page => {
-    changeHash(page)
-    setLoading(true)
-    fetchPostList({ page })
-  }
-
   useEffect(() => {
-    onLoad()
+    return onLoad()
   }, [])
 
   return (
@@ -131,5 +125,5 @@ PostList.propTypes = {
   fetchPostList: PropTypes.func.isRequired,
   onLoad: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  setLoading: PropTypes.func.isRequired,
+  handlePaginationClick: PropTypes.func.isRequired,
 }
