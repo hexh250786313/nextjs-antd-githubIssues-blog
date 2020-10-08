@@ -67,19 +67,25 @@ export const timelineQuery = {
   noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
 
-// post 列表查询条件
-export const postsListQuery = {
+export const listQuery = {
+  labels: `post`,
+  page: 1,
+  per_page: 1,
+  creator: `hexh250786313`,
+  sort: `created`,
+  direction: `desc`,
+  state: `open`,
+}
+
+// 搜索请求的参数
+export const searchQuery = {
   // labels: `post`,
   // // labels: `bug`,
   page: 1,
   per_page: 1,
   // per_page: 10,
   // creator: `hexh250786313`,
-  // sort: `created`,
   // direction: `desc`,
-  // state: `open`,
-  // noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
-  // q: `state:open+label:qZy6GBWGe`,
   q: `state:open+repo:hexh250786313/Blog`,
   sort: `created`,
   order: `desc`,

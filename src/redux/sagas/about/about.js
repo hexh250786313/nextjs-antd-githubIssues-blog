@@ -20,7 +20,7 @@ function* fetchAbout() {
   while (true) {
     yield take(FETCH_ABOUT)
     const query = aboutQuery
-    const searchList = yield select(state => state.search.items)
+    const searchList = yield select(state => state.search.cacheList)
     const postList = yield select(state => state.post.list)
     const timelineList = yield select(state => state.home.timeline.currentList)
     const list = [...searchList, ...postList, ...timelineList]

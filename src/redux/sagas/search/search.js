@@ -18,6 +18,8 @@ function* fetchSearch() {
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_SEARCH)
     const prevQueryParams = yield select(state => state.search.query)
+    const cacheList = yield select(state => state.search.cacheList)
+
     const query = {
       ...prevQueryParams,
       ...nextQueryParams,
@@ -46,11 +48,22 @@ function* fetchSearch() {
         loading: false,
       }
 
-      // 这个接口有请求次数限制，一小时 30 次，因此做缓存
-      sessionStorage.setItem(
-        query.q + query.page,
-        JSON.stringify({ items, total_count }),
-      )
+      nextState.cacheList = cacheList
+        .concat(items)
+        .filter(
+          (item, index, self) =>
+            index === self.findIndex(T => T.number === item.number),
+        )
+      console.log(`更新缓存列表`, nextState.cacheList)
+
+      if (!cache) {
+        // 这个接口有请求次数限制，一小时 30 次，因此做缓存
+        sessionStorage.setItem(
+          query.q + query.page,
+          JSON.stringify({ items, total_count }),
+        )
+      }
+
       yield put(saveSearch(nextState))
     } catch (e) {
       yield put(fetchSearchFail())

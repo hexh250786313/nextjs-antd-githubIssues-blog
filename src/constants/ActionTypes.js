@@ -29,6 +29,8 @@ export const FETCH_POST_DETAIL = 'FETCH_POST_DETAIL'
 export const FETCH_POST_DETAIL_FAIL = 'FETCH_POST_DETAIL_FAIL'
 export const FETCH_POST_DETAIL_SUCCESS = 'FETCH_POST_DETAIL_SUCCESS'
 
+export const SAVE_LIST_STATE = `SAVE_LIST_STATE`
+
 // ================= Drawer Part ==================== //
 
 export const OPEN_DRAWER = 'OPEN_DRAWER'

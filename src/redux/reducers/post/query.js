@@ -1,11 +1,11 @@
 import { SAVE_QUERY_PARAMS } from '@/constants/ActionTypes'
-import { postsListQuery } from '@/constants/ConstTypes'
+import { searchQuery } from '@/constants/ConstTypes'
 
-const query = (state = postsListQuery, { type, payload: params }) => {
+const query = (state = searchQuery, { type, payload: params }) => {
   switch (type) {
     case SAVE_QUERY_PARAMS:
       return {
-        ...postsListQuery,
+        ...searchQuery,
         ...params,
       }
     default:

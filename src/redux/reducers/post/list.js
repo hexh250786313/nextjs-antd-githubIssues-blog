@@ -1,19 +1,23 @@
-import {
-  FETCH_POST_LIST,
-  FETCH_POST_LIST_FAIL,
-  FETCH_POST_LIST_SUCCESS,
-} from '@/constants/ActionTypes'
+import { FETCH_POST_LIST_FAIL, SAVE_LIST_STATE } from '@/constants/ActionTypes'
+import { listQuery } from '@/constants/ConstTypes'
 
-const initialState = []
+const initialState = {
+  items: [],
+  total_count: 0,
+  query: listQuery,
+  loading: false,
+  cacheList: {},
+}
 
 const list = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
-    case FETCH_POST_LIST_SUCCESS:
-      return nextState
-    case FETCH_POST_LIST:
-      return prevState
-    case FETCH_POST_LIST_FAIL:
+    case SAVE_LIST_STATE:
+      return {
+        ...prevState,
+        ...nextState,
+      }
     default:
+    case FETCH_POST_LIST_FAIL:
       return prevState
   }
 }

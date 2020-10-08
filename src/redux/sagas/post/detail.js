@@ -19,10 +19,14 @@ export function* fetchPostDetail() {
     const {
       payload: { number = '0' },
     } = yield take(FETCH_POST_DETAIL)
-    const searchList = yield select(state => state.search.items)
-    const postList = yield select(state => state.post.list)
+    const searchList = yield select(state => state.search.cacheList)
+    // const postList = yield select(state => state.post.list.items)
     const timelineList = yield select(state => state.home.timeline.currentList)
-    const list = [...searchList, ...postList, ...timelineList]
+    const list = [
+      ...searchList,
+      // ...postList,
+      ...timelineList,
+    ]
     let detail
 
     try {

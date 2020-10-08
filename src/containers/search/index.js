@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPostList: (payload, callback) =>
     dispatch(fetchSearch(payload, callback)),
   onLoad: () => {
-    const handleRouteChange = url => {
+    const _handleRouteChange = url => {
       if (url.indexOf(`search`) !== -1) {
         const nextQueryParams = handleHashAndQuery()
         dispatch(fetchSearch(nextQueryParams))
@@ -68,13 +68,13 @@ const mapDispatchToProps = dispatch => ({
     }
 
     const nextQueryParams = handleHashAndQuery()
-    Router.events.on('hashChangeComplete', handleRouteChange)
+    Router.events.on('hashChangeComplete', _handleRouteChange)
 
     dispatch(fetchSearch(nextQueryParams))
 
     // 返回一个组件卸载时运行的方法，用来取消对 hash 的监听
     return () => {
-      Router.events.off('hashChangeComplete', handleRouteChange)
+      Router.events.off('hashChangeComplete', _handleRouteChange)
     }
   },
   handlePaginationClick: (page, keyword) => {

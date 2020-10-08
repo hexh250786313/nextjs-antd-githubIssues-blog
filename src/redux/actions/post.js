@@ -9,6 +9,7 @@ import {
   GET_POSTS_AMOUNT,
   GET_POSTS_AMOUNT_SUCCESS,
   GET_POSTS_AMOUNT_FAIL,
+  SAVE_LIST_STATE,
 } from '@/constants/ActionTypes'
 import { postsAmountQuery } from '@/constants/ConstTypes'
 
@@ -57,7 +58,7 @@ export const fetchPostDetailSuccess = payload => ({
 // 该方法用于获取标签为 post 的 issue 的总数
 export const getPostsAmount = payload => ({
   type: GET_POSTS_AMOUNT,
-  payload: payload || postsAmountQuery,
+  payload: payload,
 })
 
 export const getPostsAmountSuccess = payload => ({
@@ -67,5 +68,10 @@ export const getPostsAmountSuccess = payload => ({
 
 export const getPostsAmountFail = payload => ({
   type: GET_POSTS_AMOUNT_FAIL,
+  payload,
+})
+
+export const saveListState = payload => ({
+  type: SAVE_LIST_STATE,
   payload,
 })
