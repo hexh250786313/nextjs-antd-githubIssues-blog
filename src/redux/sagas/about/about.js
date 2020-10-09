@@ -20,14 +20,12 @@ function* fetchAbout() {
   while (true) {
     yield take(FETCH_ABOUT)
     const query = aboutQuery
-    const searchList = yield select(state => state.search.cacheList)
-    const postList = yield select(state => state.post.list)
-    const timelineList = yield select(state => state.home.timeline.currentList)
-    const list = [...searchList, ...postList, ...timelineList]
+    const fetchedList = yield select(state => state.post.list.fetchedList)
+    
     let detail, res
 
     try {
-      detail = list.find(item =>
+      detail = fetchedList.find(item =>
         item.labels.some(label => label.name === `about`),
       )
       if (!detail) {

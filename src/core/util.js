@@ -23,19 +23,19 @@ const getDay = day => {
   }
 
   switch (day) {
-    case 0:
-      return `Monday`
     case 1:
-      return `Tuesday`
+      return `Monday`
     case 2:
-      return `Wednesday`
+      return `Tuesday`
     case 3:
-      return `Thursday`
+      return `Wednesday`
     case 4:
-      return `Friday`
+      return `Thursday`
     case 5:
-      return `Saturday`
+      return `Friday`
     case 6:
+      return `Saturday`
+    case 0:
       return `Sunday`
     default:
       return ``
@@ -178,4 +178,14 @@ export const handleQueryParams = (keyword = ``) => {
       .replace(头尾的加号, ``)
       .replace(重复的加号, `+`) + queryParams
   )
+}
+
+export const handleFetchedList = (prevfetchedList, newItems) => {
+  const list = prevfetchedList
+    .concat(newItems)
+    .filter(
+      (item, index, self) =>
+        index === self.findIndex(T => T.number === item.number),
+    )
+  return list
 }

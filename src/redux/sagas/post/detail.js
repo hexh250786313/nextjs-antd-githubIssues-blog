@@ -19,19 +19,13 @@ export function* fetchPostDetail() {
     const {
       payload: { number = '0' },
     } = yield take(FETCH_POST_DETAIL)
-    const searchList = yield select(state => state.search.cacheList)
-    // const postList = yield select(state => state.post.list.items)
-    const timelineList = yield select(state => state.home.timeline.currentList)
-    const list = [
-      ...searchList,
-      // ...postList,
-      ...timelineList,
-    ]
+    const fetchedList = yield select(state => state.post.list.fetchedList)
+
     let detail
 
     try {
       // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
-      detail = list.find(item => item.number === number - 0)
+      detail = fetchedList.find(item => item.number === number - 0)
       if (!detail) {
         const res = yield fetch(`${api.getGitHubIssue}/${number}`)
         detail = yield res.json()

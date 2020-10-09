@@ -2,6 +2,7 @@ import { take, put, fork, select, call } from 'redux-saga/effects'
 import { FETCH_SEARCH } from '@/constants/ActionTypes'
 import { saveSearch, fetchSearchFail } from '@/redux/actions/search'
 import { handleHeaderChange } from '@/redux/actions/layout'
+import { saveFetchedList } from '@/redux/actions/post.js'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 import { indexPic } from '@/constants/ConstTypes.js'
@@ -18,7 +19,6 @@ function* fetchSearch() {
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_SEARCH)
     const prevQueryParams = yield select(state => state.search.query)
-    const cacheList = yield select(state => state.search.cacheList)
 
     const query = {
       ...prevQueryParams,
@@ -48,14 +48,6 @@ function* fetchSearch() {
         loading: false,
       }
 
-      nextState.cacheList = cacheList
-        .concat(items)
-        .filter(
-          (item, index, self) =>
-            index === self.findIndex(T => T.number === item.number),
-        )
-      console.log(`更新缓存列表`, nextState.cacheList)
-
       if (!cache) {
         // 这个接口有请求次数限制，一小时 30 次，因此做缓存
         sessionStorage.setItem(
@@ -64,6 +56,7 @@ function* fetchSearch() {
         )
       }
 
+      yield put(saveFetchedList(items))
       yield put(saveSearch(nextState))
     } catch (e) {
       yield put(fetchSearchFail())

@@ -10,7 +10,6 @@ const initialState = {
   query: searchQuery,
   total_count: 0,
   loading: false,
-  cacheList: [],
 }
 
 const search = (prevState = initialState, { type, payload: nextState }) => {

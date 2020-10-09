@@ -1,9 +1,7 @@
 import { take, put, fork, select, call } from 'redux-saga/effects'
 import { FETCH_TIMELINE } from '@/constants/ActionTypes'
-import {
-  fetchTimelineSuccess,
-  fetchTimelineFail
-} from '@/redux/actions/home'
+import { fetchTimelineSuccess, fetchTimelineFail } from '@/redux/actions/home'
+import { saveFetchedList } from '@/redux/actions/post.js'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 
@@ -30,6 +28,8 @@ function* fetchPostList() {
         })
       }
       yield put(fetchTimelineSuccess(list))
+      yield put(saveFetchedList(list))
+      yield put
     } catch (e) {
       yield put(fetchTimelineFail())
     }

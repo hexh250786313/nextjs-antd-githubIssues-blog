@@ -1,5 +1,10 @@
-import { FETCH_POST_LIST_FAIL, SAVE_LIST_STATE } from '@/constants/ActionTypes'
+import {
+  FETCH_POST_LIST_FAIL,
+  SAVE_LIST_STATE,
+  SAVE_FETCHED_LIST,
+} from '@/constants/ActionTypes'
 import { listQuery } from '@/constants/ConstTypes'
+import { handleFetchedList } from '@/core/util'
 
 const initialState = {
   items: [],
@@ -7,10 +12,16 @@ const initialState = {
   query: listQuery,
   loading: false,
   cacheList: {},
+  fetchedList: [],
 }
 
 const list = (prevState = initialState, { type, payload: nextState }) => {
   switch (type) {
+    case SAVE_FETCHED_LIST:
+      return {
+        ...prevState,
+        fetchedList: handleFetchedList(prevState.fetchedList, nextState),
+      }
     case SAVE_LIST_STATE:
       return {
         ...prevState,

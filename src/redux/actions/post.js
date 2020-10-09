@@ -10,8 +10,8 @@ import {
   GET_POSTS_AMOUNT_SUCCESS,
   GET_POSTS_AMOUNT_FAIL,
   SAVE_LIST_STATE,
+  SAVE_FETCHED_LIST,
 } from '@/constants/ActionTypes'
-import { postsAmountQuery } from '@/constants/ConstTypes'
 
 export const saveQueryParams = payload =>
   !!payload.noCache
@@ -73,5 +73,10 @@ export const getPostsAmountFail = payload => ({
 
 export const saveListState = payload => ({
   type: SAVE_LIST_STATE,
+  payload,
+})
+
+export const saveFetchedList = payload => ({
+  type: SAVE_FETCHED_LIST,
   payload,
 })

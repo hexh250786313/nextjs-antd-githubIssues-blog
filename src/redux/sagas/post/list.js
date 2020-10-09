@@ -4,6 +4,7 @@ import { fetchPostListFail, saveListState } from '@/redux/actions/post'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 import { listQuery } from '@/constants/ConstTypes'
+import { handleFetchedList } from '@/core/util.js'
 
 const fetchList = query => {
   return nextFetch.get(api.getGitHubIssue, { query })
@@ -16,9 +17,12 @@ function* fetchPostList() {
   // 如果要用 tabkeEvery，则不能用 while(true)
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_POST_LIST)
-    let { query: prevQueryParams, total_count, cacheList } = yield select(
-      state => state.post.list,
-    )
+    let {
+      query: prevQueryParams,
+      total_count,
+      cacheList,
+      fetchedList,
+    } = yield select(state => state.post.list)
     const query = { ...prevQueryParams, ...nextQueryParams }
 
     try {
@@ -41,23 +45,14 @@ function* fetchPostList() {
         throw new Error()
       }
 
-      console.log(cacheList)
-
       const nextState = {
         total_count,
         items,
         query,
         loading: false,
-        cacheList
+        cacheList,
+        fetchedList: handleFetchedList(fetchedList, items),
       }
-
-      // nextState.cacheList = cacheList
-      //   .concat(items)
-      //   .filter(
-      //     (item, index, self) =>
-      //       index === self.findIndex(T => T.number === item.number),
-      //   )
-      // console.log(`更新缓存列表`, nextState.cacheList)
 
       yield put(saveListState(nextState))
     } catch (e) {
