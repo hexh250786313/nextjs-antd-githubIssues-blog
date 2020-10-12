@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import PostDetail from '@/components/Post/PostDetail'
 import { setTOC, handleHeaderChange } from '@/redux/actions/layout'
-import { fetchPostDetailSuccess, fetchPostDetail } from '@/redux/actions/post'
+import { savePostState, fetchPostDetail } from '@/redux/actions/post'
 
 const exec = str => {
   if (typeof str === `string`) {
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(handleHeaderChange(payload))
   },
   clearDetail() {
-    dispatch(fetchPostDetailSuccess({}))
+    dispatch(savePostState({}))
   },
   fetchPostDetail: () =>
     dispatch(fetchPostDetail({ number: exec(window.location.pathname) })),

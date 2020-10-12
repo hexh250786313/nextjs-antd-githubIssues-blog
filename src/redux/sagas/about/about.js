@@ -1,6 +1,6 @@
 import { put, fork, call, select, take } from 'redux-saga/effects'
 import { fetchAboutFail } from '../../actions/about'
-import { fetchPostDetailSuccess } from '../../actions/post'
+import { savePostState } from '../../actions/post'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 import { aboutQuery } from '@/constants/ConstTypes'
@@ -35,7 +35,7 @@ function* fetchAbout() {
         }
       }
 
-      yield put(fetchPostDetailSuccess(detail))
+      yield put(savePostState(detail))
       yield put(
         handleHeaderChange({
           title: detail.title,

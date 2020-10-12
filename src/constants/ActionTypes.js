@@ -1,8 +1,10 @@
-// ================= Home Part ==================== //
+// ================= Global ==================== //
 
-export const INCREMENT = 'INCREMENT'
-export const DECREMENT = 'DECREMENT'
-export const RESET = 'RESET'
+export const FETCH_BLOG_INFO = 'FETCH_BLOG_INFO'
+export const FETCH_BLOG_INFO_FAIL = 'FETCH_BLOG_INFO_FAIL'
+export const FETCH_BLOG_INFO_SUCCESS = 'FETCH_BLOG_INFO_SUCCESS'
+
+// ================= Home Part ==================== //
 
 export const SAVE_TIMELINE = 'SAVE_TIMELINE'
 export const FETCH_TIMELINE = 'FETCH_TIMELINE'
@@ -11,24 +13,13 @@ export const FETCH_TIMELINE_FAIL = 'FETCH_TIMELINE_FAIL'
 
 // ================= Post Part ==================== //
 
-export const FETCH_BLOG_INFO = 'FETCH_BLOG_INFO'
-export const FETCH_BLOG_INFO_SUCCESS = 'FETCH_BLOG_INFO_SUCCESS'
-export const FETCH_BLOG_INFO_FAIL = 'FETCH_BLOG_INFO_FAIL'
-
 export const FETCH_POST_LIST = 'FETCH_POST_LIST'
 export const FETCH_POST_LIST_FAIL = 'FETCH_POST_LIST_FAIL'
-export const FETCH_POST_LIST_SUCCESS = 'FETCH_POST_LIST_SUCCESS'
-
-export const SAVE_QUERY_PARAMS = 'SAVE_QUERY_PARAMS'
-
-export const GET_POSTS_AMOUNT = 'GET_POSTS_AMOUNT'
-export const GET_POSTS_AMOUNT_SUCCESS = 'GET_POSTS_AMOUNT_SUCCESS'
-export const GET_POSTS_AMOUNT_FAIL = 'GET_POSTS_AMOUNT_FAIL'
 
 export const FETCH_POST_DETAIL = 'FETCH_POST_DETAIL'
 export const FETCH_POST_DETAIL_FAIL = 'FETCH_POST_DETAIL_FAIL'
-export const FETCH_POST_DETAIL_SUCCESS = 'FETCH_POST_DETAIL_SUCCESS'
 
+export const SAVE_POST_STATE = 'SAVE_POST_STATE'
 export const SAVE_LIST_STATE = `SAVE_LIST_STATE`
 
 export const SAVE_FETCHED_LIST = `SAVE_FETCHED_LIST`

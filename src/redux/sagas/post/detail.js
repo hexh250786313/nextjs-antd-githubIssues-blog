@@ -3,7 +3,7 @@ import { take, put, fork, select } from 'redux-saga/effects'
 import { FETCH_POST_DETAIL } from '@/constants/ActionTypes'
 import {
   fetchPostDetailFail,
-  fetchPostDetailSuccess,
+  savePostState,
 } from '@/redux/actions/post'
 import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
 import api from '@/constants/ApiUrlForBE'
@@ -33,7 +33,7 @@ export function* fetchPostDetail() {
       if (!detail.body) {
         throw new Error()
       }
-      yield put(fetchPostDetailSuccess(detail))
+      yield put(savePostState(detail))
       yield put(
         handleHeaderChange({
           title: detail.title,
