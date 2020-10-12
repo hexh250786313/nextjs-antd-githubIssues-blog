@@ -1,8 +1,4 @@
-import {
-  SAVE_SEARCH,
-  FETCH_SEARCH_FAIL,
-  CHANGE_SEARCH_KEYWORD,
-} from '@/constants/ActionTypes'
+import { SAVE_SEARCH, CHANGE_SEARCH_KEYWORD } from '@/constants/ActionTypes'
 import { searchQuery } from '@/constants/ConstTypes'
 
 const initialState = {
@@ -27,7 +23,6 @@ const search = (prevState = initialState, { type, payload: nextState }) => {
         ...prevState,
         ...nextState,
       }
-    case FETCH_SEARCH_FAIL:
     default:
       return prevState
   }

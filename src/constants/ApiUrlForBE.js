@@ -1,13 +1,10 @@
 // const API url
 export default {
   /**
-   * Get post list
+   * GitHub Api
    * @method GET
    */
-  // getGitHubIssues: `https://api.github.com/repos/hexh250786313/Blog/issues?sort=created&direction=asc&labels=post&creator=hexh250786313`,
-  // getGitHubIssues: `https://api.github.com/repos/hexh250786313/Blog/issues?sort=created&direction=asc&creator=hexh250786313&state=open`,
-  getGitHubIssues: `https://api.github.com/repos/hexh250786313/Blog/issues`,
-  getGitHub: `https://api.github.com/repos/hexh250786313/Blog`,
-  getGitHubIssue: `https://api.github.com/repos/hexh250786313/Blog/issues`,
-  searchGitHubIssue: `https://api.github.com/search/issues`,
+  githubIssuesApi: `https://api.github.com/repos/hexh250786313/Blog/issues`,
+  githubInfoApi: `https://api.github.com/repos/hexh250786313/Blog`,
+  githubSearchApi: `https://api.github.com/search/issues`,
 }

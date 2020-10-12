@@ -1,14 +1,12 @@
-import fetch from 'isomorphic-unfetch'
-import { take, put, fork, select } from 'redux-saga/effects'
 import { FETCH_POST_DETAIL } from '@/constants/ActionTypes'
-import {
-  fetchPostDetailFail,
-  savePostState,
-} from '@/redux/actions/post'
-import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
 import api from '@/constants/ApiUrlForBE'
-import { handleTagContent } from '@/core/util'
 import { defaultPic } from '@/constants/ConstTypes'
+import { handleTagContent } from '@/core/util'
+import { requestFail } from '@/redux/actions/global'
+import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
+import { savePostState } from '@/redux/actions/post'
+import fetch from 'isomorphic-unfetch'
+import { fork, put, select, take } from 'redux-saga/effects'
 // import { trackPromise } from 'react-promise-tracker';
 
 /**
@@ -24,10 +22,10 @@ export function* fetchPostDetail() {
     let detail
 
     try {
-      // const res = yield trackPromise(fetch(`${api.getGitHubIssues}/${number}`));
+      // const res = yield trackPromise(fetch(`${api.githubIssuesApi}/${number}`));
       detail = fetchedList.find(item => item.number === number - 0)
       if (!detail) {
-        const res = yield fetch(`${api.getGitHubIssue}/${number}`)
+        const res = yield fetch(`${api.githubIssuesApi}/${number}`)
         detail = yield res.json()
       }
       if (!detail.body) {
@@ -42,7 +40,7 @@ export function* fetchPostDetail() {
       )
       yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
     } catch (e) {
-      yield put(fetchPostDetailFail())
+      yield put(requestFail(`请求文章详情接口错误，请刷新页面或者联系我`))
     }
   }
 }

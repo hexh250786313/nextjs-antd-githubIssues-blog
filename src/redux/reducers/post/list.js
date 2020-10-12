@@ -1,5 +1,4 @@
 import {
-  FETCH_POST_LIST_FAIL,
   SAVE_LIST_STATE,
   SAVE_FETCHED_LIST,
 } from '@/constants/ActionTypes'
@@ -28,7 +27,6 @@ const list = (prevState = initialState, { type, payload: nextState }) => {
         ...nextState,
       }
     default:
-    case FETCH_POST_LIST_FAIL:
       return prevState
   }
 }

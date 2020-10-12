@@ -1,8 +1,6 @@
 import {
   FETCH_POST_LIST,
-  FETCH_POST_LIST_FAIL,
   FETCH_POST_DETAIL,
-  FETCH_POST_DETAIL_FAIL,
   SAVE_POST_STATE,
   SAVE_LIST_STATE,
   SAVE_FETCHED_LIST,
@@ -14,18 +12,8 @@ export const fetchPostList = (payload, callback) => ({
   callback,
 })
 
-export const fetchPostListFail = payload => ({
-  type: FETCH_POST_LIST_FAIL,
-  payload,
-})
-
 export const fetchPostDetail = payload => ({
   type: FETCH_POST_DETAIL,
-  payload,
-})
-
-export const fetchPostDetailFail = payload => ({
-  type: FETCH_POST_DETAIL_FAIL,
   payload,
 })
 

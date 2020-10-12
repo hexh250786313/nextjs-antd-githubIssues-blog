@@ -1,14 +1,15 @@
-import { take, put, fork, select, call } from 'redux-saga/effects'
 import { FETCH_SEARCH } from '@/constants/ActionTypes'
-import { saveSearch, fetchSearchFail } from '@/redux/actions/search'
+import api from '@/constants/ApiUrlForBE'
+import { indexPic } from '@/constants/ConstTypes.js'
+import nextFetch from '@/core/nextFetch'
+import { requestFail } from '@/redux/actions/global'
 import { handleHeaderChange } from '@/redux/actions/layout'
 import { saveFetchedList } from '@/redux/actions/post.js'
-import api from '@/constants/ApiUrlForBE'
-import nextFetch from '@/core/nextFetch'
-import { indexPic } from '@/constants/ConstTypes.js'
+import { saveSearch } from '@/redux/actions/search'
+import { call, fork, put, select, take } from 'redux-saga/effects'
 
 const fetchList = query => {
-  return nextFetch.get(api.searchGitHubIssue, { query })
+  return nextFetch.get(api.githubSearchApi, { query })
 }
 
 /**
@@ -59,7 +60,7 @@ function* fetchSearch() {
       yield put(saveFetchedList(items))
       yield put(saveSearch(nextState))
     } catch (e) {
-      yield put(fetchSearchFail())
+      yield put(requestFail(`请求搜索接口报错，请重试或者联系我`))
     } finally {
       if (!!callback) {
         yield call(() => {

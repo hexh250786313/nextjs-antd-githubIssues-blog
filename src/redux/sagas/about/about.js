@@ -1,16 +1,15 @@
-import { put, fork, call, select, take } from 'redux-saga/effects'
-import { fetchAboutFail } from '../../actions/about'
-import { savePostState } from '../../actions/post'
-import api from '@/constants/ApiUrlForBE'
-import nextFetch from '@/core/nextFetch'
-import { aboutQuery } from '@/constants/ConstTypes'
 import { FETCH_ABOUT } from '@/constants/ActionTypes'
-import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
-import { aboutPic } from '@/constants/ConstTypes'
+import api from '@/constants/ApiUrlForBE'
+import { aboutPic, aboutQuery } from '@/constants/ConstTypes'
+import nextFetch from '@/core/nextFetch'
 import { handleTagContent } from '@/core/util'
+import { requestFail } from '@/redux/actions/global'
+import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
+import { savePostState } from '@/redux/actions/post'
+import { call, fork, put, select, take } from 'redux-saga/effects'
 
 const fetchList = query => {
-  return nextFetch.get(api.getGitHubIssues, { query })
+  return nextFetch.get(api.githubIssuesApi, { query })
 }
 
 /**
@@ -44,7 +43,7 @@ function* fetchAbout() {
       )
       yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
     } catch (e) {
-      yield put(fetchAboutFail())
+      yield put(requestFail(`请求关于页面的接口错误，请刷新页面或者联系我`))
     }
   }
 }

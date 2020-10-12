@@ -1,7 +1,6 @@
 import {
   SAVE_TIMELINE,
   FETCH_TIMELINE_SUCCESS,
-  FETCH_TIMELINE_FAIL,
   FETCH_TIMELINE,
 } from '@/constants/ActionTypes'
 
@@ -19,7 +18,6 @@ const timeline = (prevState = initialState, { type, payload: nextState }) => {
         ...nextState,
       }
     case FETCH_TIMELINE:
-    case FETCH_TIMELINE_FAIL:
     default:
       return prevState
   }

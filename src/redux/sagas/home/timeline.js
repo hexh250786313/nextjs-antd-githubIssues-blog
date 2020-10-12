@@ -1,12 +1,13 @@
-import { take, put, fork, select, call } from 'redux-saga/effects'
 import { FETCH_TIMELINE } from '@/constants/ActionTypes'
-import { fetchTimelineSuccess, fetchTimelineFail } from '@/redux/actions/home'
-import { saveFetchedList } from '@/redux/actions/post.js'
 import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
+import { requestFail } from '@/redux/actions/global'
+import { fetchTimelineSuccess } from '@/redux/actions/home'
+import { saveFetchedList } from '@/redux/actions/post.js'
+import { call, fork, put, select, take } from 'redux-saga/effects'
 
 const fetchList = query => {
-  return nextFetch.get(api.getGitHubIssues, { query })
+  return nextFetch.get(api.githubIssuesApi, { query })
 }
 
 /**
@@ -31,7 +32,7 @@ function* fetchPostList() {
       yield put(saveFetchedList(list))
       yield put
     } catch (e) {
-      yield put(fetchTimelineFail())
+      yield put(requestFail('请求首页接口报错，请刷新页面或者联系我'))
     }
   }
 }

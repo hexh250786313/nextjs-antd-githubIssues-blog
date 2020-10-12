@@ -1,5 +1,5 @@
 import Home from '@/components/Home'
-import { fetchBlogInfo } from '@/redux/actions/blog'
+import { fetchBlogInfo } from '@/redux/actions/global'
 import { fetchTimeline } from '@/redux/actions/home'
 import { timelineQuery } from '@/constants/ConstTypes'
 

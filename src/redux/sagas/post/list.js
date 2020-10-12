@@ -1,15 +1,16 @@
-import { take, put, fork, select, call, takeEvery } from 'redux-saga/effects'
 import { FETCH_POST_LIST } from '@/constants/ActionTypes'
-import { fetchPostListFail, saveListState } from '@/redux/actions/post'
 import api from '@/constants/ApiUrlForBE'
+import { defaultPic, listQuery } from '@/constants/ConstTypes'
 import nextFetch from '@/core/nextFetch'
-import { listQuery } from '@/constants/ConstTypes'
-import { handleFetchedList } from '@/core/util.js'
+import { handleFetchedList } from '@/core/util'
+import { requestFail } from '@/redux/actions/global'
 import { handleHeaderChange } from '@/redux/actions/layout'
-import { defaultPic } from '@/constants/ConstTypes.js'
+import { saveListState } from '@/redux/actions/post'
+import { call, fork, put, select, take, takeEvery } from 'redux-saga/effects'
+
 
 const fetchList = query => {
-  return nextFetch.get(api.getGitHubIssue, { query })
+  return nextFetch.get(api.githubIssuesApi, { query })
 }
 
 /**
@@ -64,7 +65,7 @@ function* fetchPostList() {
         }),
       )
     } catch (e) {
-      yield put(fetchPostListFail())
+      yield put(requestFail(`请求文章列表接口报错，请刷新页面或者联系我`))
     } finally {
       if (!!callback) {
         yield call(() => {

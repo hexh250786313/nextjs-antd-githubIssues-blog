@@ -1,6 +1,5 @@
 import {
   FETCH_BLOG_INFO,
-  FETCH_BLOG_INFO_FAIL,
   FETCH_BLOG_INFO_SUCCESS,
 } from '@/constants/ActionTypes'
 
@@ -16,7 +15,6 @@ const info = (prevState = initialState, { type, payload: nextState }) => {
         ...nextState,
       }
     case FETCH_BLOG_INFO:
-    case FETCH_BLOG_INFO_FAIL:
     default:
       return prevState
   }
