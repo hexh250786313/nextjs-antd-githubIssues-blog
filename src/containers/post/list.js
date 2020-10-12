@@ -19,12 +19,10 @@ const handleHash = hash => {
   return { page }
 }
 
-const handleHashAndQuery = currentPage => {
+const handleHashAndQuery = () => {
   let nextQueryParams
   if (!!window.location.hash) {
     nextQueryParams = handleHash(window.location.hash)
-  } else if (typeof currentPage === `number` && currentPage > 1) {
-    Router.push(`/post/list#page=${currentPage}`)
   } else {
     nextQueryParams = { page: 1 }
   }
