@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import {
   indexPic,
-  aboutPic,
   defaultPic,
   pageWihtoutDefaultHeader,
 } from '@/constants/ConstTypes.js'
@@ -11,11 +10,6 @@ import {
 const Header = ({ handleHeaderChange, pic, title }) => {
   const handleChange = pathname => {
     switch (pathname) {
-      case '/post/list':
-        handleHeaderChange({
-          title: 'Posts List',
-          pic: defaultPic,
-        })
       default:
         if (
           !pageWihtoutDefaultHeader.some(str => pathname.indexOf(str) !== -1)

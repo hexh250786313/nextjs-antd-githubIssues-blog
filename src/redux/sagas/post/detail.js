@@ -30,6 +30,9 @@ export function* fetchPostDetail() {
         const res = yield fetch(`${api.getGitHubIssue}/${number}`)
         detail = yield res.json()
       }
+      if (!detail.body) {
+        throw new Error()
+      }
       yield put(fetchPostDetailSuccess(detail))
       yield put(
         handleHeaderChange({

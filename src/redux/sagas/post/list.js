@@ -5,6 +5,8 @@ import api from '@/constants/ApiUrlForBE'
 import nextFetch from '@/core/nextFetch'
 import { listQuery } from '@/constants/ConstTypes'
 import { handleFetchedList } from '@/core/util.js'
+import { handleHeaderChange } from '@/redux/actions/layout'
+import { defaultPic } from '@/constants/ConstTypes.js'
 
 const fetchList = query => {
   return nextFetch.get(api.getGitHubIssue, { query })
@@ -55,6 +57,12 @@ function* fetchPostList() {
       }
 
       yield put(saveListState(nextState))
+      yield put(
+        handleHeaderChange({
+          title: `Posts List`,
+          pic: defaultPic,
+        }),
+      )
     } catch (e) {
       yield put(fetchPostListFail())
     } finally {
