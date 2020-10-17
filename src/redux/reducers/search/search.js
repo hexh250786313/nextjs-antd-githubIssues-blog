@@ -3,7 +3,7 @@ import { searchQuery } from '@/constants/ConstTypes'
 
 const initialState = {
   items: [],
-  query: searchQuery,
+  query: searchQuery(),
   total_count: 0,
   loading: false,
 }

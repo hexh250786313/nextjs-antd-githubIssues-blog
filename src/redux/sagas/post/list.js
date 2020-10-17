@@ -1,6 +1,6 @@
 import { FETCH_POST_LIST } from '@/constants/ActionTypes'
 import api from '@/constants/ApiUrlForBE'
-import { defaultPic, listQuery } from '@/constants/ConstTypes'
+import { defaultPic, searchQuery } from '@/constants/ConstTypes'
 import nextFetch from '@/core/nextFetch'
 import { handleFetchedList } from '@/core/util'
 import { requestFail } from '@/redux/actions/global'
@@ -10,6 +10,10 @@ import { call, fork, put, select, take, takeEvery } from 'redux-saga/effects'
 
 const fetchList = query => {
   return nextFetch.get(api.githubIssuesApi, { query })
+}
+
+const fetchSearch = () => {
+  return nextFetch.get(api.githubSearchApi, { query: searchQuery(`allPost`) })
 }
 
 /**
@@ -36,11 +40,17 @@ function* fetchPostList() {
         cacheList[query.page] = items
       }
       if (!total_count) {
-        const res = yield call(fetchList, { ...listQuery, per_page: 100000 })
-        if (!Array.isArray(res)) {
-          throw new Error()
+        const cache = JSON.parse(sessionStorage.getItem(`total_count`))
+        if (typeof(cache) !== `number`) {
+          const res = yield call(fetchSearch, query)
+          if (typeof(res.total_count) !== `number`) {
+            throw new Error()
+          }
+          total_count = res.total_count
+          sessionStorage.setItem(`total_count`, JSON.stringify(total_count))
+        } else {
+          total_count = cache
         }
-        total_count = res.length
       }
 
       if (!Array.isArray(items)) {

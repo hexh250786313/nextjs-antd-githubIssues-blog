@@ -78,18 +78,26 @@ export const listQuery = {
 }
 
 // 搜索请求的参数
-export const searchQuery = {
-  // labels: `post`,
-  // // labels: `bug`,
-  page: 1,
-  per_page: 1,
-  // per_page: 10,
-  // creator: `hexh250786313`,
-  // direction: `desc`,
-  q: `state:open+repo:hexh250786313/Blog`,
-  sort: `created`,
-  order: `desc`,
-  keyword: ``,
+export const searchQuery = (mode = ``) => {
+  const queryParams = {
+    page: 1,
+    per_page: 1,
+    q: `state:open+repo:hexh250786313/Blog`,
+    sort: `created`,
+    order: `desc`,
+    keyword: ``,
+  }
+
+  switch (mode) {
+    case `allPost`:
+      queryParams.page = 1000,
+      queryParams.q = `label:post+state:open+repo:hexh250786313/Blog`
+      break
+    default:
+      break
+  }
+
+  return queryParams
 }
 
 // post 数量查询条件
