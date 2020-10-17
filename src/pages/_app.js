@@ -19,9 +19,9 @@ const progressDoneEvent = () => {
 }
 
 const toTopEvent = path => {
-  if (path.match(/^\/about/) || (path.match(/^\/post\/\d/) && window)) {
-    window.scrollTo({ top: 0, behavior: `smooth` })
-  }
+  // if (path.match(/^\/about/) || (path.match(/^\/post\/\d/) && window)) {
+  window.scrollTo({ top: 0, behavior: `smooth` })
+  // }
   NProgress.done()
 }
 
