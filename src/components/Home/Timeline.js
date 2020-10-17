@@ -79,6 +79,7 @@ const Timeline = ({
               <span className="type">{tag}</span>
               <a
                 href={`/post/${number}`}
+                target="_self"
                 onClick={e =>
                   tag === `ABOUT`
                     ? routerToAbout(e)
@@ -95,7 +96,10 @@ const Timeline = ({
                         key={index}
                         src={url}
                         alt="url"
-                        onClick={() => handleLink(url)}
+                        // onClick={e => {
+                        //   e.stopPropagation()
+                        //   handleLink(url)
+                        // }}
                         className="image"
                       />
                     ))

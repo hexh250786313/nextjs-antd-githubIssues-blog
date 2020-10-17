@@ -40,6 +40,14 @@ const PostList = ({
                 created_at,
                 labels: [label],
               } = item
+
+              let images = handleTagContent(body, `image`)
+              let desc = handleTagContent(body, `desc`)
+
+              if (images) {
+                images = images.split(`--split--`)
+              }
+
               return (
                 <a
                   key={number}
@@ -60,7 +68,16 @@ const PostList = ({
                         <span className="time">{utc2locale(created_at)}</span>
                       }
                     />
-                    <p className="description">{handleTagContent(body)}</p>
+                    {desc && (
+                      <p className="description">{handleTagContent(body)}</p>
+                    )}
+                    {images && (
+                      <div className="pic">
+                        {images.map(image => (
+                          <img className="pic" src={image} alt="" key={image} />
+                        ))}
+                      </div>
+                    )}
                   </List.Item>
                 </a>
               )
@@ -113,6 +130,7 @@ const PostList = ({
           font-size: 18px;
           font-weight: bold;
           word-break: break-all;
+          margin-bottom: 5px;
         }
 
         .description {
@@ -124,6 +142,20 @@ const PostList = ({
           text-overflow: ellipsis;
           margin: 0;
           word-break: break-all;
+        }
+
+        .pic {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          margin-top: 10px;
+        }
+
+        .pic > img {
+          margin: 0 10px 0 0;
+          width: 100px;
         }
       `}</style>
     </div>

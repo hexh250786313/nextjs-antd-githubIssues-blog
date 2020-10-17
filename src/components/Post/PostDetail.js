@@ -7,8 +7,20 @@ import CodeBlock from '../CodeBlock'
 import './index.less'
 
 const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
-  const { body: _body } = detail
-  const body = _body ? handleTagContent(_body, `desc`, `exec`) : ``
+  let { body } = detail
+  let images = handleTagContent(body, `image`)
+  let desc = handleTagContent(body, `desc`)
+
+  if (images) {
+    images = images.split(`--split--`)
+    body = handleTagContent(body, `image`, `exec`)
+  }
+
+  if (desc) {
+    // desc = desc.replace(/^\s+|\s+$/g, ``) // 去除头尾空白
+    desc = desc.replace(/^\r\n+|\r\n+$/g, ``) // 去除头尾换行+回车
+    body = handleTagContent(body, `desc`, `exec`)
+  }
 
   useEffect(() => {
     if (!body) {
@@ -26,6 +38,14 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
   return (
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
+        {desc && <p className="desc">{desc}</p>}
+        {images && (
+          <div className="pic">
+            {images.map(image => (
+              <img src={image} alt="" key={image} />
+            ))}
+          </div>
+        )}
         <ReactMarkdown
           className="markdown-body"
           source={body}
@@ -35,6 +55,28 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
           escapeHtml={false}
         />
       </Spin>
+      <style jsx>{`
+        .pic {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 15px;
+          flex-wrap: wrap;
+        }
+
+        .pic > img {
+          width: 80%;
+        }
+
+        .desc {
+          background-color: #dedede;
+          font-size: 17px;
+          border-radius: 5px;
+          padding: 10px 20px;
+          white-space: break-spaces;
+        }
+      `}</style>
     </div>
   )
 }

@@ -62,6 +62,7 @@ export const filterObject = (o, filter) => {
  */
 export const handleLink = link => {
   if (typeof link === 'string') {
+    link = link.replace(/\s/g, ``)
     let startsWith
     if ((startsWith = handleHrefStr(linkToPending, link))) {
       const eleLink = document.createElement('a')
