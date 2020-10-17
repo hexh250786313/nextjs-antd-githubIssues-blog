@@ -17,6 +17,6 @@
 
 ### todo
 
-- [ ] 搜索功能
-- [ ] header 图片的标签
-- [ ] 打算把 post 管理从 GitHub 迁移到 Gitee
+- [x] 搜索功能
+- [x] header 图片的标签
+      ~~- [ ] 打算把 post 管理从 GitHub 迁移到 Gitee~~

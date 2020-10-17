@@ -90,7 +90,8 @@ export const searchQuery = (mode = ``) => {
 
   switch (mode) {
     case `allPost`:
-      queryParams.page = 1000,
+      queryParams.per_page = 1,
+      queryParams.page = 100,
       queryParams.q = `label:post+state:open+repo:hexh250786313/Blog`
       break
     default:

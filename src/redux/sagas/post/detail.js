@@ -32,16 +32,32 @@ export function* fetchPostDetail() {
       if (!detail.body) {
         throw new Error()
       }
+
+      const body = detail.body
+      let pic = handleTagContent(body, `header-img`)
+
+      console.log(pic)
+
       yield put(savePostState(detail))
       yield put(saveFetchedList([detail]))
 
+      if (pic) {
+        pic.replace(/^\r\n+|\r\n+$/g, ``)
+        pic = pic.split(`--split--`)[0]
+      }
       yield put(
         handleHeaderChange({
           title: detail.title,
-          pic: defaultPic,
+          pic: pic || defaultPic,
         }),
       )
-      yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
+
+      let src = handleTagContent(detail.body, `desc`, `exec`)
+      src = handleTagContent(src, `image`, `exec`)
+      src = handleTagContent(src, `header-img`, `exec`)
+      src = src.replace(/^\s+|\s+$/g, ``)
+
+      yield put(setTOC(src))
     } catch (e) {
       yield put(requestFail(`请求文章详情接口错误，请刷新页面或者联系我`))
     }

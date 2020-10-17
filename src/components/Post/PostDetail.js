@@ -22,6 +22,11 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
     body = handleTagContent(body, `desc`, `exec`)
   }
 
+  if (body) {
+    body = body.replace(/^\s+|\s+$/g, ``)
+    body = handleTagContent(body, `header-img`, `exec`)
+  }
+
   useEffect(() => {
     if (!body) {
       fetchPostDetail()

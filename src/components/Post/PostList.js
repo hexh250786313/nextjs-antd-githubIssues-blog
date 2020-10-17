@@ -69,7 +69,7 @@ const PostList = ({
                       }
                     />
                     {desc && (
-                      <p className="description">{handleTagContent(body)}</p>
+                      <p className="description">{desc}</p>
                     )}
                     {images && (
                       <div className="pic">
