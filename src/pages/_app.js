@@ -10,15 +10,20 @@ import Router from 'next/router'
 import NProgress from 'nprogress' // nprogress module
 import '../../assets/progress.less' // styles of nprogress
 
-// Binding events.
-Router.events.on('routeChangeStart', () => NProgress.start())
-Router.events.on('routeChangeComplete', path => {
+const progressStartEvent = () => {
+  NProgress.start()
+}
+
+const progressDoneEvent = () => {
+  NProgress.done()
+}
+
+const toTopEvent = path => {
   if (path.match(/^\/about/) || (path.match(/^\/post\/\d/) && window)) {
     window.scrollTo({ top: 0, behavior: `smooth` })
   }
   NProgress.done()
-})
-Router.events.on('routeChangeError', () => NProgress.done())
+}
 
 class NextApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -29,6 +34,27 @@ class NextApp extends App {
     }
 
     return { pageProps }
+  }
+
+  componentDidMount() {
+    // const {
+    //   post: {
+    //     list: {
+    //       query: { page },
+    //     },
+    //   },
+    // } = this.props.store.getState()
+
+    // Binding events.
+    Router.events.on('routeChangeStart', progressStartEvent)
+    Router.events.on('routeChangeComplete', toTopEvent)
+    Router.events.on('routeChangeError', progressDoneEvent)
+  }
+
+  componentWillUnmount() {
+    Router.events.off('routeChangeStart', progressStartEvent)
+    Router.events.off('routeChangeComplete', toTopEvent)
+    Router.events.off('routeChangeError', progressDoneEvent)
   }
 
   render() {

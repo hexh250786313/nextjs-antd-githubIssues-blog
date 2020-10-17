@@ -64,9 +64,7 @@ function* fetchSearch() {
     } finally {
       if (!!callback) {
         yield call(() => {
-          setTimeout(() => {
-            callback()
-          })
+          callback()
         })
       }
       yield put(

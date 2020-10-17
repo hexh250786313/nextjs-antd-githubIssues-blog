@@ -4,8 +4,17 @@ import Router from 'next/router'
 import { handleTagContent, utc2locale } from '@/core/util'
 import { useEffect } from 'react'
 
+const handleClick = (e, href) => {
+  e.preventDefault()
+  Router.push(`/post/[number]`, href)
+}
+
+const routerToAbout = e => {
+  e.preventDefault()
+  Router.push(`/about`, `/about`)
+}
+
 const PostList = ({
-  fetchPostList,
   perPage,
   list: postList,
   postsAmount,
@@ -14,11 +23,6 @@ const PostList = ({
   loading,
   handlePaginationClick,
 }) => {
-  const handleClick = (e, href) => {
-    e.preventDefault()
-    Router.push(`/post/[number]`, href)
-  }
-
   useEffect(() => {
     return onLoad()
   }, [])
@@ -29,12 +33,24 @@ const PostList = ({
         {postList.length !== 0 ? (
           <List>
             {postList.map(item => {
-              const { number, title, body, created_at } = item
+              const {
+                number,
+                title,
+                body,
+                created_at,
+                labels: [label],
+              } = item
               return (
                 <a
                   key={number}
                   href={`/post/${number}`}
-                  onClick={e => handleClick(e, `/post/${number}`)}
+                  // onClick={e => handleClick(e, `/post/${number}`)}
+                  // onClick={e => handleClick(e, `/post/${number}`)}
+                  onClick={e =>
+                    label.name === `about`
+                      ? routerToAbout(e)
+                      : handleClick(e, `/post/${number}`)
+                  }
                 >
                   <List.Item>
                     <List.Item.Meta
@@ -94,11 +110,9 @@ const PostList = ({
         .title {
           display: inline-block;
           width: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           font-size: 18px;
           font-weight: bold;
+          word-break: break-all;
         }
 
         .description {
@@ -109,6 +123,7 @@ const PostList = ({
           overflow: hidden;
           text-overflow: ellipsis;
           margin: 0;
+          word-break: break-all;
         }
       `}</style>
     </div>

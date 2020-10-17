@@ -7,6 +7,7 @@ import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
 import { savePostState } from '@/redux/actions/post'
 import fetch from 'isomorphic-unfetch'
 import { fork, put, select, take } from 'redux-saga/effects'
+import { saveFetchedList } from '@/redux/actions/post.js'
 // import { trackPromise } from 'react-promise-tracker';
 
 /**
@@ -32,6 +33,8 @@ export function* fetchPostDetail() {
         throw new Error()
       }
       yield put(savePostState(detail))
+      yield put(saveFetchedList([detail]))
+
       yield put(
         handleHeaderChange({
           title: detail.title,

@@ -52,6 +52,7 @@ const mapDispatchToProps = dispatch => ({
     const nextQueryParams = handleHashAndQuery(currentPage)
     Router.events.on('hashChangeComplete', _handleRouteChange)
 
+    dispatch(saveListState({ loading: true }))
     dispatch(fetchPostList(nextQueryParams))
 
     // 返回一个组件卸载时运行的方法，用来取消对 hash 的监听

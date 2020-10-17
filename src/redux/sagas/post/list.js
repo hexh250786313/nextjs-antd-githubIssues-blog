@@ -8,7 +8,6 @@ import { handleHeaderChange } from '@/redux/actions/layout'
 import { saveListState } from '@/redux/actions/post'
 import { call, fork, put, select, take, takeEvery } from 'redux-saga/effects'
 
-
 const fetchList = query => {
   return nextFetch.get(api.githubIssuesApi, { query })
 }
@@ -69,9 +68,7 @@ function* fetchPostList() {
     } finally {
       if (!!callback) {
         yield call(() => {
-          setTimeout(() => {
-            callback()
-          })
+          callback()
         })
       }
     }

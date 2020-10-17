@@ -47,7 +47,6 @@ const _Menu = () => {
 
 const Navigation = ({
   openDrawer,
-  setLoading,
   changeSearchKeyword,
   searchKeyword,
 }) => {
@@ -120,7 +119,6 @@ const Navigation = ({
               // placeholder="Search for something interesting?"
               placeholder="Make your life easier..."
               onPressEnter={() => {
-                setLoading(searchKeyword)
                 Router.push(`/search#q=${searchKeyword}&page=1`)
               }}
               style={{ width: searchBarWidth }}
@@ -162,7 +160,7 @@ const Navigation = ({
               key={item.key}
             >
               <Link href={item.key}>
-                <a>{item.value}</a>
+                <a target="_self">{item.value}</a>
               </Link>
             </Item>
           ))}
@@ -271,7 +269,6 @@ const Navigation = ({
 
 Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
-  setLoading: PropTypes.func.isRequired,
   changeSearchKeyword: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
 }

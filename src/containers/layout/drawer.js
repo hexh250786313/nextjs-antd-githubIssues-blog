@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { closeDrawer } from '@/redux/actions/layout'
-import { changeSearchKeyword, saveSearch } from '@/redux/actions/search'
+import { changeSearchKeyword } from '@/redux/actions/search'
 import Drawer from '@/components/Layout/Drawer'
 
 const mapStateToProps = state => ({
@@ -11,7 +11,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   closeDrawer: () => dispatch(closeDrawer()),
-  setLoading: () => dispatch(saveSearch({ loading: true })),
   changeSearchKeyword: keyword => dispatch(changeSearchKeyword(keyword)),
 })
 

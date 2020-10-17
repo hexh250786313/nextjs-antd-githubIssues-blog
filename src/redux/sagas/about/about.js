@@ -7,6 +7,7 @@ import { requestFail } from '@/redux/actions/global'
 import { handleHeaderChange, setTOC } from '@/redux/actions/layout'
 import { savePostState } from '@/redux/actions/post'
 import { call, fork, put, select, take } from 'redux-saga/effects'
+import { saveFetchedList } from '@/redux/actions/post.js'
 
 const fetchList = query => {
   return nextFetch.get(api.githubIssuesApi, { query })
@@ -35,6 +36,8 @@ function* fetchAbout() {
       }
 
       yield put(savePostState(detail))
+      yield put(saveFetchedList([detail]))
+
       yield put(
         handleHeaderChange({
           title: detail.title,

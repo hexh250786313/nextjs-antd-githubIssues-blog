@@ -29,7 +29,7 @@ const SideNavigation = ({ mdSource }) => {
               return (
                 <Item icon={<Icon />} key={key}>
                   <Link href={key}>
-                    <a>{value}</a>
+                    <a target="_self">{value}</a>
                   </Link>
                 </Item>
               )

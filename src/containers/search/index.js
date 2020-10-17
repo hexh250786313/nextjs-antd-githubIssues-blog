@@ -70,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
     const nextQueryParams = handleHashAndQuery()
     Router.events.on('hashChangeComplete', _handleRouteChange)
 
+    dispatch(saveSearch({ loading: true }))
     dispatch(fetchSearch(nextQueryParams))
 
     // 返回一个组件卸载时运行的方法，用来取消对 hash 的监听

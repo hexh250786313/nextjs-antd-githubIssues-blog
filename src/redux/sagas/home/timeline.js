@@ -30,7 +30,6 @@ function* fetchPostList() {
       }
       yield put(fetchTimelineSuccess(list))
       yield put(saveFetchedList(list))
-      yield put
     } catch (e) {
       yield put(requestFail('请求首页接口报错，请刷新页面或者联系我'))
     }
