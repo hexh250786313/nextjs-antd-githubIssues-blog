@@ -9,14 +9,33 @@ import OrderedListOutlined from '@ant-design/icons/OrderedListOutlined'
 
 const Item = Menu.Item
 
-const SideNavigation = ({ mdSource }) => {
+const SideNavigation = ({ mdSource, currentPostListPage }) => {
   const [pathname, setPathname] = useState('/')
+
+  const handleLink = key => {
+    if (key.indexOf(`list`) !== -1) {
+      key = key + `#page=${currentPostListPage}`
+    }
+    return key
+  }
+
+  const pathnameHandler = pathname => {
+    pagesIndex.some(({ key }) => {
+      if (key !== `/` && pathname.startsWith(key)) {
+        pathname = key
+        return true
+      }
+    })
+    setPathname(pathname)
+  }
 
   useEffect(() => {
     setPathname(window.location.pathname)
-    Router.events.on('routeChangeComplete', pathname => {
-      setPathname(pathname)
-    })
+    Router.events.on('routeChangeComplete', pathnameHandler)
+
+    return () => {
+      Router.events.off('routeChangeComplete', pathnameHandler)
+    }
   }, [])
 
   return (
@@ -28,7 +47,7 @@ const SideNavigation = ({ mdSource }) => {
               const { key, Icon, value } = item
               return (
                 <Item icon={<Icon />} key={key}>
-                  <Link href={key}>
+                  <Link href={handleLink(key)}>
                     <a target="_self">{value}</a>
                   </Link>
                 </Item>
@@ -65,10 +84,12 @@ SideNavigation.propTypes = {
    * markdown 文本源
    */
   mdSource: PropTypes.string,
+  currentPostListPage: PropTypes.number,
 }
 
 SideNavigation.defaultProps = {
   mdSource: '',
+  currentPostListPage: 1,
 }
 
 export default SideNavigation

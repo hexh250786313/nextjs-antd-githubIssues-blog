@@ -21,6 +21,16 @@ const mapPagesIndex = (() => {
 const exec = string => {
   const reg = new RegExp(`\\/([\\s\\S]+?)\\#`)
 
+  pagesIndex.some(({ key, value }) => {
+    if (string === `/`) {
+      string = `Timeline`
+      return true
+    } else if (key !== `/` && string.startsWith(key)) {
+      string = value
+      return true
+    }
+  })
+
   if (!!string.match(reg)) {
     return `/` + string.match(reg)[1]
     // .toLowerCase()
@@ -46,6 +56,7 @@ const _Menu = () => {
 }
 
 const Navigation = ({
+  currentPostListPage,
   openDrawer,
   changeSearchKeyword,
   searchKeyword,
@@ -67,7 +78,18 @@ const Navigation = ({
     setShowBottomDrawer(!isShowBottomDrawer)
   }
 
+  const handleRoute = key => {
+    if (key.indexOf(`list`) !== -1) {
+      key = key + `#page=${currentPostListPage}`
+    }
+    return key
+  }
+
   useEffect(() => {
+    const _handlePathname = pathname => {
+      setPathname(pathname)
+    }
+
     window.addEventListener(
       'scroll',
       () => {
@@ -87,7 +109,11 @@ const Navigation = ({
       false,
     )
     setPathname(window.location.pathname)
-    Router.events.on('routeChangeComplete', pathname => setPathname(pathname))
+    Router.events.on('routeChangeComplete', _handlePathname)
+
+    return () => {
+      Router.events.off('routeChangeComplete', _handlePathname)
+    }
   }, [])
 
   return (
@@ -152,14 +178,14 @@ const Navigation = ({
         title="Index"
         height={210}
       >
-        <Menu selectedKeys={[pathname]} mode="vertical">
+        <Menu selectedKeys={[exec(pathname)]} mode="vertical">
           {pagesIndex.map(item => (
             <Item
               onClick={handleBottomDrawer}
               icon={<item.Icon />}
-              key={item.key}
+              key={item.value}
             >
-              <Link href={item.key}>
+              <Link href={handleRoute(item.key)}>
                 <a target="_self">{item.value}</a>
               </Link>
             </Item>
@@ -271,6 +297,7 @@ Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
   changeSearchKeyword: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
+  currentPostListPage: PropTypes.number.isRequired,
 }
 
 export default Navigation

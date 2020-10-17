@@ -3,8 +3,7 @@ import SideNavigation from '@/components/Layout/SideNavigation'
 
 const mapStateToProps = state => ({
   mdSource: state.layout.toc.source,
+  currentPostListPage: state.post.list.query.page,
 })
-
-// const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps)(SideNavigation)

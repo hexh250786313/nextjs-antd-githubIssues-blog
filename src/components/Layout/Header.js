@@ -24,10 +24,12 @@ const Header = ({ handleHeaderChange, pic, title }) => {
   }
 
   useEffect(() => {
-    Router.events.on('routeChangeComplete', pathname => {
-      handleChange(pathname)
-    })
+    Router.events.on('routeChangeComplete', handleChange)
     handleChange(window.location.pathname)
+
+    return () => {
+      Router.events.off('routeChangeComplete', handleChange)
+    }
   }, [])
 
   return pic ? (

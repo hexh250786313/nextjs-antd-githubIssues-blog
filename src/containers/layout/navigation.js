@@ -5,6 +5,7 @@ import Navigation from '@/components/Layout/Navigation'
 
 const mapStateToProps = state => ({
   searchKeyword: state.search.query.keyword,
+  currentPostListPage: state.post.list.query.page,
 })
 
 const mapDispatchToProps = dispatch => ({
