@@ -62,15 +62,15 @@ export const pagesIndex = [
 export const timelineQuery = {
   labels: undefined,
   page: 1,
-  // per_page: 10,
   per_page: 10,
   noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
 
+// 列表查询条件
 export const listQuery = {
   labels: `post`,
   page: 1,
-  per_page: 1,
+  per_page: 10,
   creator: `hexh250786313`,
   sort: `created`,
   direction: `desc`,
@@ -101,18 +101,11 @@ export const searchQuery = (mode = ``) => {
   return queryParams
 }
 
-// post 数量查询条件
-export const postsAmountQuery = {
-  per_page: 10000,
-  page: 1,
-  noCache: true,
-}
-
-// about 列表查询条件
+// about 查询条件
 export const aboutQuery = {
   labels: `about`,
   page: 1,
-  per_page: 1,
+  per_page: 10,
   creator: `hexh250786313`,
   sort: `created`,
   direction: `desc`,
