@@ -36,8 +36,6 @@ export function* fetchPostDetail() {
       const body = detail.body
       let pic = handleTagContent(body, `header-img`)
 
-      console.log(pic)
-
       yield put(savePostState(detail))
       yield put(saveFetchedList([detail]))
 

@@ -1,20 +1,30 @@
 import PropTypes from 'prop-types'
 import { Spin, Timeline as AntTimeline } from 'antd'
-import { handleTagContent, utc2locale, handleLink } from '@/core/util'
+import { handleTagContent, utc2locale } from '@/core/util'
 import { useEffect, useState } from 'react'
-import Router from 'next/router'
 import { timelineQuery } from '@/constants/ConstTypes'
+import Link from 'next/link'
 
 const { Item } = AntTimeline
 
-const handleClick = (e, href) => {
-  e.preventDefault()
-  Router.push(`/post/[number]`, href)
-}
+const getLink = (tag, number) => {
+  let res = {
+    href: ``,
+    as: ``,
+  }
 
-const routerToAbout = e => {
-  e.preventDefault()
-  Router.push(`/about`, `/about`)
+  switch (tag) {
+    case `ABOUT`:
+      res.href = `/about`
+      res.as = `/about`
+      break
+    default:
+      res.href = `/post/[number]`
+      res.as = `/post/${number}`
+      break
+  }
+
+  return res
 }
 
 const Timeline = ({
@@ -77,34 +87,24 @@ const Timeline = ({
           return (
             <Item key={title}>
               <span className="type">{tag}</span>
-              <a
-                href={`/post/${number}`}
-                target="_self"
-                onClick={e =>
-                  tag === `ABOUT`
-                    ? routerToAbout(e)
-                    : handleClick(e, `/post/${number}`)
-                }
-              >
-                <span className="title">{title}</span>
-                <br />
-                <span className="time">{utc2locale(created_at)}</span>
-                <p className="content">{handleTagContent(body)}</p>
-                {Array.isArray(images)
-                  ? images.map((url, index) => (
-                      <img
-                        key={index}
-                        src={url}
-                        alt="url"
-                        // onClick={e => {
-                        //   e.stopPropagation()
-                        //   handleLink(url)
-                        // }}
-                        className="image"
-                      />
-                    ))
-                  : null}
-              </a>
+              <Link {...getLink(tag, number)}>
+                <a target="_self">
+                  <span className="title">{title}</span>
+                  <br />
+                  <span className="time">{utc2locale(created_at)}</span>
+                  <p className="content">{handleTagContent(body)}</p>
+                  {Array.isArray(images)
+                    ? images.map((url, index) => (
+                        <img
+                          key={index}
+                          src={url}
+                          alt="url"
+                          className="image"
+                        />
+                      ))
+                    : null}
+                </a>
+              </Link>
             </Item>
           )
         })}

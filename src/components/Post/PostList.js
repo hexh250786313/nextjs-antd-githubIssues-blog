@@ -1,17 +1,27 @@
 import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
-import Router from 'next/router'
 import { handleTagContent, utc2locale } from '@/core/util'
 import { useEffect } from 'react'
+import Link from 'next/link'
 
-const handleClick = (e, href) => {
-  e.preventDefault()
-  Router.push(`/post/[number]`, href)
-}
+const getLink = (tag, number) => {
+  let res = {
+    href: ``,
+    as: ``,
+  }
 
-const routerToAbout = e => {
-  e.preventDefault()
-  Router.push(`/about`, `/about`)
+  switch (tag) {
+    case `about`:
+      res.href = `/about`
+      res.as = `/about`
+      break
+    default:
+      res.href = `/post/[number]`
+      res.as = `/post/${number}`
+      break
+  }
+
+  return res
 }
 
 const PostList = ({
@@ -49,37 +59,31 @@ const PostList = ({
               }
 
               return (
-                <a
-                  key={number}
-                  href={`/post/${number}`}
-                  // onClick={e => handleClick(e, `/post/${number}`)}
-                  // onClick={e => handleClick(e, `/post/${number}`)}
-                  onClick={e =>
-                    label.name === `about`
-                      ? routerToAbout(e)
-                      : handleClick(e, `/post/${number}`)
-                  }
-                >
-                  <List.Item>
-                    <List.Item.Meta
-                      // title={<span className="title">{title}</span>}
-                      title={<span className="title">{title}</span>}
-                      description={
-                        <span className="time">{utc2locale(created_at)}</span>
-                      }
-                    />
-                    {desc && (
-                      <p className="description">{desc}</p>
-                    )}
-                    {images && (
-                      <div className="pic">
-                        {images.map(image => (
-                          <img className="pic" src={image} alt="" key={image} />
-                        ))}
-                      </div>
-                    )}
-                  </List.Item>
-                </a>
+                <Link {...getLink(label.name, number)} key={number}>
+                  <a target="_self">
+                    <List.Item>
+                      <List.Item.Meta
+                        title={<span className="title">{title}</span>}
+                        description={
+                          <span className="time">{utc2locale(created_at)}</span>
+                        }
+                      />
+                      {desc && <p className="description">{desc}</p>}
+                      {images && (
+                        <div className="pic">
+                          {images.map(image => (
+                            <img
+                              className="pic"
+                              src={image}
+                              alt=""
+                              key={image}
+                            />
+                          ))}
+                        </div>
+                      )}
+                    </List.Item>
+                  </a>
+                </Link>
               )
             })}
           </List>
