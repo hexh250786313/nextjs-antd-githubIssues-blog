@@ -9,6 +9,7 @@ import MenuOutlined from '@ant-design/icons/MenuOutlined'
 import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined'
 import { handleLink } from '@/core/util'
 import Router from 'next/router'
+import { archieveUrl } from '@/constants/ConstTypes'
 
 const Item = Menu.Item
 const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37]
@@ -23,7 +24,7 @@ const exec = string => {
 
   pagesIndex.some(({ key, value }) => {
     if (string === `/`) {
-      string = `Timeline`
+      string = value
       return true
     } else if (key !== `/` && string.startsWith(key)) {
       string = value
@@ -307,5 +308,5 @@ const linkTo = ({ key }) => {
 }
 
 const linkToArchive = () => {
-  handleLink(`https://github.com/hexh250786313/Blog/issues`)
+  handleLink(archieveUrl)
 }

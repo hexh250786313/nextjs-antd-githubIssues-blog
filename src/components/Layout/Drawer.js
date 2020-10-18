@@ -12,6 +12,7 @@ import { contactTypes, blogName } from '@/constants/ConstTypes'
 import { handleLink } from '@/core/util'
 import TOC from '@/containers/layout/toc'
 import Router from 'next/router'
+import { archieveUrl } from '@/constants/ConstTypes'
 
 const SubMenu = Menu.SubMenu
 
@@ -104,7 +105,7 @@ const Drawer = ({
             </Menu.Item>
             {renderContact()}
             <Menu.Item
-              key={`https://github.com/hexh250786313/Blog/issues`}
+              key={archieveUrl}
               icon={<FileTextOutlined />}
             >
               ARCHIEVE

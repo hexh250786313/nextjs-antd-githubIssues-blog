@@ -20,6 +20,10 @@ export const aboutPic =
 export const defaultPic =
   'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg'
 
+// 默认主页 title
+export const indexTitle =
+  "I'm looking for something fun. Are you going with me?"
+
 // 联系方式
 export const contactTypes = [
   {
@@ -90,9 +94,9 @@ export const searchQuery = (mode = ``) => {
 
   switch (mode) {
     case `allPost`:
-      queryParams.per_page = 1,
-      queryParams.page = 100,
-      queryParams.q = `label:post+state:open+repo:hexh250786313/Blog`
+      ;(queryParams.per_page = 1),
+        (queryParams.page = 100),
+        (queryParams.q = `label:post+state:open+repo:hexh250786313/Blog`)
       break
     default:
       break
@@ -121,4 +125,8 @@ export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
 
 export const queryParams = `+state:open+repo:hexh250786313/Blog`
 
+// 不需要默认图的页面
 export const pageWihtoutDefaultHeader = [`search`, `post`, `about`]
+
+// 博文仓库地址
+export const archieveUrl = `https://github.com/hexh250786313/Blog/issues`

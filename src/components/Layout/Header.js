@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import {
   indexPic,
-  defaultPic,
   pageWihtoutDefaultHeader,
+  indexTitle,
 } from '@/constants/ConstTypes.js'
 
 const Header = ({ handleHeaderChange, pic, title }) => {
@@ -15,7 +15,7 @@ const Header = ({ handleHeaderChange, pic, title }) => {
           !pageWihtoutDefaultHeader.some(str => pathname.indexOf(str) !== -1)
         ) {
           handleHeaderChange({
-            title: "I'm looking for something fun. Are you going with me?",
+            title: indexTitle,
             pic: indexPic,
           })
         }
