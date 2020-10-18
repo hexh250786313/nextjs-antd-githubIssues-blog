@@ -80,7 +80,7 @@ const Navigation = ({
 
   const handleRoute = key => {
     if (key.indexOf(`list`) !== -1) {
-      key = key + `#page=${currentPostListPage}`
+      key = key + `?page=${currentPostListPage}`
     }
     return key
   }

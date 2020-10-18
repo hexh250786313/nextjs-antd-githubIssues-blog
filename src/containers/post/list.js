@@ -21,8 +21,8 @@ const handleHash = hash => {
 
 const handleHashAndQuery = () => {
   let nextQueryParams
-  if (!!window.location.hash) {
-    nextQueryParams = handleHash(window.location.hash)
+  if (!!window.location.search) {
+    nextQueryParams = handleHash(window.location.search)
   } else {
     nextQueryParams = { page: 1 }
   }
@@ -50,24 +50,17 @@ const mapDispatchToProps = dispatch => ({
     }
 
     const nextQueryParams = handleHashAndQuery(currentPage)
-    Router.events.on('hashChangeComplete', _handleRouteChange)
+    Router.events.on('routeChangeComplete', _handleRouteChange)
 
     dispatch(saveListState({ loading: true }))
     dispatch(fetchPostList(nextQueryParams))
 
-    // 返回一个组件卸载时运行的方法，用来取消对 hash 的监听
+    // 返回一个组件卸载时运行的方法，用来取消对 url 的监听
     return () => {
-      Router.events.off('hashChangeComplete', _handleRouteChange)
+      Router.events.off('routeChangeComplete', _handleRouteChange)
     }
   },
-  handlePaginationClick: page => {
-    if (!!window.location.hash || page) {
-      dispatch(saveListState({ loading: true }))
-      Router.push(`/post/list#page=${page}`)
-    } else {
-      Router.push(`/post/list#page=1`)
-    }
-  },
+  handlePaginationClick: () => dispatch(saveListState({ loading: true })),
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({

@@ -54,6 +54,7 @@ const mapStateToProps = state => ({
   postsAmount: state.search.total_count,
   keyword: state.search.query.keyword,
   loading: state.search.loading,
+  listType: `search`,
 })
 
 const mapDispatchToProps = dispatch => ({

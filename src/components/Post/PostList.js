@@ -32,10 +32,29 @@ const PostList = ({
   onLoad,
   loading,
   handlePaginationClick,
+  listType,
 }) => {
   useEffect(() => {
     return onLoad()
   }, [])
+
+  const itemRender = (current, type, originalElement) => {
+    if (type === `page`) {
+      switch (listType) {
+        default:
+        case `list`:
+          return (
+            <Link href={`/post/list?page=${current}`}>
+              <a target="_self">{current}</a>
+            </Link>
+          )
+        case `search`:
+          return originalElement
+      }
+    }
+
+    return originalElement
+  }
 
   return (
     <div className="container">
@@ -97,8 +116,8 @@ const PostList = ({
         defaultCurrent={1}
         current={currentPage}
         total={postsAmount}
-        // total={openIssuesCount}
         showSizeChanger={false}
+        itemRender={itemRender}
       />
       <style jsx>{`
         :global(.container .ant-list-item) {
@@ -177,4 +196,5 @@ PostList.propTypes = {
   onLoad: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   handlePaginationClick: PropTypes.func.isRequired,
+  listType: PropTypes.string.isRequired,
 }

@@ -39,11 +39,11 @@ function* fetchPostList() {
         items = yield call(fetchList, query)
         cacheList[query.page] = items
       }
-      if (!total_count) {
+      if (!!process.browser) {
         const cache = JSON.parse(sessionStorage.getItem(`total_count`))
-        if (typeof(cache) !== `number`) {
+        if (typeof cache !== `number`) {
           const res = yield call(fetchSearch, query)
-          if (typeof(res.total_count) !== `number`) {
+          if (typeof res.total_count !== `number`) {
             throw new Error()
           }
           total_count = res.total_count

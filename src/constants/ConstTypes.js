@@ -70,7 +70,7 @@ export const timelineQuery = {
 export const listQuery = {
   labels: `post`,
   page: 1,
-  per_page: 10,
+  per_page: 1,
   creator: `hexh250786313`,
   sort: `created`,
   direction: `desc`,
