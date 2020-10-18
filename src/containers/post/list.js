@@ -36,6 +36,7 @@ const mapStateToProps = state => ({
   perPage: state.post.list.query.per_page,
   postsAmount: state.post.list.total_count,
   loading: state.post.list.loading,
+  listType: `list`,
 })
 
 const mapDispatchToProps = dispatch => ({
