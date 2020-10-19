@@ -23,6 +23,9 @@ function* fetchPostList() {
     }
     try {
       const list = yield call(fetchList, query)
+      if (!Array.isArray(list)) {
+        throw new Error()
+      }
       if (!!callback) {
         yield call(() => {
           callback(list)

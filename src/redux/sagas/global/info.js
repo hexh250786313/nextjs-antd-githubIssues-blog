@@ -9,7 +9,7 @@ export function* fetchBlogInfo() {
     yield take(FETCH_BLOG_INFO)
     try {
       const blogInfo = yield nextFetch.get(api.githubInfoApi)
-      if (isNaN(blogInfo.open_issues_count)) {
+      if (typeof blogInfo.open_issues_count !== `number`) {
         throw new Error()
       }
       yield put(fetchBlogInfoSuccess({ ...blogInfo }))

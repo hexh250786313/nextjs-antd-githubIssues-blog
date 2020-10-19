@@ -86,7 +86,7 @@ export const searchQuery = (mode = ``) => {
   const queryParams = {
     page: 1,
     per_page: 10,
-    q: `state:open+repo:hexh250786313/Blog`,
+    q: `state:open+repo:hexh250786313/Blog+author:hexh250786313`,
     sort: `created`,
     order: `desc`,
     keyword: ``,
@@ -96,7 +96,7 @@ export const searchQuery = (mode = ``) => {
     case `allPost`:
       ;(queryParams.per_page = 1),
         (queryParams.page = 100),
-        (queryParams.q = `label:post+state:open+repo:hexh250786313/Blog`)
+        (queryParams.q = `label:post+state:open+repo:hexh250786313/Blog+author:hexh250786313`)
       break
     default:
       break
@@ -123,7 +123,7 @@ export const queryLabel = `qZy6GBWGe`
 // token
 export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
 
-export const queryParams = `+state:open+repo:hexh250786313/Blog`
+export const queryParams = `+state:open+repo:hexh250786313/Blog+author:hexh250786313`
 
 // 不需要默认图的页面
 export const pageWihtoutDefaultHeader = [`search`, `post`, `about`]

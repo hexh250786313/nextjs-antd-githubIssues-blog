@@ -21,7 +21,7 @@ function* fetchAbout() {
     yield take(FETCH_ABOUT)
     const query = aboutQuery
     const fetchedList = yield select(state => state.post.list.fetchedList)
-    
+
     let detail, res
 
     try {
@@ -32,6 +32,8 @@ function* fetchAbout() {
         res = yield call(fetchList, query)
         if (Array.isArray(res)) {
           detail = res[0]
+        } else {
+          throw new Error()
         }
       }
 

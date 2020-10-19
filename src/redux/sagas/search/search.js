@@ -50,7 +50,7 @@ function* fetchSearch() {
       }
 
       if (!cache) {
-        // 这个接口有请求次数限制，一小时 30 次，因此做缓存
+        // 这个接口有请求次数限制，一分钟 30 次，因此做缓存
         sessionStorage.setItem(
           query.q + query.page,
           JSON.stringify({ items, total_count }),
