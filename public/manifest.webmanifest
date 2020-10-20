@@ -1,0 +1,13 @@
+{
+  "background_color": "white",
+  "description": "hexh's blog",
+  "display": "standalone",
+  "name": "hexh's blog",
+  "icons": [
+    {
+      "src": "http://pic.yupoo.com/sinaweibo4907754196_v/954c2a64/789ca8d7.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    }
+  ],  "short_name": "hexh's blog"
+}

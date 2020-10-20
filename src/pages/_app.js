@@ -66,6 +66,7 @@ class NextApp extends App {
           <meta charSet="utf-8" />
           <title>hexh's blog</title>
           <link rel="shortcut icon" href="/tama.ico" type="image/ico" />
+          <link rel="manifest" href="/manifest.webmanifest" />
           <style jsx global>
             {`
               * {
