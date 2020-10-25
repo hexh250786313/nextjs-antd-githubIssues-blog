@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Button } from 'antd'
+import {
+  PlusOutlined,
+  MinusOutlined,
+  RedoOutlined,
+  CloseOutlined,
+} from '@ant-design/icons'
+
+const originWidth = `90%`
 
 const ImgViewer = ({ imgUrl }) => {
   const viewerEl = useRef(null)
+  const imgEl = useRef(null)
+  const [imgStyle, setImgStyle] = useState({ width: originWidth })
+  let isMoving = false
 
   const _handleClick = () => {
     ImgViewerHandler.hide()
@@ -13,15 +25,96 @@ const ImgViewer = ({ imgUrl }) => {
     viewerEl.current.addEventListener(`touchmove`, e => {
       e.preventDefault()
     })
+
+    imgEl.current.addEventListener(`dragstart`, e => {
+      e.preventDefault()
+      isMoving = true
+    })
+
+    imgEl.current.addEventListener(`mousedown`, () => {
+      isMoving = true
+    })
+
+    imgEl.current.addEventListener(`mouseup`, () => {
+      isMoving = false
+    })
+
+    imgEl.current.addEventListener(`mousemove`, e => {
+      if (isMoving) {
+        // console.log(e)
+      }
+    })
   }, [])
+
+  useEffect(() => {
+    setImgStyle({ width: originWidth })
+  }, [imgUrl])
+
+  const _handleZoom = type => {
+    const width = imgEl.current.width
+    switch (type) {
+      case 'in':
+        setImgStyle({ width: width * 1.2 + `px` })
+        break
+      case 'out':
+        setImgStyle({ width: width / 1.2 + `px` })
+        break
+      case 'recover':
+        setImgStyle({ width: originWidth })
+        break
+      default:
+    }
+  }
 
   return (
     <div className="viewer" ref={viewerEl} onClick={_handleClick}>
       <img
+        ref={imgEl}
         src={imgUrl}
         alt={imgUrl}
-        // onClick={e => e.stopPropagation()}
+        style={imgStyle}
+        onClick={e => e.stopPropagation()}
       />
+      <div className="buttons">
+        <div className="buttons-inner">
+          <Button
+            shape="round"
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={e => {
+              e.stopPropagation()
+              _handleZoom(`in`)
+            }}
+          >
+            放大
+          </Button>
+          <Button
+            shape="round"
+            type="primary"
+            icon={<MinusOutlined />}
+            onClick={e => {
+              e.stopPropagation()
+              _handleZoom(`out`)
+            }}
+          >
+            缩小
+          </Button>
+          <Button
+            shape="round"
+            type="primary"
+            icon={<RedoOutlined />}
+            onClick={e => {
+              e.stopPropagation()
+              _handleZoom(`recover`)
+            }}
+          >
+            还原
+          </Button>
+          <Button shape="round" type="primary" icon={<CloseOutlined />}>
+            关闭
+          </Button>
+        </div>
+      </div>
       <style jsx>{`
         .viewer {
           display: flex;
@@ -37,10 +130,31 @@ const ImgViewer = ({ imgUrl }) => {
         }
 
         .viewer img {
-          width: 90%;
+          width: ${originWidth};
           height: auto;
           cursor: move;
-          max-width: 1000px;
+          position: fixed;
+        }
+
+        .buttons {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          bottom: 70px;
+          height: 0;
+        }
+
+        .buttons-inner {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        :global(.buttons .ant-btn) {
+          margin: 0 10px 10px;
         }
       `}</style>
     </div>
