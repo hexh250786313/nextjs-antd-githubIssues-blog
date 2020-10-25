@@ -16,6 +16,7 @@ const ImgViewer = ({ imgUrl }) => {
   const imgEl = useRef(null)
   const [imgStyle, setImgStyle] = useState({ width: originWidth })
   let isMoving = false
+  const positionStore = { X: 0, Y: 0, imgTop: 0, imgLeft: 0 }
 
   const _handleClick = () => {
     ImgViewerHandler.hide()
@@ -41,7 +42,18 @@ const ImgViewer = ({ imgUrl }) => {
 
     imgEl.current.addEventListener(`mousemove`, e => {
       if (isMoving) {
-        // console.log(e)
+        const { clientX, clientY } = e
+        const { offsetTop, offsetLeft } = imgEl.current
+        const { X, Y } = positionStore
+        if (!!Y && !!X) {
+          const top = offsetTop - (Y - clientY)
+          const left = offsetLeft - (X - clientX)
+          setImgStyle({ ...imgStyle, top, left })
+        }
+        // positionStore.imgTop = top
+        // positionStore.imgLeft = offsetLeft
+        positionStore.Y = clientY
+        positionStore.X = clientX
       }
     })
   }, [])
