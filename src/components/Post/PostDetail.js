@@ -4,7 +4,9 @@ import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { handleTagContent } from '@/core/util'
 import CodeBlock from '../CodeBlock'
+import Terms from './Term'
 import './index.less'
+import ImgViewer from '@/components/ImgViewer'
 
 const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
   let { body } = detail
@@ -31,6 +33,14 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
     if (!body) {
       fetchPostDetail()
     }
+
+    const imgs = document.getElementsByTagName(`img`)
+
+    imgs.forEach(imgEle => {
+      imgEle.addEventListener(`click`, e => {
+        ImgViewer.show(e.target.src)
+      })
+    })
   }, [body])
 
   useEffect(() => {
@@ -60,6 +70,7 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
             }}
             escapeHtml={false}
           />
+          <Terms />
         </div>
       </Spin>
       <style jsx>{`
