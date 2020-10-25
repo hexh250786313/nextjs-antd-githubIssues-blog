@@ -16,7 +16,7 @@ const TOC = ({ source }) => {
   return (
     <MarkdownNavbar
       ordered={false}
-      headingTopOffset={-165}
+      headingTopOffset={-140}
       updateHashAuto={false}
       ordered={false}
       source={source}

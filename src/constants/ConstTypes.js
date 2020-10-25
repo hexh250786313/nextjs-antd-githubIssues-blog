@@ -10,15 +10,15 @@ export const blogName = "hexh's blog"
 
 // 默认图片
 export const indexPic =
-  'http://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg'
+  'https://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg'
 
 // 关于页面图片
 export const aboutPic =
-  'http://pic.yupoo.com/sinaweibo4907754196_v/a9592e94/41111f63.png'
+  'https://pic.yupoo.com/sinaweibo4907754196_v/a9592e94/41111f63.png'
 
 // 默认图片
 export const defaultPic =
-  'http://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg'
+  'https://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg'
 
 // 默认主页 title
 export const indexTitle =

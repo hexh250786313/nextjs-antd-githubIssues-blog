@@ -70,62 +70,66 @@ const Timeline = ({
 
   return (
     <Spin spinning={currentList.length === 0}>
-      <AntTimeline mode={timeLineMode}>
-        {currentList.map(item => {
-          const {
-            number,
-            title,
-            created_at,
-            body,
-            labels: [label],
-          } = item
-          let images = handleTagContent(body, `image`)
-          const tag = label ? label.name.toUpperCase() : `POST`
-          if (images) {
-            images = images.split(`--split--`)
-          }
-          return (
-            <Item key={title}>
-              <span className="type">{tag}</span>
-              <Link {...getLink(tag, number)}>
-                <a target="_self">
-                  <span className="title">{title}</span>
-                  <br />
-                  <span className="time">{utc2locale(created_at)}</span>
-                  <p className="content">{handleTagContent(body)}</p>
-                  {Array.isArray(images)
-                    ? images.map((url, index) => (
-                        <img
-                          key={index}
-                          src={url}
-                          alt="url"
-                          className="image"
-                        />
-                      ))
-                    : null}
-                </a>
-              </Link>
+      <div className="wrapper">
+        <AntTimeline mode={timeLineMode}>
+          {currentList.map(item => {
+            const {
+              number,
+              title,
+              created_at,
+              body,
+              labels: [label],
+            } = item
+            let images = handleTagContent(body, `image`)
+            const tag = label ? label.name.toUpperCase() : `POST`
+            if (images) {
+              images = images.split(`--split--`)
+            }
+            return (
+              <Item key={title}>
+                <Link {...getLink(tag, number)}>
+                  <a target="_self">
+                    <div>
+                      <span className="type">{tag}</span>
+                      <span className="title">{title}</span>
+                      <br />
+                      <span className="time">{utc2locale(created_at)}</span>
+                      <p className="content">{handleTagContent(body)}</p>
+                      {Array.isArray(images)
+                        ? images.map((url, index) => (
+                            <img
+                              key={index}
+                              src={url}
+                              alt="url"
+                              className="image"
+                            />
+                          ))
+                        : null}
+                    </div>
+                  </a>
+                </Link>
+              </Item>
+            )
+          })}
+          {currentPage >
+          Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
+            <Item>
+              <span className="type">DEPLOY</span>
+              <a onClick={() => setShowSeeMore(!showSeeMore)}>
+                <span className="title">hexh's blog deployed.</span>
+                <br />
+                <span className="time">2020/4/26 Monday</span>
+              </a>
             </Item>
-          )
-        })}
-        {currentPage >
-        Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
-          <Item>
-            <span className="type">DEPLOY</span>
-            <a onClick={() => setShowSeeMore(!showSeeMore)}>
-              <span className="title">hexh's blog deployed.</span>
-              <br />
-              <span className="time">2020/4/26 Monday</span>
-            </a>
-          </Item>
-        ) : (
-          <Spin spinning={loading}>
-            <div className="see_more">
-              <a onClick={handleSeeMoreClick}>See more...</a>
-            </div>
-          </Spin>
-        )}
-      </AntTimeline>
+          ) : (
+            <Spin spinning={loading}>
+              <div className="see_more">
+                <a onClick={handleSeeMoreClick}>See more...</a>
+              </div>
+            </Spin>
+          )}
+        </AntTimeline>
+      </div>
       <style jsx>{`
         .title {
           font-weight: bold;
@@ -162,6 +166,10 @@ const Timeline = ({
         .image {
           width: 100px;
           margin: 0 10px 10px 0;
+        }
+
+        .wrapper {
+          padding-top: 25px;
         }
       `}</style>
     </Spin>

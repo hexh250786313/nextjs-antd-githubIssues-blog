@@ -43,24 +43,31 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
   return (
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
-        {desc && <p className="desc">{desc}</p>}
-        {images && (
-          <div className="pic">
-            {images.map(image => (
-              <img src={image} alt="" key={image} />
-            ))}
-          </div>
-        )}
-        <ReactMarkdown
-          className="markdown-body"
-          source={body}
-          renderers={{
-            code: CodeBlock,
-          }}
-          escapeHtml={false}
-        />
+        <div className="wrapper">
+          {desc && <p className="desc">{desc}</p>}
+          {images && (
+            <div className="pic">
+              {images.map(image => (
+                <img src={image} alt="" key={image} />
+              ))}
+            </div>
+          )}
+          <ReactMarkdown
+            className="markdown-body"
+            source={body}
+            renderers={{
+              code: CodeBlock,
+            }}
+            escapeHtml={false}
+          />
+        </div>
       </Spin>
       <style jsx>{`
+        .wrapper {
+          padding-top: 0;
+          min-height: 50vh;
+        }
+
         .pic {
           width: 100%;
           display: flex;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Spin, List, Pagination, Skeleton } from 'antd'
 import { handleTagContent, utc2locale } from '@/core/util'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const getLink = (tag, number) => {
@@ -34,6 +34,8 @@ const PostList = ({
   handlePaginationClick,
   listType,
 }) => {
+  const [wrapperClass, setWrapperClass] = useState('wrapper-mouse-hover')
+
   useEffect(() => {
     return onLoad()
   }, [])
@@ -80,27 +82,31 @@ const PostList = ({
               return (
                 <Link {...getLink(label.name, number)} key={number}>
                   <a target="_self">
-                    <List.Item>
-                      <List.Item.Meta
-                        title={<span className="title">{title}</span>}
-                        description={
-                          <span className="time">{utc2locale(created_at)}</span>
-                        }
-                      />
-                      {desc && <p className="description">{desc}</p>}
-                      {images && (
-                        <div className="pic">
-                          {images.map(image => (
-                            <img
-                              className="pic"
-                              src={image}
-                              alt=""
-                              key={image}
-                            />
-                          ))}
-                        </div>
-                      )}
-                    </List.Item>
+                    <div className="wrapper">
+                      <List.Item>
+                        <List.Item.Meta
+                          title={<span className="title">{title}</span>}
+                          description={
+                            <span className="time">
+                              {utc2locale(created_at)}
+                            </span>
+                          }
+                        />
+                        {desc && <p className="description">{desc}</p>}
+                        {images && (
+                          <div className="pic">
+                            {images.map(image => (
+                              <img
+                                className="pic"
+                                src={image}
+                                alt=""
+                                key={image}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </List.Item>
+                    </div>
                   </a>
                 </Link>
               )
@@ -118,13 +124,13 @@ const PostList = ({
         total={postsAmount}
         showSizeChanger={false}
         itemRender={itemRender}
+        style={{ marginTop: 10 }}
       />
       <style jsx>{`
         :global(.container .ant-list-item) {
           flex-direction: column;
           align-items: flex-start;
           padding: 0;
-          margin: 0 0 25px;
         }
 
         :global(.container .ant-list-item-meta, .container
@@ -179,6 +185,38 @@ const PostList = ({
         .pic > img {
           margin: 0 10px 0 0;
           width: 100px;
+        }
+
+        @media (max-width: 767px) {
+          .wrapper {
+            padding: 0 0 15px;
+            border-radius: 0;
+            background-color: inherit;
+          }
+
+          .wrapper:hover {
+            background-color: inherit;
+          }
+
+          :global(.container .ant-pagination) {
+            margin-left: 0;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .wrapper {
+            padding: 15px;
+            border-radius: 5px;
+            background-color: inherit;
+          }
+
+          .wrapper:hover {
+            background-color: #e6ecf4;
+          }
+
+          :global(.container .ant-pagination) {
+            margin-left: 15px;
+          }
         }
       `}</style>
     </div>

@@ -64,7 +64,7 @@ const Layout = ({ children }) => {
         }
 
         .container-outer {
-          padding-top: 40px;
+          padding-top: 15px;
           display: flex;
           justify-content: center;
           align-items: center;
