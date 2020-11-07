@@ -23,7 +23,7 @@ class CodeBlock extends React.PureComponent {
     language: null,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // 注册要高亮的语法，
     // 注意：如果不设置打包后供第三方使用是不起作用的
     SyntaxHighlighter.registerLanguage('jsx', jsx)
@@ -31,6 +31,15 @@ class CodeBlock extends React.PureComponent {
     SyntaxHighlighter.registerLanguage('js', javascript)
     SyntaxHighlighter.registerLanguage('shell', bash)
   }
+
+  // componentWillMount() {
+  // // 注册要高亮的语法，
+  // // 注意：如果不设置打包后供第三方使用是不起作用的
+  // SyntaxHighlighter.registerLanguage('jsx', jsx)
+  // SyntaxHighlighter.registerLanguage('javascript', javascript)
+  // SyntaxHighlighter.registerLanguage('js', javascript)
+  // SyntaxHighlighter.registerLanguage('shell', bash)
+  // }
 
   render() {
     const { language, value } = this.props
