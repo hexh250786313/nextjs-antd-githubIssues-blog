@@ -27,7 +27,6 @@ export const useTranslate = ({ container, dragItem }) => {
 
   const _dragStart = useCallback(
     (e) => {
-      e.preventDefault()
       if (e.type === 'touchstart') {
         if (e.target === dragItem) {
           setDragState((prevState) => ({
