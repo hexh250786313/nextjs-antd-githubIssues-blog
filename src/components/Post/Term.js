@@ -1,11 +1,11 @@
 const Terms = () => {
   return (
-    <div className="terms">
-      <p className="title">文档信息</p>
+    <div className='terms'>
+      <p className='title'>文档信息</p>
 
-      <p className="content">
-        版权声明：自由转载-非商用-非衍生-保持署名（
-        <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">
+      <p className='content'>
+        版权声明：自由转载 - 非商用 - 非衍生 - 保持署名（
+        <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh'>
           创意共享3.0许可证
         </a>
         ）
@@ -30,7 +30,8 @@ const Terms = () => {
         .content {
           margin: 0;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }

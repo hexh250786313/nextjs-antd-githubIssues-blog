@@ -13,20 +13,20 @@ const fetchList = query => {
 /**
  * timeline saga
  */
-function* fetchPostList() {
+function * fetchPostList () {
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_TIMELINE)
     const prevQueryParams = yield select(state => state.post.query)
     const query = {
       ...prevQueryParams,
-      ...nextQueryParams,
+      ...nextQueryParams
     }
     try {
       const list = yield call(fetchList, query)
       if (!Array.isArray(list)) {
         throw new Error()
       }
-      if (!!callback) {
+      if (callback) {
         yield call(() => {
           callback(list)
         })

@@ -6,5 +6,5 @@ import toc from './toc'
 export default combineReducers({
   drawer,
   header,
-  toc,
+  toc
 })

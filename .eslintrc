@@ -31,7 +31,7 @@
     "no-lonely-if": 1,
     "no-nested-ternary": 0,
     "wrap-iife": [2, "inside"],
-    "jsx-quotes": [2, "prefer-double"],
+    "jsx-quotes": [2, "prefer-single"],
     "generator-star-spacing": 0,
     "react/forbid-prop-types": 0,
     "react/sort-comp": 1,

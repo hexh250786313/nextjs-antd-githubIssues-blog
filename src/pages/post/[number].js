@@ -5,7 +5,7 @@ PostDetail.getInitialProps = async props => {
   const {
     store,
     isServer,
-    query: { number },
+    query: { number }
   } = props.ctx
   const payload = { number }
   if (isServer) {

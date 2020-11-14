@@ -5,18 +5,18 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const getLink = (tag, number) => {
-  let res = {
-    href: ``,
-    as: ``,
+  const res = {
+    href: '',
+    as: ''
   }
 
   switch (tag) {
-    case `about`:
-      res.href = `/about`
-      res.as = `/about`
+    case 'about':
+      res.href = '/about'
+      res.as = '/about'
       break
     default:
-      res.href = `/post/[number]`
+      res.href = '/post/[number]'
       res.as = `/post/${number}`
       break
   }
@@ -32,7 +32,7 @@ const PostList = ({
   onLoad,
   loading,
   handlePaginationClick,
-  listType,
+  listType
 }) => {
   const [wrapperClass, setWrapperClass] = useState('wrapper-mouse-hover')
 
@@ -41,16 +41,16 @@ const PostList = ({
   }, [])
 
   const itemRender = (current, type, originalElement) => {
-    if (type === `page`) {
+    if (type === 'page') {
       switch (listType) {
         default:
-        case `list`:
+        case 'list':
           return (
             <Link href={`/post/list?page=${current}`}>
-              <a target="_self">{current}</a>
+              <a target='_self'>{current}</a>
             </Link>
           )
-        case `search`:
+        case 'search':
           return originalElement
       }
     }
@@ -59,7 +59,7 @@ const PostList = ({
   }
 
   return (
-    <div className="container">
+    <div className='container'>
       <Spin spinning={loading}>
         {postList.length !== 0 ? (
           <List>
@@ -69,37 +69,37 @@ const PostList = ({
                 title,
                 body,
                 created_at,
-                labels: [label],
+                labels: [label]
               } = item
 
-              let images = handleTagContent(body, `image`)
-              let desc = handleTagContent(body, `desc`)
+              let images = handleTagContent(body, 'image')
+              const desc = handleTagContent(body, 'desc')
 
               if (images) {
-                images = images.split(`--split--`)
+                images = images.split('--split--')
               }
 
               return (
                 <Link {...getLink(label.name, number)} key={number}>
-                  <a target="_self">
-                    <div className="wrapper">
+                  <a target='_self'>
+                    <div className='wrapper'>
                       <List.Item>
                         <List.Item.Meta
-                          title={<span className="title">{title}</span>}
+                          title={<span className='title'>{title}</span>}
                           description={
-                            <span className="time">
+                            <span className='time'>
                               {utc2locale(created_at)}
                             </span>
                           }
                         />
-                        {desc && <p className="description">{desc}</p>}
+                        {desc && <p className='description'>{desc}</p>}
                         {images && (
-                          <div className="pic">
+                          <div className='pic'>
                             {images.map(image => (
                               <img
-                                className="pic"
+                                className='pic'
                                 src={image}
-                                alt=""
+                                alt=''
                                 key={image}
                               />
                             ))}
@@ -218,7 +218,8 @@ const PostList = ({
             margin-left: 15px;
           }
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }
@@ -234,5 +235,5 @@ PostList.propTypes = {
   onLoad: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   handlePaginationClick: PropTypes.func.isRequired,
-  listType: PropTypes.string.isRequired,
+  listType: PropTypes.string.isRequired
 }

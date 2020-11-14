@@ -10,5 +10,5 @@ export default combineReducers({
   post,
   layout,
   global,
-  search,
+  search
 })

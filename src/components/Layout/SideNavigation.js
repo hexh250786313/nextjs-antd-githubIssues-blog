@@ -13,7 +13,7 @@ const SideNavigation = ({ mdSource, currentPostListPage }) => {
   const [pathname, setPathname] = useState('/')
 
   const handleLink = key => {
-    if (key.indexOf(`list`) !== -1) {
+    if (key.indexOf('list') !== -1) {
       key = key + `?page=${currentPostListPage}`
     }
     return key
@@ -21,7 +21,7 @@ const SideNavigation = ({ mdSource, currentPostListPage }) => {
 
   const pathnameHandler = pathname => {
     pagesIndex.some(({ key }) => {
-      if (key !== `/` && pathname.startsWith(key)) {
+      if (key !== '/' && pathname.startsWith(key)) {
         pathname = key
         return true
       }
@@ -41,23 +41,23 @@ const SideNavigation = ({ mdSource, currentPostListPage }) => {
   return (
     <>
       <Affix offsetTop={80}>
-        <div className="navigation">
-          <Menu selectedKeys={[pathname]} mode="vertical">
+        <div className='navigation'>
+          <Menu selectedKeys={[pathname]} mode='vertical'>
             {pagesIndex.map(item => {
               const { key, Icon, value } = item
               return (
                 <Item icon={<Icon />} key={key}>
                   <Link href={handleLink(key)}>
-                    <a target="_self">{value}</a>
+                    <a target='_self'>{value}</a>
                   </Link>
                 </Item>
               )
             })}
             {mdSource ? (
               <Menu.SubMenu
-                key="toc"
+                key='toc'
                 icon={<OrderedListOutlined />}
-                title="TOC"
+                title='TOC'
               >
                 <TOC />
               </Menu.SubMenu>
@@ -72,7 +72,8 @@ const SideNavigation = ({ mdSource, currentPostListPage }) => {
             @media (max-width: 767px) {
               display: none;
             }
-          `}</style>
+          `}
+          </style>
         </div>
       </Affix>
     </>
@@ -84,12 +85,12 @@ SideNavigation.propTypes = {
    * markdown 文本源
    */
   mdSource: PropTypes.string,
-  currentPostListPage: PropTypes.number,
+  currentPostListPage: PropTypes.number
 }
 
 SideNavigation.defaultProps = {
   mdSource: '',
-  currentPostListPage: 1,
+  currentPostListPage: 1
 }
 
 export default SideNavigation

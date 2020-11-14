@@ -13,13 +13,13 @@ const fetchList = query => {
 }
 
 const fetchSearch = () => {
-  return nextFetch.get(api.githubSearchApi, { query: searchQuery(`allPost`) })
+  return nextFetch.get(api.githubSearchApi, { query: searchQuery('allPost') })
 }
 
 /**
  * postList saga
  */
-function* fetchPostList() {
+function * fetchPostList () {
   // 如果要用 tabkeEvery，则不能用 while(true)
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_POST_LIST)
@@ -27,7 +27,7 @@ function* fetchPostList() {
       query: prevQueryParams,
       total_count,
       cacheList,
-      fetchedList,
+      fetchedList
     } = yield select(state => state.post.list)
     const query = { ...prevQueryParams, ...nextQueryParams }
 
@@ -40,30 +40,30 @@ function* fetchPostList() {
         cacheList[query.page] = items
       }
 
-      if (!!process.browser) {
+      if (process.browser) {
         // 如果没有 redux 缓存，则找 sessionStorage 的缓存
         if (!total_count) {
-          const cache = JSON.parse(sessionStorage.getItem(`total_count`))
+          const cache = JSON.parse(sessionStorage.getItem('total_count'))
           // 如果没有 sessionStorage 的缓存，则请求接口
-          if (typeof cache !== `number`) {
+          if (typeof cache !== 'number') {
             const res = yield call(fetchSearch, query)
-            if (typeof res.total_count !== `number`) {
+            if (typeof res.total_count !== 'number') {
               throw new Error()
             }
             total_count = res.total_count
-            sessionStorage.setItem(`total_count`, JSON.stringify(total_count))
+            sessionStorage.setItem('total_count', JSON.stringify(total_count))
           } else {
             // 如果有 sessionStorage，则直接使用
             total_count = cache
           }
         } else {
           // 如果有 redux 缓存，则更新 sessionStorage 的缓存
-          sessionStorage.setItem(`total_count`, JSON.stringify(total_count))
+          sessionStorage.setItem('total_count', JSON.stringify(total_count))
         }
       } else if (!total_count) {
         // 如果不在浏览器环境，则直接请求接口即可
         const res = yield call(fetchSearch, query)
-        if (typeof res.total_count !== `number`) {
+        if (typeof res.total_count !== 'number') {
           throw new Error()
         }
         total_count = res.total_count
@@ -79,20 +79,20 @@ function* fetchPostList() {
         query,
         loading: false,
         cacheList,
-        fetchedList: handleFetchedList(fetchedList, items),
+        fetchedList: handleFetchedList(fetchedList, items)
       }
 
       yield put(saveListState(nextState))
       yield put(
         handleHeaderChange({
-          title: `Posts List`,
-          pic: defaultPic,
-        }),
+          title: 'Posts List',
+          pic: defaultPic
+        })
       )
     } catch (e) {
-      yield put(requestFail(`请求文章列表接口报错，请刷新页面或者联系我`))
+      yield put(requestFail('请求文章列表接口报错，请刷新页面或者联系我'))
     } finally {
-      if (!!callback) {
+      if (callback) {
         yield call(() => {
           callback()
         })
@@ -101,7 +101,7 @@ function* fetchPostList() {
   }
 }
 
-function* watchFetchPostList() {
+function * watchFetchPostList () {
   // const { payload: nextQueryParams, callback } = yield take(FETCH_POST_LIST)
   yield takeEvery(FETCH_POST_LIST, fetchPostList)
 }

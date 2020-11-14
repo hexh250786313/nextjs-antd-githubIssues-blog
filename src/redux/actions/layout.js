@@ -2,31 +2,31 @@ import {
   HANDLE_HEADER_CHANGE,
   OPEN_DRAWER,
   CLOSE_DRAWER,
-  SET_TOC,
+  SET_TOC
 } from '@/constants/ActionTypes'
 
-export function openDrawer() {
+export function openDrawer () {
   return {
-    type: OPEN_DRAWER,
+    type: OPEN_DRAWER
   }
 }
 
-export function closeDrawer() {
+export function closeDrawer () {
   return {
-    type: CLOSE_DRAWER,
+    type: CLOSE_DRAWER
   }
 }
 
-export function handleHeaderChange(payload) {
+export function handleHeaderChange (payload) {
   return {
     type: HANDLE_HEADER_CHANGE,
-    payload,
+    payload
   }
 }
 
-export function setTOC(payload) {
+export function setTOC (payload) {
   return {
     type: SET_TOC,
-    payload,
+    payload
   }
 }

@@ -5,12 +5,12 @@ import Navigation from '@/components/Layout/Navigation'
 
 const mapStateToProps = state => ({
   searchKeyword: state.search.query.keyword,
-  currentPostListPage: state.post.list.query.page,
+  currentPostListPage: state.post.list.query.page
 })
 
 const mapDispatchToProps = dispatch => ({
   openDrawer: () => dispatch(openDrawer()),
-  changeSearchKeyword: keyword => dispatch(changeSearchKeyword(keyword)),
+  changeSearchKeyword: keyword => dispatch(changeSearchKeyword(keyword))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

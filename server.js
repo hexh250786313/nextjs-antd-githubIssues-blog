@@ -4,10 +4,10 @@ const next = require('next')
 const os = require('os')
 // const { publicRuntimeConfig, serverRuntimeConfig } = require('./next.config');
 
-function getIPAdress() {
+function getIPAdress () {
   const interfaces = os.networkInterfaces()
 
-  for (let devName in interfaces) {
+  for (const devName in interfaces) {
     const iface = interfaces[devName]
     for (let i = 0; i < iface.length; i++) {
       const alias = iface[i]

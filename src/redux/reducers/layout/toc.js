@@ -1,7 +1,7 @@
 import { SET_TOC } from '@/constants/ActionTypes'
 
 const initialState = {
-  source: '',
+  source: ''
 }
 
 const toc = (state = initialState, { type, payload }) => {
@@ -9,7 +9,7 @@ const toc = (state = initialState, { type, payload }) => {
     case SET_TOC:
       return {
         ...state,
-        source: payload,
+        source: payload
       }
     default:
       return state

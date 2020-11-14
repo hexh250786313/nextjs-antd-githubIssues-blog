@@ -7,23 +7,23 @@ import { handleQueryParams } from '@/core/util'
 
 const handleInvalidParams = () => {
   window.history.back()
-  message.info(`请输入搜索关键字`)
+  message.info('请输入搜索关键字')
 }
 
 const handleHash = hash => {
   let q, page, keyword
 
-  const qReg = new RegExp(`q=([\\s\\S]+)&`)
-  const pageReg = new RegExp(`page=([\\s\\S]+)`)
+  const qReg = new RegExp('q=([\\s\\S]+)&')
+  const pageReg = new RegExp('page=([\\s\\S]+)')
 
-  if (!!hash.match(qReg)) {
+  if (hash.match(qReg)) {
     keyword = decodeURI(hash.match(qReg)[1])
     q = handleQueryParams(keyword)
   } else {
     handleInvalidParams()
   }
 
-  if (!!hash.match(pageReg)) {
+  if (hash.match(pageReg)) {
     page = hash.match(pageReg)[1] - 0
   } else {
     page = 1
@@ -32,13 +32,13 @@ const handleHash = hash => {
   return {
     q,
     page,
-    keyword,
+    keyword
   }
 }
 
 const handleHashAndQuery = () => {
   let nextQueryParams
-  if (!!window.location.hash) {
+  if (window.location.hash) {
     nextQueryParams = handleHash(window.location.hash)
   } else {
     handleInvalidParams()
@@ -54,7 +54,7 @@ const mapStateToProps = state => ({
   postsAmount: state.search.total_count,
   keyword: state.search.query.keyword,
   loading: state.search.loading,
-  listType: `search`,
+  listType: 'search'
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -62,7 +62,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchSearch(payload, callback)),
   onLoad: () => {
     const _handleRouteChange = url => {
-      if (url.indexOf(`search`) !== -1) {
+      if (url.indexOf('search') !== -1) {
         const nextQueryParams = handleHashAndQuery()
         dispatch(fetchSearch(nextQueryParams))
       }
@@ -80,24 +80,24 @@ const mapDispatchToProps = dispatch => ({
     }
   },
   handlePaginationClick: (page, keyword) => {
-    if (!!window.location.hash) {
+    if (window.location.hash) {
       dispatch(saveSearch({ loading: true }))
       Router.push(`/search#q=${keyword}&page=${page}`)
     } else {
       handleInvalidParams()
     }
-  },
+  }
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
   handlePaginationClick: page =>
-    dispatchProps.handlePaginationClick(page, stateProps.keyword),
+    dispatchProps.handlePaginationClick(page, stateProps.keyword)
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
+  mergeProps
 )(PostList)

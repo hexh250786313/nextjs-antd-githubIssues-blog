@@ -4,13 +4,13 @@ import Header from '@/components/Layout/Header'
 
 const mapStateToProps = state => ({
   pic: state.layout.header.pic,
-  title: state.layout.header.title,
+  title: state.layout.header.title
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleHeaderChange(payload) {
+  handleHeaderChange (payload) {
     dispatch(handleHeaderChange(payload))
-  },
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

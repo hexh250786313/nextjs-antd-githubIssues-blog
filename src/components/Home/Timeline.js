@@ -8,18 +8,18 @@ import Link from 'next/link'
 const { Item } = AntTimeline
 
 const getLink = (tag, number) => {
-  let res = {
-    href: ``,
-    as: ``,
+  const res = {
+    href: '',
+    as: ''
   }
 
   switch (tag) {
-    case `ABOUT`:
-      res.href = `/about`
-      res.as = `/about`
+    case 'ABOUT':
+      res.href = '/about'
+      res.as = '/about'
       break
     default:
-      res.href = `/post/[number]`
+      res.href = '/post/[number]'
       res.as = `/post/${number}`
       break
   }
@@ -33,7 +33,7 @@ const Timeline = ({
   open_issues_count,
   saveTimeline,
   fetchBlogInfo,
-  fetchTimeline,
+  fetchTimeline
 }) => {
   const [timeLineMode, setTimeLineMode] = useState('alternate')
   const [showSeeMore, setShowSeeMore] = useState(1)
@@ -44,7 +44,7 @@ const Timeline = ({
     fetchTimeline(reqData, list => {
       saveTimeline({
         currentList: currentList.concat(list),
-        currentPage: reqData.page,
+        currentPage: reqData.page
       })
       setLoading(false)
     })
@@ -53,7 +53,7 @@ const Timeline = ({
   const handleSeeMoreClick = () => {
     const nextReqData = {
       ...timelineQuery,
-      page: currentPage + 1,
+      page: currentPage + 1
     }
     fetchList(nextReqData)
   }
@@ -70,7 +70,7 @@ const Timeline = ({
 
   return (
     <Spin spinning={currentList.length === 0}>
-      <div className="wrapper">
+      <div className='wrapper'>
         <AntTimeline mode={timeLineMode}>
           {currentList.map(item => {
             const {
@@ -78,31 +78,31 @@ const Timeline = ({
               title,
               created_at,
               body,
-              labels: [label],
+              labels: [label]
             } = item
-            let images = handleTagContent(body, `image`)
-            const tag = label ? label.name.toUpperCase() : `POST`
+            let images = handleTagContent(body, 'image')
+            const tag = label ? label.name.toUpperCase() : 'POST'
             if (images) {
-              images = images.split(`--split--`)
+              images = images.split('--split--')
             }
             return (
               <Item key={title}>
                 <Link {...getLink(tag, number)}>
-                  <a target="_self">
+                  <a target='_self'>
                     <div>
-                      <span className="type">{tag}</span>
-                      <span className="title">{title}</span>
+                      <span className='type'>{tag}</span>
+                      <span className='title'>{title}</span>
                       <br />
-                      <span className="time">{utc2locale(created_at)}</span>
-                      <p className="content">{handleTagContent(body)}</p>
+                      <span className='time'>{utc2locale(created_at)}</span>
+                      <p className='content'>{handleTagContent(body)}</p>
                       {Array.isArray(images)
                         ? images.map((url, index) => (
-                            <img
-                              key={index}
-                              src={url}
-                              alt="url"
-                              className="image"
-                            />
+                          <img
+                            key={index}
+                            src={url}
+                            alt='url'
+                            className='image'
+                          />
                           ))
                         : null}
                     </div>
@@ -114,20 +114,20 @@ const Timeline = ({
           {currentPage >
           Math.ceil(open_issues_count / timelineQuery.per_page) - 1 ? (
             <Item>
-              <span className="type">DEPLOY</span>
+              <span className='type'>DEPLOY</span>
               <a onClick={() => setShowSeeMore(!showSeeMore)}>
-                <span className="title">hexh's blog deployed.</span>
+                <span className='title'>hexh's blog deployed.</span>
                 <br />
-                <span className="time">2020/4/26 Monday</span>
+                <span className='time'>2020/4/26 Monday</span>
               </a>
             </Item>
-          ) : (
-            <Spin spinning={loading}>
-              <div className="see_more">
-                <a onClick={handleSeeMoreClick}>See more...</a>
-              </div>
-            </Spin>
-          )}
+              ) : (
+                <Spin spinning={loading}>
+                  <div className='see_more'>
+                    <a onClick={handleSeeMoreClick}>See more...</a>
+                  </div>
+                </Spin>
+              )}
         </AntTimeline>
       </div>
       <style jsx>{`
@@ -171,7 +171,8 @@ const Timeline = ({
         .wrapper {
           padding-top: 25px;
         }
-      `}</style>
+      `}
+      </style>
     </Spin>
   )
 }
@@ -184,5 +185,5 @@ Timeline.propTypes = {
   open_issues_count: PropTypes.number.isRequired,
   saveTimeline: PropTypes.func.isRequired,
   fetchBlogInfo: PropTypes.func.isRequired,
-  fetchTimeline: PropTypes.func.isRequired,
+  fetchTimeline: PropTypes.func.isRequired
 }

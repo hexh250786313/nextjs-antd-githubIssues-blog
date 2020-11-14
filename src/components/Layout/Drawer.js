@@ -5,21 +5,20 @@ import {
   OrderedListOutlined,
   MailOutlined,
   SearchOutlined,
-  FileTextOutlined,
+  FileTextOutlined
 } from '@ant-design/icons'
 import { color_primary } from '@/constants/CustomTheme'
-import { contactTypes, blogName } from '@/constants/ConstTypes'
+import { contactTypes, blogName, archieveUrl } from '@/constants/ConstTypes'
 import { handleLink } from '@/core/util'
 import TOC from '@/containers/layout/toc'
 import Router from 'next/router'
-import { archieveUrl } from '@/constants/ConstTypes'
 
 const SubMenu = Menu.SubMenu
 
 const renderContact = () => {
   return (
     <SubMenu
-      key="contact"
+      key='contact'
       title={
         <span>
           <MailOutlined />
@@ -42,7 +41,7 @@ const renderContact = () => {
 const renderTOC = () => {
   return (
     <SubMenu
-      key="toc"
+      key='toc'
       title={
         <span>
           <OrderedListOutlined />
@@ -60,34 +59,34 @@ const Drawer = ({
   closeDrawer,
   mdSource,
   changeSearchKeyword,
-  searchKeyword,
+  searchKeyword
 }) => {
   return (
     <AntDrawer
       visible={isShowDrawer}
       onClose={closeDrawer}
-      placement="left"
+      placement='left'
       closable={false}
       bodyStyle={{ padding: 0 }}
     >
-      <div className="drawer-container">
-        <Link href="/">
-          <div onClick={closeDrawer} className="drawer-header">
+      <div className='drawer-container'>
+        <Link href='/'>
+          <div onClick={closeDrawer} className='drawer-header'>
             {blogName}
           </div>
         </Link>
-        <div className="drawer-menu">
+        <div className='drawer-menu'>
           <Menu
             defaultOpenKeys={['toc']}
-            mode="inline"
+            mode='inline'
             selectable={false}
             onClick={linkTo}
           >
-            <Menu.Item key="search">
+            <Menu.Item key='search'>
               <Input
-                className="drawer-search"
+                className='drawer-search'
                 prefix={<SearchOutlined style={{ color: color_primary }} />}
-                placeholder="Make your life easier..."
+                placeholder='Make your life easier...'
                 onPressEnter={() => {
                   Router.push(`/search#q=${searchKeyword}&page=1`)
                   closeDrawer()
@@ -136,7 +135,8 @@ const Drawer = ({
           :global(.drawer-container .ant-input-affix-wrapper) {
             border-radius: 100px;
           }
-        `}</style>
+        `}
+        </style>
       </div>
     </AntDrawer>
   )
@@ -147,17 +147,17 @@ Drawer.propTypes = {
   closeDrawer: PropTypes.func.isRequired,
   mdSource: PropTypes.string,
   changeSearchKeyword: PropTypes.func.isRequired,
-  searchKeyword: PropTypes.string.isRequired,
+  searchKeyword: PropTypes.string.isRequired
 }
 
 Drawer.defaultProps = {
-  mdSource: '',
+  mdSource: ''
 }
 
 export default Drawer
 
 const linkTo = ({ key }) => {
-  if (key === `search`) {
+  if (key === 'search') {
     return
   }
   handleLink(key)

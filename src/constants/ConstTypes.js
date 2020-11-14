@@ -29,18 +29,18 @@ export const contactTypes = [
   {
     text: 'GitHub',
     link: 'https://github.com/hexh250786313',
-    Icon: GithubOutlined,
+    Icon: GithubOutlined
   },
   {
     text: 'Weibo',
     link: 'https://weibo.com/HanaSoup',
-    Icon: WeiboOutlined,
+    Icon: WeiboOutlined
   },
   {
     text: 'Mail',
     link: 'mailto:250786313@qq.com',
-    Icon: MailFilled,
-  },
+    Icon: MailFilled
+  }
 ]
 
 // 页面索引
@@ -48,18 +48,18 @@ export const pagesIndex = [
   {
     key: '/',
     value: 'Timeline',
-    Icon: CalendarFilled,
+    Icon: CalendarFilled
   },
   {
     key: '/post/list',
     value: 'Post',
-    Icon: EditFilled,
+    Icon: EditFilled
   },
   {
     key: '/about',
     value: 'About',
-    Icon: QuestionCircleFilled,
-  },
+    Icon: QuestionCircleFilled
+  }
 ]
 
 // 首页时间轴查询条件
@@ -67,36 +67,36 @@ export const timelineQuery = {
   labels: undefined,
   page: 1,
   per_page: 10,
-  noCache: true, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+  noCache: true // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
 
 // 列表查询条件
 export const listQuery = {
-  labels: `post`,
+  labels: 'post',
   page: 1,
   per_page: 10,
-  creator: `hexh250786313`,
-  sort: `created`,
-  direction: `desc`,
-  state: `open`,
+  creator: 'hexh250786313',
+  sort: 'created',
+  direction: 'desc',
+  state: 'open'
 }
 
 // 搜索请求的参数
-export const searchQuery = (mode = ``) => {
+export const searchQuery = (mode = '') => {
   const queryParams = {
     page: 1,
     per_page: 10,
-    q: `state:open+repo:hexh250786313/Blog+author:hexh250786313`,
-    sort: `created`,
-    order: `desc`,
-    keyword: ``,
+    q: 'state:open+repo:hexh250786313/Blog+author:hexh250786313',
+    sort: 'created',
+    order: 'desc',
+    keyword: ''
   }
 
   switch (mode) {
-    case `allPost`:
+    case 'allPost':
       ;(queryParams.per_page = 1),
-        (queryParams.page = 100),
-        (queryParams.q = `label:post+state:open+repo:hexh250786313/Blog+author:hexh250786313`)
+      (queryParams.page = 100),
+      (queryParams.q = 'label:post+state:open+repo:hexh250786313/Blog+author:hexh250786313')
       break
     default:
       break
@@ -107,26 +107,26 @@ export const searchQuery = (mode = ``) => {
 
 // about 查询条件
 export const aboutQuery = {
-  labels: `about`,
+  labels: 'about',
   page: 1,
   per_page: 10,
-  creator: `hexh250786313`,
-  sort: `created`,
-  direction: `desc`,
-  state: `open`,
-  noCache: false, // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
+  creator: 'hexh250786313',
+  sort: 'created',
+  direction: 'desc',
+  state: 'open',
+  noCache: false // 这个不是接口的参数，用于 redux 判断是否需要储存查询参数，例如首页的时间轴就不需要储存参数
 }
 
 // 查询标识
-export const queryLabel = `qZy6GBWGe`
+export const queryLabel = 'qZy6GBWGe'
 
 // token
-export const githubToken = `6b4454ce9d30dcb9ed9c1f6f16e329f56142b328`
+export const githubToken = '6b4454ce9d30dcb9ed9c1f6f16e329f56142b328'
 
-export const queryParams = `+state:open+repo:hexh250786313/Blog+author:hexh250786313`
+export const queryParams = '+state:open+repo:hexh250786313/Blog+author:hexh250786313'
 
 // 不需要默认图的页面
-export const pageWihtoutDefaultHeader = [`search`, `post`, `about`]
+export const pageWihtoutDefaultHeader = ['search', 'post', 'about']
 
 // 博文仓库地址
-export const archieveUrl = `https://github.com/hexh250786313/Blog/issues`
+export const archieveUrl = 'https://github.com/hexh250786313/Blog/issues'

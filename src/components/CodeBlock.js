@@ -7,7 +7,7 @@ import vsDark from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedligh
 import {
   jsx,
   javascript,
-  bash,
+  bash
 } from 'react-syntax-highlighter/dist/cjs/languages/prism'
 
 // import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
@@ -16,14 +16,14 @@ import {
 class CodeBlock extends React.PureComponent {
   static propTypes = {
     value: PropTypes.string.isRequired,
-    language: PropTypes.string,
+    language: PropTypes.string
   }
 
   static defaultProps = {
-    language: null,
+    language: null
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // 注册要高亮的语法，
     // 注意：如果不设置打包后供第三方使用是不起作用的
     SyntaxHighlighter.registerLanguage('jsx', jsx)
@@ -41,10 +41,10 @@ class CodeBlock extends React.PureComponent {
   // SyntaxHighlighter.registerLanguage('shell', bash)
   // }
 
-  render() {
+  render () {
     const { language, value } = this.props
     return (
-      <figure className="highlight">
+      <figure className='highlight'>
         <SyntaxHighlighter language={language} style={vsDark}>
           {value}
         </SyntaxHighlighter>

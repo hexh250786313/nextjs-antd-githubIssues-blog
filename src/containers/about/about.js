@@ -6,19 +6,20 @@ import { fetchAbout } from '@/redux/actions/about'
 
 const mapStateToProps = state => ({
   detail: state.post.detail,
+  isShowTerm: false
 })
 
 const mapDispatchToProps = dispatch => ({
-  setTOC(source) {
+  setTOC (source) {
     dispatch(setTOC(source))
   },
-  handleHeaderChange(payload) {
+  handleHeaderChange (payload) {
     dispatch(handleHeaderChange(payload))
   },
-  clearDetail() {
+  clearDetail () {
     dispatch(savePostState({}))
   },
-  fetchPostDetail: () => dispatch(fetchAbout()),
+  fetchPostDetail: () => dispatch(fetchAbout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

@@ -2,7 +2,7 @@ import { HANDLE_HEADER_CHANGE } from '@/constants/ActionTypes'
 
 const initialState = {
   pic: '',
-  title: '',
+  title: ''
 }
 
 const header = (state = initialState, { type, payload }) => {
@@ -10,7 +10,7 @@ const header = (state = initialState, { type, payload }) => {
     case HANDLE_HEADER_CHANGE:
       return {
         ...state,
-        ...payload,
+        ...payload
       }
     default:
       return state
