@@ -107,6 +107,12 @@ export const useTranslate = ({ container, dragItem }) => {
     if (!!dragItem && !!container) {
       // console.log(`钩子开始`);
 
+      const _preventDefaultDrag = (e) => {
+        e.preventDefault()
+      }
+
+      container.addEventListener('dragstart', _preventDefaultDrag, false)
+
       container.addEventListener('touchstart', _dragStart, false)
       container.addEventListener('touchend', _dragEnd, false)
       container.addEventListener('touchmove', _drag, false)
@@ -115,6 +121,8 @@ export const useTranslate = ({ container, dragItem }) => {
       container.addEventListener('mouseup', _dragEnd, false)
       container.addEventListener('mousemove', _drag, false)
       return () => {
+        container.removeEventListener("dragstart", _preventDefaultDrag, false)
+
         // console.log(`钩子结束`);
         container.removeEventListener('touchstart', _dragStart, false)
         container.removeEventListener('touchend', _dragEnd, false)
