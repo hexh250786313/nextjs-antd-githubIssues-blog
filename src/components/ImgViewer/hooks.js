@@ -43,19 +43,19 @@ export const useTranslate = ({ container, dragItem }) => {
           }))
         }
       } else if (e.target === dragItem) {
-          setDragState((prevState) => ({
-            ...prevState,
-            initialX: e.clientX - prevState.xOffset,
-            initialY: e.clientY - prevState.yOffset,
-            active: true
-          }))
-        } else {
-          setDragState((prevState) => ({
-            ...prevState,
-            initialX: e.clientX - prevState.xOffset,
-            initialY: e.clientY - prevState.yOffset
-          }))
-        }
+        setDragState((prevState) => ({
+          ...prevState,
+          initialX: e.clientX - prevState.xOffset,
+          initialY: e.clientY - prevState.yOffset,
+          active: true
+        }))
+      } else {
+        setDragState((prevState) => ({
+          ...prevState,
+          initialX: e.clientX - prevState.xOffset,
+          initialY: e.clientY - prevState.yOffset
+        }))
+      }
 
       // console.log(`开始拖拽`);
     },
