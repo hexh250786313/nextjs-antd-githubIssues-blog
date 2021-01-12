@@ -1,7 +1,7 @@
 import { OPEN_DRAWER, CLOSE_DRAWER } from '@/constants/ActionTypes'
 
 const initialState = {
-  isShowDrawer: false,
+  isShowDrawer: false
 }
 
 const drawer = (state = initialState, { type }) => {
@@ -9,12 +9,12 @@ const drawer = (state = initialState, { type }) => {
     case OPEN_DRAWER:
       return {
         ...state,
-        isShowDrawer: true,
+        isShowDrawer: true
       }
     case CLOSE_DRAWER:
       return {
         ...state,
-        isShowDrawer: false,
+        isShowDrawer: false
       }
     default:
       return state

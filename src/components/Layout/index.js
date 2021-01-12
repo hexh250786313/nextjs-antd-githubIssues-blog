@@ -4,11 +4,13 @@ import Drawer from '@/containers/layout/drawer'
 import Navigation from '@/containers/layout/navigation'
 import Header from '@/containers/layout/header'
 import SideNavigation from '@/containers/layout/side-navigation'
+import Footer from '@/components/Layout/Footer'
+import BackToTop from '@/components/Layout/BackToTop'
 // import SideNavigation from './SideNavigation';
 
 const Layout = ({ children }) => {
   return (
-    <div className="layout">
+    <div className='layout'>
       {
         // <Progress />
       }
@@ -19,14 +21,18 @@ const Layout = ({ children }) => {
 
       <Drawer />
 
-      <div className="container-outer">
-        <div className="container">
+      <div className='container-outer'>
+        <div className='container'>
           <SideNavigation />
-          <div className="main">
+          <div className='main'>
             {children}
+            <Footer />
           </div>
         </div>
       </div>
+
+      <BackToTop />
+
       {
         // <div
         // style={{
@@ -99,7 +105,8 @@ const Layout = ({ children }) => {
         :global(.ant-drawer-title) {
           font-weight: bold;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }
@@ -114,9 +121,9 @@ const Layout = ({ children }) => {
 export default Layout
 
 Layout.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any
 }
 
 Layout.defaultProps = {
-  children: null,
+  children: null
 }

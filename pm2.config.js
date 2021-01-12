@@ -14,7 +14,7 @@ module.exports = {
         'logs',
         'static'
       ],
-      instances: 2,  // start 2 instances
+      instances: 2, // start 2 instances
       node_args: '--harmony',
       env: {
         NODE_ENV: 'production',

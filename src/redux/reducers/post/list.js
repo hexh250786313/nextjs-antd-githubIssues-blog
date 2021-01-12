@@ -1,6 +1,6 @@
 import {
   SAVE_LIST_STATE,
-  SAVE_FETCHED_LIST,
+  SAVE_FETCHED_LIST
 } from '@/constants/ActionTypes'
 import { listQuery } from '@/constants/ConstTypes'
 import { handleFetchedList } from '@/core/util'
@@ -11,7 +11,7 @@ const initialState = {
   query: listQuery,
   loading: false,
   cacheList: {},
-  fetchedList: [],
+  fetchedList: []
 }
 
 const list = (prevState = initialState, { type, payload: nextState }) => {
@@ -19,12 +19,12 @@ const list = (prevState = initialState, { type, payload: nextState }) => {
     case SAVE_FETCHED_LIST:
       return {
         ...prevState,
-        fetchedList: handleFetchedList(prevState.fetchedList, nextState),
+        fetchedList: handleFetchedList(prevState.fetchedList, nextState)
       }
     case SAVE_LIST_STATE:
       return {
         ...prevState,
-        ...nextState,
+        ...nextState
       }
     default:
       return prevState

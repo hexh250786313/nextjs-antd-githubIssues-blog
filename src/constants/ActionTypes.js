@@ -18,9 +18,9 @@ export const FETCH_POST_LIST = 'FETCH_POST_LIST'
 export const FETCH_POST_DETAIL = 'FETCH_POST_DETAIL'
 
 export const SAVE_POST_STATE = 'SAVE_POST_STATE'
-export const SAVE_LIST_STATE = `SAVE_LIST_STATE`
+export const SAVE_LIST_STATE = 'SAVE_LIST_STATE'
 
-export const SAVE_FETCHED_LIST = `SAVE_FETCHED_LIST`
+export const SAVE_FETCHED_LIST = 'SAVE_FETCHED_LIST'
 
 // ================= Drawer Part ==================== //
 

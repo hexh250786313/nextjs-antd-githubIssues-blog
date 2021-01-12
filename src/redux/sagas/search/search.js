@@ -15,7 +15,7 @@ const fetchList = query => {
 /**
  * search saga
  */
-function* fetchSearch() {
+function * fetchSearch () {
   // 如果要用 tabkeEvery，则不能用 while(true)
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_SEARCH)
@@ -23,14 +23,14 @@ function* fetchSearch() {
 
     const query = {
       ...prevQueryParams,
-      ...nextQueryParams,
+      ...nextQueryParams
     }
     let total_count = 0
     let items = []
     try {
       let res = {}
       const cache = sessionStorage.getItem(query.q + query.page)
-      if (!!cache) {
+      if (cache) {
         res = yield call(JSON.parse, cache)
       } else {
         res = yield call(fetchList, query)
@@ -46,23 +46,23 @@ function* fetchSearch() {
         total_count,
         items,
         query,
-        loading: false,
+        loading: false
       }
 
       if (!cache) {
         // 这个接口有请求次数限制，一分钟 30 次，因此做缓存
         sessionStorage.setItem(
           query.q + query.page,
-          JSON.stringify({ items, total_count }),
+          JSON.stringify({ items, total_count })
         )
       }
 
       yield put(saveFetchedList(items))
       yield put(saveSearch(nextState))
     } catch (e) {
-      yield put(requestFail(`请求搜索接口报错，请重试或者联系我`))
+      yield put(requestFail('请求搜索接口报错，请重试或者联系我'))
     } finally {
-      if (!!callback) {
+      if (callback) {
         yield call(() => {
           callback()
         })
@@ -70,8 +70,8 @@ function* fetchSearch() {
       yield put(
         handleHeaderChange({
           title: `About ${total_count} results`,
-          pic: indexPic,
-        }),
+          pic: indexPic
+        })
       )
     }
   }

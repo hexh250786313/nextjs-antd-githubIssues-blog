@@ -1,12 +1,12 @@
 import {
   SAVE_TIMELINE,
   FETCH_TIMELINE_SUCCESS,
-  FETCH_TIMELINE,
+  FETCH_TIMELINE
 } from '@/constants/ActionTypes'
 
 const initialState = {
   currentList: [],
-  currentPage: 1,
+  currentPage: 1
 }
 
 const timeline = (prevState = initialState, { type, payload: nextState }) => {
@@ -15,7 +15,7 @@ const timeline = (prevState = initialState, { type, payload: nextState }) => {
     case SAVE_TIMELINE:
       return {
         ...prevState,
-        ...nextState,
+        ...nextState
       }
     case FETCH_TIMELINE:
     default:

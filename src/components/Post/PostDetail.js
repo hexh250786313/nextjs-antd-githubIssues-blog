@@ -8,25 +8,25 @@ import Terms from './Term'
 import './index.less'
 import ImgViewer from '@/components/ImgViewer'
 
-const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
+const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail, isShowTerm }) => {
   let { body } = detail
-  let images = handleTagContent(body, `image`)
-  let desc = handleTagContent(body, `desc`)
+  let images = handleTagContent(body, 'image')
+  let desc = handleTagContent(body, 'desc')
 
   if (images) {
-    images = images.split(`--split--`)
-    body = handleTagContent(body, `image`, `exec`)
+    images = images.split('--split--')
+    body = handleTagContent(body, 'image', 'exec')
   }
 
   if (desc) {
     // desc = desc.replace(/^\s+|\s+$/g, ``) // 去除头尾空白
-    desc = desc.replace(/^\r\n+|\r\n+$/g, ``) // 去除头尾换行+回车
-    body = handleTagContent(body, `desc`, `exec`)
+    desc = desc.replace(/^\r\n+|\r\n+$/g, '') // 去除头尾换行+回车
+    body = handleTagContent(body, 'desc', 'exec')
   }
 
   if (body) {
-    body = body.replace(/^\s+|\s+$/g, ``)
-    body = handleTagContent(body, `header-img`, `exec`)
+    body = body.replace(/^\s+|\s+$/g, '')
+    body = handleTagContent(body, 'header-img', 'exec')
   }
 
   useEffect(() => {
@@ -34,10 +34,10 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
       fetchPostDetail()
     }
 
-    const imgs = document.getElementsByTagName(`img`)
+    const imgs = document.getElementsByTagName('img')
 
     imgs.forEach(imgEle => {
-      imgEle.addEventListener(`click`, e => {
+      imgEle.addEventListener('click', e => {
         ImgViewer.show(e.target.src)
       })
     })
@@ -53,24 +53,24 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
   return (
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
-        <div className="wrapper">
-          {desc && <p className="desc">{desc}</p>}
+        <div className='wrapper'>
+          {desc && <p className='desc'>{desc}</p>}
           {images && (
-            <div className="pic">
+            <div className='pic'>
               {images.map(image => (
-                <img src={image} alt="" key={image} />
+                <img src={image} alt='' key={image} />
               ))}
             </div>
           )}
           <ReactMarkdown
-            className="markdown-body"
+            className='markdown-body'
             source={body}
             renderers={{
-              code: CodeBlock,
+              code: CodeBlock
             }}
             escapeHtml={false}
           />
-          <Terms />
+          {body && isShowTerm ? <Terms /> : null}
         </div>
       </Spin>
       <style jsx>{`
@@ -99,16 +99,18 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail }) => {
           padding: 10px 20px;
           white-space: break-spaces;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }
-
-export default PostDetail
 
 PostDetail.propTypes = {
   detail: PropTypes.object.isRequired,
   setTOC: PropTypes.func.isRequired,
   clearDetail: PropTypes.func.isRequired,
   fetchPostDetail: PropTypes.func.isRequired,
+  isShowTerm: PropTypes.bool.isRequired
 }
+
+export default PostDetail

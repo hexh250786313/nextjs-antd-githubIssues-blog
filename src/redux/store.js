@@ -17,12 +17,12 @@ const bindMiddleware = middleware => {
   return applyMiddleware(...middleware)
 }
 
-function configureStore(initialState) {
+function configureStore (initialState) {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     rootReducer,
     initialState,
-    bindMiddleware([sagaMiddleware]),
+    bindMiddleware([sagaMiddleware])
   )
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
@@ -31,7 +31,7 @@ function configureStore(initialState) {
   if (process.env.NODE_ENV !== 'production' && module.hot) {
     module.hot.accept('./reducers', () =>
       // eslint-disable-next-line global-require
-      store.replaceReducer(require('./reducers').default),
+      store.replaceReducer(require('./reducers').default)
     )
   }
 

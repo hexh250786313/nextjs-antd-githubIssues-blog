@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import {
   indexPic,
   pageWihtoutDefaultHeader,
-  indexTitle,
+  indexTitle
 } from '@/constants/ConstTypes.js'
 
 const Header = ({ handleHeaderChange, pic, title }) => {
@@ -16,7 +16,7 @@ const Header = ({ handleHeaderChange, pic, title }) => {
         ) {
           handleHeaderChange({
             title: indexTitle,
-            pic: indexPic,
+            pic: indexPic
           })
         }
         break
@@ -33,8 +33,8 @@ const Header = ({ handleHeaderChange, pic, title }) => {
   }, [])
 
   return pic ? (
-    <div className="header" style={{ backgroundImage: `url(${pic})` }}>
-      <h1 className="title">{title}</h1>
+    <div className='header' style={{ backgroundImage: `url(${pic})` }}>
+      <h1 className='title'>{title}</h1>
       <style jsx>
         {`
           .header {
@@ -74,12 +74,12 @@ const Header = ({ handleHeaderChange, pic, title }) => {
 Header.propTypes = {
   handleHeaderChange: PropTypes.func.isRequired,
   pic: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.string
 }
 
 Header.defaultProps = {
   pic: '',
-  title: '',
+  title: ''
 }
 
 export default Header

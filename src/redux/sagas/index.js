@@ -5,12 +5,12 @@ import homeSagas from './home'
 import aboutSagas from './about'
 import searchSagas from './search'
 
-export default function* rootSagas() {
+export default function * rootSagas () {
   yield all([
     ...postSagas,
     ...globalSagas,
     ...homeSagas,
     ...aboutSagas,
-    ...searchSagas,
+    ...searchSagas
   ])
 }

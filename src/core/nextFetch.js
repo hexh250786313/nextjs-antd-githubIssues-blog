@@ -26,12 +26,12 @@ HTTP_METHOD.forEach(method => {
       // credentials: 'include',
       timeout,
       mode: 'cors',
-      cache: 'no-cache',
+      cache: 'no-cache'
     }
 
     if (query) {
       url += `${url.includes('?') ? '&' : '?'}${qs.stringify(
-        filterObject(query, Boolean),
+        filterObject(query, Boolean)
       )}`
     }
 
@@ -43,8 +43,8 @@ HTTP_METHOD.forEach(method => {
     // console.info('Request Url:', url);
 
     // github 不会解析编码 + 号后的字符，所以不编码
-    if (url.indexOf(`github`) !== -1) {
-      url = url.replace(/%2B/g, `+`)
+    if (url.indexOf('github') !== -1) {
+      url = url.replace(/%2B/g, '+')
     }
 
     return fetch(url, opts).then(res => {

@@ -18,27 +18,27 @@ const handleHrefStr = (passStartsWithArr, link) => {
  *
  */
 const getDay = day => {
-  if (typeof day !== `number`) {
-    throw new Error(`Not a number`)
+  if (typeof day !== 'number') {
+    throw new Error('Not a number')
   }
 
   switch (day) {
     case 1:
-      return `Monday`
+      return 'Monday'
     case 2:
-      return `Tuesday`
+      return 'Tuesday'
     case 3:
-      return `Wednesday`
+      return 'Wednesday'
     case 4:
-      return `Thursday`
+      return 'Thursday'
     case 5:
-      return `Friday`
+      return 'Friday'
     case 6:
-      return `Saturday`
+      return 'Saturday'
     case 0:
-      return `Sunday`
+      return 'Sunday'
     default:
-      return ``
+      return ''
   }
 }
 
@@ -62,7 +62,7 @@ export const filterObject = (o, filter) => {
  */
 export const handleLink = link => {
   if (typeof link === 'string') {
-    link = link.replace(/\s/g, ``)
+    link = link.replace(/\s/g, '')
     let startsWith
     if ((startsWith = handleHrefStr(linkToPending, link))) {
       const eleLink = document.createElement('a')
@@ -85,7 +85,7 @@ export const handleLink = link => {
       return link
     }
   }
-  throw new Error(`Not a string`)
+  throw new Error('Not a string')
 }
 
 /** 处理特殊标签标签的内容，提取或者去除
@@ -97,26 +97,26 @@ export const handleLink = link => {
  * @returns {string} 返回特殊标签标签中的内容或去除特殊标签后的内容
  *
  */
-export const handleTagContent = (source = ``, tag = `desc`, action = `get`) => {
+export const handleTagContent = (source = '', tag = 'desc', action = 'get') => {
   const actions = ['get', 'exec']
-  if (typeof source !== `string` || typeof action !== `string`) {
-    throw new Error(`Not a string`)
+  if (typeof source !== 'string' || typeof action !== 'string') {
+    throw new Error('Not a string')
   }
   if (!actions.includes(action)) {
-    throw new Error(`Require 'get' or 'exec'`)
+    throw new Error('Require \'get\' or \'exec\'')
   }
-  const reg = new RegExp(`<${tag}>([\\s\\S]+)<\\/${tag}>`, `g`)
-  let str = ``
-  let strWithTag = ``
+  const reg = new RegExp(`<${tag}>([\\s\\S]+)<\\/${tag}>`, 'g')
+  let str = ''
+  let strWithTag = ''
   if ((str = reg.exec(source))) {
     strWithTag = str[0]
     str = str[1]
   }
 
   switch (action) {
-    case `get`:
+    case 'get':
       return str
-    case `exec`:
+    case 'exec':
       if (strWithTag) {
         return source.replace(strWithTag, '')
       }
@@ -134,11 +134,11 @@ export const handleTagContent = (source = ``, tag = `desc`, action = `get`) => {
  *
  */
 export const utc2locale = utc_datetime => {
-  if (typeof utc_datetime !== `string`) {
-    throw new Error(`Not a string`)
+  if (typeof utc_datetime !== 'string') {
+    throw new Error('Not a string')
   }
-  if (utc_datetime.indexOf(`T`) === -1 || utc_datetime.indexOf(`Z`) === -1) {
-    throw new Error(`Not a UTC`)
+  if (utc_datetime.indexOf('T') === -1 || utc_datetime.indexOf('Z') === -1) {
+    throw new Error('Not a UTC')
   }
 
   let localeDate = ''
@@ -168,16 +168,16 @@ export const utc2locale = utc_datetime => {
  * @returns {string} 返回经过拼接处理的搜索条件
  *
  */
-export const handleQueryParams = (keyword = ``) => {
-  const 空白符号 = new RegExp(`\\s+`, `g`)
-  const 头尾的加号 = new RegExp(`^(\\+)+|(\\+)+$`, `g`)
-  const 重复的加号 = new RegExp(`(\\+)\\1+`, `g`)
+export const handleQueryParams = (keyword = '') => {
+  const 空白符号 = new RegExp('\\s+', 'g')
+  const 头尾的加号 = new RegExp('^(\\+)+|(\\+)+$', 'g')
+  const 重复的加号 = new RegExp('(\\+)\\1+', 'g')
 
   return (
     keyword
-      .replace(空白符号, `+`)
-      .replace(头尾的加号, ``)
-      .replace(重复的加号, `+`) + queryParams
+      .replace(空白符号, '+')
+      .replace(头尾的加号, '')
+      .replace(重复的加号, '+') + queryParams
   )
 }
 
@@ -186,7 +186,7 @@ export const handleFetchedList = (prevfetchedList, newItems) => {
     .concat(newItems)
     .filter(
       (item, index, self) =>
-        index === self.findIndex(T => T.number === item.number),
+        index === self.findIndex(T => T.number === item.number)
     )
   return list
 }

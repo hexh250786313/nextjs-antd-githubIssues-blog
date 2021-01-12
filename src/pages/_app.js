@@ -20,13 +20,13 @@ const progressDoneEvent = () => {
 
 const toTopEvent = path => {
   // if (path.match(/^\/about/) || (path.match(/^\/post\/\d/) && window)) {
-  window.scrollTo({ top: 0, behavior: `smooth` })
+  window.scrollTo({ top: 0, behavior: 'smooth' })
   // }
   NProgress.done()
 }
 
 class NextApp extends App {
-  static async getInitialProps({ Component, ctx }) {
+  static async getInitialProps ({ Component, ctx }) {
     let pageProps = {}
 
     if (Component.getInitialProps) {
@@ -36,7 +36,7 @@ class NextApp extends App {
     return { pageProps }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     // const {
     //   post: {
     //     list: {
@@ -51,22 +51,22 @@ class NextApp extends App {
     Router.events.on('routeChangeError', progressDoneEvent)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     Router.events.off('routeChangeStart', progressStartEvent)
     Router.events.off('routeChangeComplete', toTopEvent)
     Router.events.off('routeChangeError', progressDoneEvent)
   }
 
-  render() {
+  render () {
     const { Component, pageProps, store, router } = this.props
     return (
       <>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta charSet="utf-8" />
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta charSet='utf-8' />
           <title>hexh's blog</title>
-          <link rel="shortcut icon" href="/tama.ico" type="image/ico" />
-          <link rel="manifest" href="/manifest.webmanifest" />
+          <link rel='shortcut icon' href='/tama.ico' type='image/ico' />
+          <link rel='manifest' href='/manifest.webmanifest' />
           <style jsx global>
             {`
               * {

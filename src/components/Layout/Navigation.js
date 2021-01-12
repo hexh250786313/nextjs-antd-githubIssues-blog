@@ -2,14 +2,13 @@ import { color_primary } from '@/constants/CustomTheme'
 import { useState, useEffect } from 'react'
 import { Button, Input, Dropdown, Menu, Drawer } from 'antd'
 import PropTypes from 'prop-types'
-import { blogName, contactTypes, pagesIndex } from '@/constants/ConstTypes'
+import { blogName, contactTypes, pagesIndex, archieveUrl } from '@/constants/ConstTypes'
 import Link from 'next/link'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import MenuOutlined from '@ant-design/icons/MenuOutlined'
 import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined'
 import { handleLink } from '@/core/util'
 import Router from 'next/router'
-import { archieveUrl } from '@/constants/ConstTypes'
 
 const Item = Menu.Item
 const [OPENED_SEARCH_BAR_WIDTH, CLOSED_SEARCH_BAR_WIDTH] = [250, 37]
@@ -20,20 +19,20 @@ const mapPagesIndex = (() => {
 })()
 
 const exec = string => {
-  const reg = new RegExp(`\\/([\\s\\S]+?)\\#`)
+  const reg = new RegExp('\\/([\\s\\S]+?)\\#')
 
   pagesIndex.some(({ key, value }) => {
-    if (string === `/`) {
+    if (string === '/') {
       string = value
       return true
-    } else if (key !== `/` && string.startsWith(key)) {
+    } else if (key !== '/' && string.startsWith(key)) {
       string = value
       return true
     }
   })
 
-  if (!!string.match(reg)) {
-    return `/` + string.match(reg)[1]
+  if (string.match(reg)) {
+    return '/' + string.match(reg)[1]
     // .toLowerCase()
     // .replace(/( |^)[a-z]/g, L => L.toUpperCase())
   }
@@ -60,7 +59,7 @@ const Navigation = ({
   currentPostListPage,
   openDrawer,
   changeSearchKeyword,
-  searchKeyword,
+  searchKeyword
 }) => {
   const [isShowTopShadow, setTopShadow] = useState(false)
   const [searchBarWidth, setSearchWidth] = useState(CLOSED_SEARCH_BAR_WIDTH)
@@ -80,7 +79,7 @@ const Navigation = ({
   }
 
   const handleRoute = key => {
-    if (key.indexOf(`list`) !== -1) {
+    if (key.indexOf('list') !== -1) {
       key = key + `?page=${currentPostListPage}`
     }
     return key
@@ -107,7 +106,7 @@ const Navigation = ({
           setTopShadow(false)
         }
       },
-      false,
+      false
     )
     setPathname(window.location.pathname)
     Router.events.on('routeChangeComplete', _handlePathname)
@@ -118,33 +117,33 @@ const Navigation = ({
   }, [])
 
   return (
-    <div className="container">
-      <div className="navigation">
-        <div className="button-box">
+    <div className='container'>
+      <div className='navigation'>
+        <div className='button-box'>
           <Button
             onClick={openDrawer}
-            type="link"
+            type='link'
             icon={<MenuOutlined />}
-            size="large"
+            size='large'
           />
 
-          <Button type="link" size="large" onClick={handleBottomDrawer}>
+          <Button type='link' size='large' onClick={handleBottomDrawer}>
             {mapPagesIndex[pathname] ? mapPagesIndex[pathname] : exec(pathname)}
             <CaretDownOutlined />
           </Button>
         </div>
 
-        <Link href="/">
-          <div className="title">{blogName}</div>
+        <Link href='/'>
+          <div className='title'>{blogName}</div>
         </Link>
 
-        <ul className="menu">
-          <li onClick={setSearchBarOpen} className="search">
+        <ul className='menu'>
+          <li onClick={setSearchBarOpen} className='search'>
             <Input
               prefix={<SearchOutlined style={{ color: color_primary }} />}
               // onBlur={setSearchBarClose}
               // placeholder="Search for something interesting?"
-              placeholder="Make your life easier..."
+              placeholder='Make your life easier...'
               onPressEnter={() => {
                 Router.push(`/search#q=${searchKeyword}&page=1`)
               }}
@@ -161,9 +160,9 @@ const Navigation = ({
             />
           </li>
           <Dropdown overlay={_Menu}>
-            <li className="contact">CONTACT</li>
+            <li className='contact'>CONTACT</li>
           </Dropdown>
-          <li className="contact" onClick={linkToArchive}>
+          <li className='contact' onClick={linkToArchive}>
             ARCHIVE
           </li>
         </ul>
@@ -171,15 +170,15 @@ const Navigation = ({
 
       <Drawer
         visible={isShowBottomDrawer}
-        placement="bottom"
+        placement='bottom'
         onClose={handleBottomDrawer}
         closable={false}
         bodyStyle={{ padding: 0 }}
         headerStyle={{ paddingLeft: 16, border: 0 }}
-        title="Index"
+        title='Index'
         height={210}
       >
-        <Menu selectedKeys={[exec(pathname)]} mode="vertical">
+        <Menu selectedKeys={[exec(pathname)]} mode='vertical'>
           {pagesIndex.map(item => (
             <Item
               onClick={handleBottomDrawer}
@@ -187,7 +186,7 @@ const Navigation = ({
               key={item.value}
             >
               <Link href={handleRoute(item.key)}>
-                <a target="_self">{item.value}</a>
+                <a target='_self'>{item.value}</a>
               </Link>
             </Item>
           ))}
@@ -289,7 +288,8 @@ const Navigation = ({
         :global(.navigation .ant-input) {
           margin-left: 10px;
         }
-      `}</style>
+      `}
+      </style>
     </div>
   )
 }
@@ -298,7 +298,7 @@ Navigation.propTypes = {
   openDrawer: PropTypes.func.isRequired,
   changeSearchKeyword: PropTypes.func.isRequired,
   searchKeyword: PropTypes.string.isRequired,
-  currentPostListPage: PropTypes.number.isRequired,
+  currentPostListPage: PropTypes.number.isRequired
 }
 
 export default Navigation

@@ -13,10 +13,10 @@ import { saveFetchedList } from '@/redux/actions/post.js'
 /**
  * postDetail saga
  */
-export function* fetchPostDetail() {
+export function * fetchPostDetail () {
   while (true) {
     const {
-      payload: { number = '0' },
+      payload: { number = '0' }
     } = yield take(FETCH_POST_DETAIL)
     const fetchedList = yield select(state => state.post.list.fetchedList)
 
@@ -34,30 +34,30 @@ export function* fetchPostDetail() {
       }
 
       const body = detail.body
-      let pic = handleTagContent(body, `header-img`)
+      let pic = handleTagContent(body, 'header-img')
 
       yield put(savePostState(detail))
       yield put(saveFetchedList([detail]))
 
       if (pic) {
-        pic.replace(/^\r\n+|\r\n+$/g, ``)
-        pic = pic.split(`--split--`)[0]
+        pic.replace(/^\r\n+|\r\n+$/g, '')
+        pic = pic.split('--split--')[0]
       }
       yield put(
         handleHeaderChange({
           title: detail.title,
-          pic: pic || defaultPic,
-        }),
+          pic: pic || defaultPic
+        })
       )
 
-      let src = handleTagContent(detail.body, `desc`, `exec`)
-      src = handleTagContent(src, `image`, `exec`)
-      src = handleTagContent(src, `header-img`, `exec`)
-      src = src.replace(/^\s+|\s+$/g, ``)
+      let src = handleTagContent(detail.body, 'desc', 'exec')
+      src = handleTagContent(src, 'image', 'exec')
+      src = handleTagContent(src, 'header-img', 'exec')
+      src = src.replace(/^\s+|\s+$/g, '')
 
       yield put(setTOC(src))
     } catch (e) {
-      yield put(requestFail(`请求文章详情接口错误，请刷新页面或者联系我`))
+      yield put(requestFail('请求文章详情接口错误，请刷新页面或者联系我'))
     }
   }
 }

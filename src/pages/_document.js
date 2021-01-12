@@ -5,22 +5,23 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps (ctx) {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
 
-  render() {
+  render () {
     return (
       <html>
-        <base target="_blank" />
+        <base target='_blank' />
         <Head>
           <style>{`
             body {
               position: absolute;
               top: 0;
             }
-          `}</style>
+          `}
+          </style>
         </Head>
         <body>
           <Main />

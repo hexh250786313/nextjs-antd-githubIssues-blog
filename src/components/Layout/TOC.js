@@ -7,7 +7,7 @@ const removeHash = e => {
     window.location.replace(
       window.location.href.toString().replace(window.location.hash, '') +
         '#' +
-        e,
+        e
     )
   }, 100)
 }
@@ -26,7 +26,7 @@ const TOC = ({ source }) => {
 }
 
 TOC.propTypes = {
-  source: PropTypes.string.isRequired,
+  source: PropTypes.string.isRequired
 }
 
 export default TOC

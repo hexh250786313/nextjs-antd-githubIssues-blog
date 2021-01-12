@@ -9,7 +9,7 @@ const ErrorPage = ({ statusCode }) => {
     case 200:
     case 404: {
       RenderComp = () => (
-        <div className="container">
+        <div className='container'>
           <style jsx>{`
             .container {
               display: flex;
@@ -24,14 +24,15 @@ const ErrorPage = ({ statusCode }) => {
               height: 200px;
               margin: 10px 0;
             }
-          `}</style>
+          `}
+          </style>
           <img
-            className="error-image"
-            alt="error-img"
-            src="/static/empty.png"
+            className='error-image'
+            alt='error-img'
+            src='/static/empty.png'
           />
           <h3>The page is not found | 404～</h3>
-          <Button onClick={() => Router.push('/')} type="primary" ghost>
+          <Button onClick={() => Router.push('/')} type='primary' ghost>
             Back Home
           </Button>
         </div>
@@ -40,7 +41,7 @@ const ErrorPage = ({ statusCode }) => {
     }
     case 500: {
       RenderComp = () => (
-        <div className="container">
+        <div className='container'>
           <style jsx>{`
             .container {
               position: absolute;
@@ -57,14 +58,15 @@ const ErrorPage = ({ statusCode }) => {
               height: 200px;
               margin: 10px 0;
             }
-          `}</style>
+          `}
+          </style>
           <img
-            className="error-image"
-            alt="error-img"
-            src="/static/unknown_error.png"
+            className='error-image'
+            alt='error-img'
+            src='/static/unknown_error.png'
           />
           <h3>The page is error | 500～</h3>
-          <Button onClick={() => Router.push('/')} type="primary" ghost>
+          <Button onClick={() => Router.push('/')} type='primary' ghost>
             Back Home
           </Button>
         </div>
@@ -78,11 +80,11 @@ const ErrorPage = ({ statusCode }) => {
 }
 
 ErrorPage.propTypes = {
-  statusCode: PropTypes.number,
+  statusCode: PropTypes.number
 }
 
 ErrorPage.defaultProps = {
-  statusCode: 200,
+  statusCode: 200
 }
 
 // class ErrorPage extends Component {

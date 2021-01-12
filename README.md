@@ -65,5 +65,5 @@ yarn prod
 - [x] 搜索功能
 - [x] header 图片的标签
 - [x] Google Search SEO 优化
-- [ ] 悬浮回到顶部按钮
+- [x] 悬浮回到顶部按钮
 - [ ] 文章详情前后页按钮

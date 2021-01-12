@@ -16,7 +16,7 @@ const fetchList = query => {
 /**
  * About saga
  */
-function* fetchAbout() {
+function * fetchAbout () {
   while (true) {
     yield take(FETCH_ABOUT)
     const query = aboutQuery
@@ -26,7 +26,7 @@ function* fetchAbout() {
 
     try {
       detail = fetchedList.find(item =>
-        item.labels.some(label => label.name === `about`),
+        item.labels.some(label => label.name === 'about')
       )
       if (!detail) {
         res = yield call(fetchList, query)
@@ -43,12 +43,12 @@ function* fetchAbout() {
       yield put(
         handleHeaderChange({
           title: detail.title,
-          pic: aboutPic,
-        }),
+          pic: aboutPic
+        })
       )
-      yield put(setTOC(handleTagContent(detail.body, `desc`, `exec`)))
+      yield put(setTOC(handleTagContent(detail.body, 'desc', 'exec')))
     } catch (e) {
-      yield put(requestFail(`请求关于页面的接口错误，请刷新页面或者联系我`))
+      yield put(requestFail('请求关于页面的接口错误，请刷新页面或者联系我'))
     }
   }
 }

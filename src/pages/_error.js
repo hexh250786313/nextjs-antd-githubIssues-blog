@@ -7,11 +7,11 @@ const Error = ({ statusCode }) => (
 )
 
 Error.propTypes = {
-  statusCode: PropTypes.number,
+  statusCode: PropTypes.number
 }
 
 Error.defaultProps = {
-  statusCode: 200,
+  statusCode: 200
 }
 
 Error.getInitialProps = ({ res, err }) => {

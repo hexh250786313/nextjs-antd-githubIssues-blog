@@ -8,9 +8,9 @@ import Router from 'next/router'
 const handleHash = hash => {
   let page
 
-  const pageReg = new RegExp(`page=([\\d]+)$`)
+  const pageReg = new RegExp('page=([\\d]+)$')
 
-  if (!!hash.match(pageReg)) {
+  if (hash.match(pageReg)) {
     page = hash.match(pageReg)[1] - 0
   } else {
     page = 1
@@ -21,7 +21,7 @@ const handleHash = hash => {
 
 const handleHashAndQuery = () => {
   let nextQueryParams
-  if (!!window.location.search) {
+  if (window.location.search) {
     nextQueryParams = handleHash(window.location.search)
   } else {
     nextQueryParams = { page: 1 }
@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
   perPage: state.post.list.query.per_page,
   postsAmount: state.post.list.total_count,
   loading: state.post.list.loading,
-  listType: `list`,
+  listType: 'list'
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchPostList(payload, callback)),
   onLoad: currentPage => {
     const _handleRouteChange = url => {
-      if (url.indexOf(`list`) !== -1) {
+      if (url.indexOf('list') !== -1) {
         const nextQueryParams = handleHashAndQuery(currentPage)
         dispatch(fetchPostList(nextQueryParams))
       }
@@ -61,17 +61,17 @@ const mapDispatchToProps = dispatch => ({
       Router.events.off('routeChangeComplete', _handleRouteChange)
     }
   },
-  handlePaginationClick: () => dispatch(saveListState({ loading: true })),
+  handlePaginationClick: () => dispatch(saveListState({ loading: true }))
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
   ...dispatchProps,
-  onLoad: () => dispatchProps.onLoad(stateProps.currentPage),
+  onLoad: () => dispatchProps.onLoad(stateProps.currentPage)
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
+  mergeProps
 )(PostList)
