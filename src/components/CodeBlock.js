@@ -30,6 +30,7 @@ class CodeBlock extends React.PureComponent {
     SyntaxHighlighter.registerLanguage('javascript', javascript)
     SyntaxHighlighter.registerLanguage('js', javascript)
     SyntaxHighlighter.registerLanguage('shell', bash)
+    SyntaxHighlighter.registerLanguage('sh', bash)
   }
 
   // componentWillMount() {
