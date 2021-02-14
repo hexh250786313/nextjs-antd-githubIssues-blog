@@ -121,7 +121,7 @@ export const aboutQuery = {
 export const queryLabel = 'qZy6GBWGe'
 
 // token
-export const githubToken = '6b4454ce9d30dcb9ed9c1f6f16e329f56142b328'
+export const githubToken = 'b6a5f3e82ee5c26470864a98f9159ab96bd0b056'
 
 export const queryParams = '+state:open+repo:hexh250786313/Blog+author:hexh250786313'
 
