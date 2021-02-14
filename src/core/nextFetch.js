@@ -21,7 +21,7 @@ HTTP_METHOD.forEach(method => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Accept: 'application/json',
-        Authorization: `token ${githubToken}`
+        // Authorization: `token ${githubToken}`
       },
       // credentials: 'include',
       timeout,
