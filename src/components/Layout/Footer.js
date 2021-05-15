@@ -1,11 +1,12 @@
 import { memo } from 'react'
 import { blogName } from '@/constants/ConstTypes'
 import { color_primary } from '@/constants/CustomTheme'
+import moment from 'moment'
 
 export default memo(() => {
   return (
     <div className='footer'>
-      Copyright © 2020 - 2020 {blogName}
+      Copyright © 2020 - {moment().format('YYYY')} {blogName}
       <style jsx>{`
         .footer {
           cursor: default;

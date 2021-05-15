@@ -31,7 +31,10 @@ function * fetchPostList () {
           callback(list)
         })
       }
-      yield put(fetchTimelineSuccess({ currentList: list }))
+      // 首屏加载，SEO 优化
+      if (query.page === 1) {
+        yield put(fetchTimelineSuccess({ currentList: list }))
+      }
       yield put(saveFetchedList(list))
     } catch (e) {
       yield put(requestFail('请求首页接口报错，请刷新页面或者联系我'))

@@ -8,7 +8,13 @@ import Terms from './Term'
 import './index.less'
 import ImgViewer from '@/components/ImgViewer'
 
-const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail, isShowTerm }) => {
+const PostDetail = ({
+  fetchPostDetail,
+  detail,
+  setTOC,
+  clearDetail,
+  isShowTerm
+}) => {
   let { body } = detail
   let images = handleTagContent(body, 'image')
   let desc = handleTagContent(body, 'desc')
@@ -70,36 +76,49 @@ const PostDetail = ({ fetchPostDetail, detail, setTOC, clearDetail, isShowTerm }
             }}
             escapeHtml={false}
           />
+
+          <a href={detail.html_url}>
+            <p className='comment'>点击这里前往 Github 查看原文，交流意见~</p>
+          </a>
+
           {body && isShowTerm ? <Terms /> : null}
         </div>
       </Spin>
-      <style jsx>{`
-        .wrapper {
-          padding-top: 0;
-          min-height: 50vh;
-        }
+      <style jsx>
+        {`
+          .wrapper {
+            padding-top: 0;
+            min-height: 50vh;
+          }
 
-        .pic {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 15px;
-          flex-wrap: wrap;
-        }
+          .pic {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+          }
 
-        .pic > img {
-          width: 80%;
-        }
+          .pic > img {
+            width: 80%;
+          }
 
-        .desc {
-          background-color: #dedede;
-          font-size: 17px;
-          border-radius: 5px;
-          padding: 10px 20px;
-          white-space: break-spaces;
-        }
-      `}
+          .desc {
+            background-color: #dedede;
+            font-size: 17px;
+            border-radius: 5px;
+            padding: 10px 20px;
+            white-space: break-spaces;
+          }
+
+          .comment {
+            margin: 50px 0 0;
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 10px;
+          }
+        `}
       </style>
     </div>
   )

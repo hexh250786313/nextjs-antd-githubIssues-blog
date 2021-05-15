@@ -80,7 +80,7 @@ const PostList = ({
               }
 
               return (
-                <Link {...getLink(label.name, number)} key={number}>
+                <Link {...getLink(label && label.name, number)} key={number}>
                   <a target='_self'>
                     <div className='wrapper'>
                       <List.Item>

@@ -8,48 +8,68 @@
 
 
 <url>
-  <loc>https://blog.hexuhua.now.sh/</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/list?page=1</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/list?page=1</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/about</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/about</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/11</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/15</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/10</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/14</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/9</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/13</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/8</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/12</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/7</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/11</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://blog.hexuhua.now.sh/post/6</loc>
-  <lastmod>2021-01-12T02:51:01+00:00</lastmod>
+  <loc>https://blog.hexuhua.vercel.app/post/10</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.hexuhua.vercel.app/post/9</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.hexuhua.vercel.app/post/8</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.hexuhua.vercel.app/post/7</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://blog.hexuhua.vercel.app/post/6</loc>
+  <lastmod>2021-05-15T16:56:15+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
