@@ -16,7 +16,7 @@ const Terms = () => {
           width: 100%;
           background-color: #e6ecf4;
           padding: 20px;
-          margin-top: 50px;
+          margin-top: 20px;
           font-weight: bold;
           font-size: 16px;
           border-radius: 10px;

@@ -2,7 +2,7 @@ import { Spin } from 'antd'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { handleTagContent } from '@/core/util'
+import { handleTagContent, utc2locale } from '@/core/util'
 import CodeBlock from '../CodeBlock'
 import Terms from './Term'
 import './index.less'
@@ -15,7 +15,7 @@ const PostDetail = ({
   clearDetail,
   isShowTerm
 }) => {
-  let { body } = detail
+  let { body, created_at } = detail
   let images = handleTagContent(body, 'image')
   let desc = handleTagContent(body, 'desc')
 
@@ -60,6 +60,9 @@ const PostDetail = ({
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
         <div className='wrapper'>
+          <div className='time'>
+            发布于 {utc2locale(created_at || '')}
+          </div>
           {desc && <p className='desc'>{desc}</p>}
           {images && (
             <div className='pic'>
@@ -77,9 +80,11 @@ const PostDetail = ({
             escapeHtml={false}
           />
 
-          <a href={detail.html_url}>
-            <p className='comment'>点击这里前往 Github 查看原文，交流意见~</p>
-          </a>
+          {isShowTerm ? (
+            <a href={detail.html_url}>
+              <p className='comment'>点击这里前往 Github 查看原文，交流意见~</p>
+            </a>
+          ) : null}
 
           {body && isShowTerm ? <Terms /> : null}
         </div>
@@ -117,6 +122,12 @@ const PostDetail = ({
             padding: 10px;
             border: 1px solid;
             border-radius: 10px;
+          }
+
+          .time {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
           }
         `}
       </style>

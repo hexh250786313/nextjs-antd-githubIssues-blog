@@ -135,10 +135,10 @@ export const handleTagContent = (source = '', tag = 'desc', action = 'get') => {
  */
 export const utc2locale = utc_datetime => {
   if (typeof utc_datetime !== 'string') {
-    throw new Error('Not a string')
+    return ''
   }
   if (utc_datetime.indexOf('T') === -1 || utc_datetime.indexOf('Z') === -1) {
-    throw new Error('Not a UTC')
+    return ''
   }
 
   let localeDate = ''
