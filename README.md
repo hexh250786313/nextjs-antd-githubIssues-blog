@@ -1,10 +1,6 @@
 ## Nextjs-Antd-GithubIssues-Blog
 
-![header](https://pic.yupoo.com/sinaweibo4907754196_v/a9592e94/41111f63.png)
-
 ### 关于这个项目
-
-如你所见，一个博客项目，做这个项目本意是想拥有一个博客用于记录本人生活工作中的一些事情
 
 ⚠️ **注意，不支持 IE 浏览器**
 
