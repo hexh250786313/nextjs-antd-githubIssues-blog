@@ -7,31 +7,42 @@ import vsDark from 'react-syntax-highlighter/dist/cjs/styles/prism/solarizedligh
 import {
   jsx,
   javascript,
-  bash
+  bash,
+  tsx,
+  typescript,
 } from 'react-syntax-highlighter/dist/cjs/languages/prism'
 
-// import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
-// import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+SyntaxHighlighter.registerLanguage('jsx', jsx)
+SyntaxHighlighter.registerLanguage('javascript', javascript)
+SyntaxHighlighter.registerLanguage('js', javascript)
+SyntaxHighlighter.registerLanguage('shell', bash)
+SyntaxHighlighter.registerLanguage('sh', bash)
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+SyntaxHighlighter.registerLanguage('ts', typescript)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
 
 class CodeBlock extends React.PureComponent {
   static propTypes = {
     value: PropTypes.string.isRequired,
-    language: PropTypes.string
+    language: PropTypes.string,
   }
 
   static defaultProps = {
-    language: null
+    language: null,
   }
 
-  componentDidMount () {
-    // 注册要高亮的语法，
-    // 注意：如果不设置打包后供第三方使用是不起作用的
-    SyntaxHighlighter.registerLanguage('jsx', jsx)
-    SyntaxHighlighter.registerLanguage('javascript', javascript)
-    SyntaxHighlighter.registerLanguage('js', javascript)
-    SyntaxHighlighter.registerLanguage('shell', bash)
-    SyntaxHighlighter.registerLanguage('sh', bash)
-  }
+  // componentDidMount() {
+  // // 注册要高亮的语法，
+  // // 注意：如果不设置打包后供第三方使用是不起作用的
+  // SyntaxHighlighter.registerLanguage('jsx', jsx)
+  // SyntaxHighlighter.registerLanguage('javascript', javascript)
+  // SyntaxHighlighter.registerLanguage('js', javascript)
+  // SyntaxHighlighter.registerLanguage('shell', bash)
+  // SyntaxHighlighter.registerLanguage('sh', bash)
+  // SyntaxHighlighter.registerLanguage('tsx', tsx)
+  // SyntaxHighlighter.registerLanguage('ts', typescript)
+  // SyntaxHighlighter.registerLanguage('typescript', typescript)
+  // }
 
   // componentWillMount() {
   // // 注册要高亮的语法，
@@ -42,7 +53,7 @@ class CodeBlock extends React.PureComponent {
   // SyntaxHighlighter.registerLanguage('shell', bash)
   // }
 
-  render () {
+  render() {
     const { language, value } = this.props
     return (
       <figure className='highlight'>
