@@ -10,15 +10,15 @@ export const blogName = "hexh's blog"
 
 // 默认图片
 export const indexPic =
-  'https://pic.yupoo.com/sinaweibo4907754196_v/cc169439/ebae9d38.jpg'
+  'https://dev.azure.com/hexuhua/f6126346-6e87-4d62-aa80-ff9b88293af0/_apis/git/repositories/ebd79495-5cbb-4565-8573-fa73ee451b5e/items?path=/github.com/hexh250786313/blog/_default/header.jpg&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=main&resolveLfs=true&%24format=octetStream&api-version=5.0'
 
 // 关于页面图片
 export const aboutPic =
-  'https://pic.yupoo.com/sinaweibo4907754196_v/a9592e94/41111f63.png'
+  'https://dev.azure.com/hexuhua/f6126346-6e87-4d62-aa80-ff9b88293af0/_apis/git/repositories/ebd79495-5cbb-4565-8573-fa73ee451b5e/items?path=/github.com/hexh250786313/blog/_default/about.png&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=main&resolveLfs=true&%24format=octetStream&api-version=5.0'
 
 // 默认图片
 export const defaultPic =
-  'https://pic.yupoo.com/sinaweibo4907754196_v/a0fb7a83/621ed2be.jpg'
+  'https://dev.azure.com/hexuhua/f6126346-6e87-4d62-aa80-ff9b88293af0/_apis/git/repositories/ebd79495-5cbb-4565-8573-fa73ee451b5e/items?path=/github.com/hexh250786313/blog/_default/list.jpg&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=main&resolveLfs=true&%24format=octetStream&api-version=5.0'
 
 // 默认主页 title
 export const indexTitle =

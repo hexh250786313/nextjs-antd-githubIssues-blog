@@ -13,10 +13,10 @@ import { saveFetchedList } from '@/redux/actions/post.js'
 /**
  * postDetail saga
  */
-export function * fetchPostDetail () {
+export function* fetchPostDetail() {
   while (true) {
     const {
-      payload: { number = '0' }
+      payload: { number = '0' },
     } = yield take(FETCH_POST_DETAIL)
     const fetchedList = yield select(state => state.post.list.fetchedList)
 
@@ -41,13 +41,18 @@ export function * fetchPostDetail () {
 
       if (pic) {
         pic.replace(/^\r\n+|\r\n+$/g, '')
-        pic = pic.split('--split--')[0]
+        pic = pic.match(/!\[.*\]\(\S+\)/g)
+          ? pic
+              .match(/!\[.*\]\(\S+\)/)[0]
+              .match(/\(.*\)$/)[0]
+              .replace(/^\(|\)$/g, '')
+          : null
       }
       yield put(
         handleHeaderChange({
           title: detail.title,
-          pic: pic || defaultPic
-        })
+          pic: pic || defaultPic,
+        }),
       )
 
       let src = handleTagContent(detail.body, 'desc', 'exec')

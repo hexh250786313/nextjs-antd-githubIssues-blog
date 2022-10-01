@@ -83,7 +83,7 @@ const Timeline = ({
             let images = handleTagContent(body, 'image')
             const tag = label ? label.name.toUpperCase() : 'POST'
             if (images) {
-              images = images.split('--split--')
+              images = images.match(/!\[.*\]\(\S+\)/g)
             }
             return (
               <Item key={title}>
@@ -96,11 +96,11 @@ const Timeline = ({
                       <span className='time'>{utc2locale(created_at)}</span>
                       <p className='content'>{handleTagContent(body)}</p>
                       {Array.isArray(images)
-                        ? images.map((url, index) => (
+                        ? images.map((image, index) => (
                           <img
                             key={index}
-                            src={url}
-                            alt='url'
+                            src={image.match(/\(.*\)$/)[0].replace(/^\(|\)$/g, '')}
+                            alt={image.match(/^!\[.*\]/)[0].replace(/^!\[|\]$/g, '') || ''}
                             className='image'
                           />
                           ))

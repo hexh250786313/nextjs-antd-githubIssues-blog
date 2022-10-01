@@ -13,14 +13,14 @@ const PostDetail = ({
   detail,
   setTOC,
   clearDetail,
-  isShowTerm
+  isShowTerm,
 }) => {
   let { body, created_at } = detail
   let images = handleTagContent(body, 'image')
   let desc = handleTagContent(body, 'desc')
 
   if (images) {
-    images = images.split('--split--')
+    images = images.match(/!\[.*\]\(\S+\)/g)
     body = handleTagContent(body, 'image', 'exec')
   }
 
@@ -60,22 +60,27 @@ const PostDetail = ({
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
         <div className='wrapper'>
-          <div className='time'>
-            发布于 {utc2locale(created_at || '')}
-          </div>
+          <div className='time'>发布于 {utc2locale(created_at || '')}</div>
           {desc && <p className='desc'>{desc}</p>}
           {images && (
             <div className='pic'>
               {images.map(image => (
-                <img src={image} alt='' key={image} />
+                <img
+                  src={image.match(/\(.*\)$/)[0].replace(/^\(|\)$/g, '')}
+                  alt={image.match(/^!\[.*\]/)[0].replace(/^!\[|\]$/g, '') || ''}
+                  key={image}
+                />
               ))}
             </div>
           )}
           <ReactMarkdown
             className='markdown-body'
-            source={body}
+            source={
+              body ? handleTagContent(body, 'details', 'exec') : undefined
+              // body ? body.replace(/^<details>[\s\S]+<\/details>/g, '') : undefined
+            }
             renderers={{
-              code: CodeBlock
+              code: CodeBlock,
             }}
             escapeHtml={false}
           />
@@ -140,7 +145,7 @@ PostDetail.propTypes = {
   setTOC: PropTypes.func.isRequired,
   clearDetail: PropTypes.func.isRequired,
   fetchPostDetail: PropTypes.func.isRequired,
-  isShowTerm: PropTypes.bool.isRequired
+  isShowTerm: PropTypes.bool.isRequired,
 }
 
 export default PostDetail

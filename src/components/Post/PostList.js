@@ -7,7 +7,7 @@ import Link from 'next/link'
 const getLink = (tag, number) => {
   const res = {
     href: '',
-    as: ''
+    as: '',
   }
 
   switch (tag) {
@@ -32,7 +32,7 @@ const PostList = ({
   onLoad,
   loading,
   handlePaginationClick,
-  listType
+  listType,
 }) => {
   const [wrapperClass, setWrapperClass] = useState('wrapper-mouse-hover')
 
@@ -69,14 +69,14 @@ const PostList = ({
                 title,
                 body,
                 created_at,
-                labels: [label]
+                labels: [label],
               } = item
 
               let images = handleTagContent(body, 'image')
               const desc = handleTagContent(body, 'desc')
 
               if (images) {
-                images = images.split('--split--')
+                images = images.match(/!\[.*\]\(\S+\)/g)
               }
 
               return (
@@ -98,8 +98,14 @@ const PostList = ({
                             {images.map(image => (
                               <img
                                 className='pic'
-                                src={image}
-                                alt=''
+                                src={image
+                                  .match(/\(.*\)$/)[0]
+                                  .replace(/^\(|\)$/g, '')}
+                                alt={
+                                  image
+                                    .match(/^!\[.*\]/)[0]
+                                    .replace(/^!\[|\]$/g, '') || ''
+                                }
                                 key={image}
                               />
                             ))}
@@ -126,99 +132,100 @@ const PostList = ({
         itemRender={itemRender}
         style={{ marginTop: 10 }}
       />
-      <style jsx>{`
-        :global(.container .ant-list-item) {
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 0;
-        }
-
-        :global(.container .ant-list-item-meta, .container
-            .ant-list-item-meta-content) {
-          width: 100%;
-        }
-
-        :global(.container .ant-list-item-meta-title) {
-          color: inherit;
-          line-height: 1.2;
-          margin: 0;
-        }
-
-        :global(.container .ant-list-item-meta-description) {
-          line-height: 1;
-          margin: 0 0 5px;
-        }
-
-        .time {
-          font-size: 14px;
-        }
-
-        .title {
-          display: inline-block;
-          width: 100%;
-          font-size: 18px;
-          font-weight: bold;
-          word-break: break-all;
-          margin-bottom: 5px;
-        }
-
-        .description {
-          color: rgba(0, 0, 0, 0.65);
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          margin: 0;
-          word-break: break-all;
-        }
-
-        .pic {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          flex-wrap: wrap;
-          margin-top: 10px;
-        }
-
-        .pic > img {
-          margin: 0 10px 0 0;
-          width: 100px;
-        }
-
-        @media (max-width: 767px) {
-          .wrapper {
-            padding: 0 0 15px;
-            border-radius: 0;
-            background-color: inherit;
+      <style jsx>
+        {`
+          :global(.container .ant-list-item) {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
           }
 
-          .wrapper:hover {
-            background-color: inherit;
+          :global(.container .ant-list-item-meta, .container
+              .ant-list-item-meta-content) {
+            width: 100%;
           }
 
-          :global(.container .ant-pagination) {
-            margin-left: 0;
-          }
-        }
-
-        @media (min-width: 768px) {
-          .wrapper {
-            padding: 15px;
-            border-radius: 5px;
-            background-color: inherit;
+          :global(.container .ant-list-item-meta-title) {
+            color: inherit;
+            line-height: 1.2;
+            margin: 0;
           }
 
-          .wrapper:hover {
-            background-color: #e6ecf4;
+          :global(.container .ant-list-item-meta-description) {
+            line-height: 1;
+            margin: 0 0 5px;
           }
 
-          :global(.container .ant-pagination) {
-            margin-left: 15px;
+          .time {
+            font-size: 14px;
           }
-        }
-      `}
+
+          .title {
+            display: inline-block;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            word-break: break-all;
+            margin-bottom: 5px;
+          }
+
+          .description {
+            color: rgba(0, 0, 0, 0.65);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            word-break: break-all;
+          }
+
+          .pic {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 10px;
+          }
+
+          .pic > img {
+            margin: 0 10px 0 0;
+            width: 100px;
+          }
+
+          @media (max-width: 767px) {
+            .wrapper {
+              padding: 0 0 15px;
+              border-radius: 0;
+              background-color: inherit;
+            }
+
+            .wrapper:hover {
+              background-color: inherit;
+            }
+
+            :global(.container .ant-pagination) {
+              margin-left: 0;
+            }
+          }
+
+          @media (min-width: 768px) {
+            .wrapper {
+              padding: 15px;
+              border-radius: 5px;
+              background-color: inherit;
+            }
+
+            .wrapper:hover {
+              background-color: #e6ecf4;
+            }
+
+            :global(.container .ant-pagination) {
+              margin-left: 15px;
+            }
+          }
+        `}
       </style>
     </div>
   )
@@ -235,5 +242,5 @@ PostList.propTypes = {
   onLoad: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   handlePaginationClick: PropTypes.func.isRequired,
-  listType: PropTypes.string.isRequired
+  listType: PropTypes.string.isRequired,
 }
