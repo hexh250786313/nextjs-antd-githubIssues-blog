@@ -38,28 +38,6 @@ yarn prod
 
 > http://localhost:5999
 
-#### 写博客
-
-![pic](https://user-images.githubusercontent.com/26080416/96369861-9c492680-118e-11eb-88e6-eb0ff695bf0d.png)
-
-模板如上图所示，也可以看[这里](https://github.com/hexh250786313/nextjs-antd-githubIssues-blog/issues/12)
-
-| 标签           | 作用                                                                                         |
-| -------------- | -------------------------------------------------------------------------------------------- |
-| \<header-img\> | 放入一张图片链接，用于改变每个文章的顶部的标题处的背景图                                     |
-| \<desc\>       | 正文开头的文案，出现在文章的开头；同时会出现在列表页的文章标题的下方，支持空白符             |
-| \<image\>      | 支持多张图片链接，显示在 `<desc>` 文案的下方，文章的上方；同时会出现在列表页的文章标题的下方 |
-
-这些标签都是可选的，不填的话不会对 markdown 格式的正文有任何影响
-
 ### 部署
 
 [vercel.app](https://vercel.com/home)
-
-### Todo
-
-- [x] 搜索功能
-- [x] header 图片的标签
-- [x] Google Search SEO 优化
-- [x] 悬浮回到顶部按钮
-- [ ] 文章详情前后页按钮

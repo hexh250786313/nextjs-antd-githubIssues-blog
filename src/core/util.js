@@ -146,7 +146,7 @@ export const utc2locale = utc_datetime => {
     const date = new Date(utc_datetime)
     // localeDate = new Date(utc_datetime).toLocaleDateString(); // 格式: '2020/7/01' 或者 '7/01/2020'
     localeDate = `${date.getFullYear()}/${date.getMonth() +
-      1}/${date.getDate()} ${getDay(date.getDay())}`
+      1}/${date.getDate()}`
     // 这一步是为了保证不同语言环境显示同样的日期格式
     // const dateArr = localeDate.split(`/`);
     // if (dateArr[2].length === 4) {

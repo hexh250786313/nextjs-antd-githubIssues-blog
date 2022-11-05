@@ -8,11 +8,11 @@ const imgViewerStore = {
   body: process.browser ? document.body : null,
   html: process.browser ? document.documentElement : null,
   htmlStyle: { overflow: '' },
-  bodyStyle: { overflow: '', position: '' }
+  bodyStyle: { overflow: '', position: '' },
 }
 
 const ImgViewerHandler = {
-  show: (url) => {
+  show: url => {
     if (process.browser) {
       const _ImgViewer = <ImgViewer imgUrl={url} />
       const { isShow, viewer, body, html } = imgViewerStore
@@ -27,6 +27,17 @@ const ImgViewerHandler = {
         body.style.position = 'relative'
 
         body.appendChild(viewer)
+        // viewer.animate(
+        //   [
+        //     // keyframes
+        //     { opacity: '0' },
+        //     { opacity: '1' },
+        //   ],
+        //   {
+        //     // timing options
+        //     duration: 1000,
+        //   },
+        // )
         ReactDOM.render(_ImgViewer, viewer)
       }
     }
@@ -42,7 +53,7 @@ const ImgViewerHandler = {
 
       body.removeChild(viewer)
     }
-  }
+  },
 }
 
 export default ImgViewerHandler

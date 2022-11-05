@@ -15,7 +15,7 @@ const PostDetail = ({
   clearDetail,
   isShowTerm,
 }) => {
-  let { body, created_at } = detail
+  let { body, created_at, updated_at } = detail
   let images = handleTagContent(body, 'image')
   let desc = handleTagContent(body, 'desc')
 
@@ -60,7 +60,7 @@ const PostDetail = ({
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
         <div className='wrapper'>
-          <div className='time'>发布于 {utc2locale(created_at || '')}</div>
+          <div className='time'>发布于 {utc2locale(created_at || '')}, 编辑于 {utc2locale(updated_at || '')}</div>
           {desc && <p className='desc'>{desc}</p>}
           {images && (
             <div className='pic'>
@@ -130,7 +130,7 @@ const PostDetail = ({
           }
 
           .time {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             margin-bottom: 10px;
           }
