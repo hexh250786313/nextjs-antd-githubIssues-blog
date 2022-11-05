@@ -62,7 +62,7 @@ class NextApp extends App {
     return (
       <>
         <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=0' />
           <meta charSet='utf-8' />
           <title>hexh's blog</title>
           <link rel='shortcut icon' href='/tama.ico' type='image/ico' />

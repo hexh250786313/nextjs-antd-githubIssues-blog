@@ -8,15 +8,15 @@ const initDragState = (() => {
     initialX: 0,
     initialY: 0,
     xOffset: 0,
-    yOffset: 0
+    yOffset: 0,
   }
   return obj
 })()
 
-export const useTranslate = ({ container, dragItem }) => {
+export const useTranslate = ({ container, dragItem, scaling }) => {
   const [translate, setTranslate] = useState({
     X: 0,
-    Y: 0
+    Y: 0,
   })
   const [dragState, setDragState] = useState(initDragState)
 
@@ -26,87 +26,89 @@ export const useTranslate = ({ container, dragItem }) => {
   }, [])
 
   const _dragStart = useCallback(
-    (e) => {
-      if (e.type === 'touchstart') {
-        if (e.target === dragItem) {
-          setDragState((prevState) => ({
+    e => {
+      if (!scaling) {
+        if (e.type === 'touchstart') {
+          if (e.target === dragItem) {
+            setDragState(prevState => ({
+              ...prevState,
+              initialX: e.touches[0].clientX - prevState.xOffset,
+              initialY: e.touches[0].clientY - prevState.yOffset,
+              active: true,
+            }))
+          } else {
+            setDragState(prevState => ({
+              ...prevState,
+              initialX: e.touches[0].clientX - prevState.xOffset,
+              initialY: e.touches[0].clientY - prevState.yOffset,
+            }))
+          }
+        } else if (e.target === dragItem) {
+          setDragState(prevState => ({
             ...prevState,
-            initialX: e.touches[0].clientX - prevState.xOffset,
-            initialY: e.touches[0].clientY - prevState.yOffset,
-            active: true
+            initialX: e.clientX - prevState.xOffset,
+            initialY: e.clientY - prevState.yOffset,
+            active: true,
           }))
         } else {
-          setDragState((prevState) => ({
+          setDragState(prevState => ({
             ...prevState,
-            initialX: e.touches[0].clientX - prevState.xOffset,
-            initialY: e.touches[0].clientY - prevState.yOffset
+            initialX: e.clientX - prevState.xOffset,
+            initialY: e.clientY - prevState.yOffset,
           }))
         }
-      } else if (e.target === dragItem) {
-        setDragState((prevState) => ({
-          ...prevState,
-          initialX: e.clientX - prevState.xOffset,
-          initialY: e.clientY - prevState.yOffset,
-          active: true
-        }))
-      } else {
-        setDragState((prevState) => ({
-          ...prevState,
-          initialX: e.clientX - prevState.xOffset,
-          initialY: e.clientY - prevState.yOffset
-        }))
       }
 
       // console.log(`开始拖拽`);
     },
-    [dragItem]
+    [dragItem, scaling],
   )
 
   const _dragEnd = useCallback(() => {
-    setDragState((prevState) => ({
+    setDragState(prevState => ({
       ...prevState,
       initialX: prevState.currentX,
       initialY: prevState.currentY,
-      active: false
+      active: false,
     }))
     // console.log(`拖拽结束`);
   }, [])
 
   const _drag = useCallback(
-    (e) => {
-      if (dragState.active) {
+    e => {
+      if (dragState.active && !scaling) {
         e.preventDefault()
         // console.log(`拖拽中`);
 
         if (e.type === 'touchmove') {
-          setDragState((prevState) => ({
+          setDragState(prevState => ({
             ...prevState,
             currentX: e.touches[0].clientX - prevState.initialX,
             currentY: e.touches[0].clientY - prevState.initialY,
             xOffset: e.touches[0].clientX - prevState.initialX,
-            yOffset: e.touches[0].clientY - prevState.initialY
+            yOffset: e.touches[0].clientY - prevState.initialY,
           }))
         } else {
-          setDragState((prevState) => ({
+          setDragState(prevState => ({
             ...prevState,
             currentX: e.clientX - prevState.initialX,
             currentY: e.clientY - prevState.initialY,
             xOffset: e.clientX - prevState.initialX,
-            yOffset: e.clientY - prevState.initialY
+            yOffset: e.clientY - prevState.initialY,
           }))
         }
 
         // setTranslate({ X: nextDragState.currentX, Y: nextDragState.currentY });
       }
     },
-    [dragState.active]
+    [dragState.active, scaling],
   )
 
   useEffect(() => {
     if (!!dragItem && !!container) {
       // console.log(`钩子开始`);
 
-      const _preventDefaultDrag = (e) => {
+      const _preventDefaultDrag = e => {
         e.preventDefault()
       }
 
@@ -120,7 +122,7 @@ export const useTranslate = ({ container, dragItem }) => {
       container.addEventListener('mouseup', _dragEnd, false)
       container.addEventListener('mousemove', _drag, false)
       return () => {
-        container.removeEventListener("dragstart", _preventDefaultDrag, false)
+        container.removeEventListener('dragstart', _preventDefaultDrag, false)
 
         // console.log(`钩子结束`);
         container.removeEventListener('touchstart', _dragStart, false)
@@ -137,7 +139,7 @@ export const useTranslate = ({ container, dragItem }) => {
   useEffect(() => {
     setTranslate({
       X: dragState.currentX,
-      Y: dragState.currentY
+      Y: dragState.currentY,
     })
   }, [dragState.currentX, dragState.currentY])
 

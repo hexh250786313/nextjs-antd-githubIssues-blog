@@ -6,9 +6,14 @@ import PropTypes from 'prop-types'
 const ImgViewer = ({ imgUrl }) => {
   const viewerEl = useRef(null)
   const imgEl = useRef(null)
+  const storeRef = useRef({
+    scaling: false
+    // scale
+  })
   const [translate, initTranslate] = useTranslate({
     container: viewerEl.current,
     dragItem: imgEl.current,
+    scaling: storeRef.current.scaling,
   })
   const _handleHide = () => {
     ImgViewerHandler.hide()
@@ -20,8 +25,129 @@ const ImgViewer = ({ imgUrl }) => {
     initTranslate()
   }, [imgUrl, initTranslate])
 
+  useEffect(() => {
+    if (viewerEl.current) {
+      viewerEl.current.addEventListener('touchstart', event => {
+        const touches = event.touches
+        const events = touches[0]
+        const events2 = touches[1]
+
+        if (event.touches.length === 2) {
+          event.preventDefault()
+        }
+
+        // 第一个触摸点的坐标
+        storeRef.current.pageX = events.pageX
+        storeRef.current.pageY = events.pageY
+
+        storeRef.current.moveable = true
+
+        if (events2) {
+          storeRef.current.pageX2 = events2.pageX
+          storeRef.current.pageY2 = events2.pageY
+          storeRef.current.scaling = true
+        }
+
+        storeRef.current.originScale = storeRef.current.scale || 1
+      })
+
+      document.addEventListener('touchmove', event => {
+        if (!storeRef.current.moveable) {
+          return
+        }
+
+        if (event.touches.length === 2) {
+          event.preventDefault()
+        }
+
+        const touches = event.touches
+        const events = touches[0]
+        const events2 = touches[1]
+        // 双指移动
+        if (events2) {
+          // 第2个指头坐标在touchmove时候获取
+          if (!storeRef.current.pageX2) {
+            storeRef.current.pageX2 = events2.pageX
+          }
+          if (!storeRef.current.pageY2) {
+            storeRef.current.pageY2 = events2.pageY
+          }
+
+          // 获取坐标之间的举例
+          const getDistance = (start, stop) => {
+            return Math.hypot(stop.x - start.x, stop.y - start.y)
+          }
+          // 双指缩放比例计算
+          const zoom =
+            getDistance(
+              {
+                x: events.pageX,
+                y: events.pageY,
+              },
+              {
+                x: events2.pageX,
+                y: events2.pageY,
+              },
+            ) /
+            getDistance(
+              {
+                x: storeRef.current.pageX,
+                y: storeRef.current.pageY,
+              },
+              {
+                x: storeRef.current.pageX2,
+                y: storeRef.current.pageY2,
+              },
+            )
+          // 应用在元素上的缩放比例
+          let newScale = storeRef.current.originScale * zoom
+          // 最大缩放比例限制
+          // if (newScale > 3) {
+          //   newScale = 3
+          // } else if (newScale < 1) {
+          //   newScale = 1
+          // }
+          // 记住使用的缩放值
+          storeRef.current.scale = newScale
+          // 图像应用缩放效果
+          setScale(scale * newScale)
+
+          document.addEventListener('touchend', () => {
+            storeRef.current.moveable = false
+            // setTimeout(() => {
+              storeRef.current.scaling = false
+            // }, 1000)
+
+            delete storeRef.current.pageX2
+            delete storeRef.current.pageY2
+          })
+          document.addEventListener('touchcancel', () => {
+            storeRef.current.moveable = false
+            // setTimeout(() => {
+              storeRef.current.scaling = false
+            // }, 1000)
+
+            delete storeRef.current.pageX2
+            delete storeRef.current.pageY2
+          })
+        }
+      })
+    }
+  }, [viewerEl])
+
   return (
-    <div className='viewer' ref={viewerEl} onClick={_handleHide}>
+    <div
+      className='viewer'
+      ref={viewerEl}
+      onClick={_handleHide}
+      onWheel={e => {
+        if (e.nativeEvent.deltaY >= 0) {
+          setScale(scale / 1.03)
+        } else {
+          setScale(scale * 1.03)
+        }
+      }}
+    >
       {/**
       <div className='tips'>
         <p>滚动鼠标/缩放手指缩放图片, 鼠标拖拽/滑动图片移动图片</p>
@@ -37,13 +163,6 @@ const ImgViewer = ({ imgUrl }) => {
             scale}px, ${translate.Y / scale}px, 0)`,
         }}
         onClick={e => e.stopPropagation()}
-        onWheel={e => {
-          if (e.nativeEvent.deltaY >= 0) {
-            setScale(scale / 1.2)
-          } else {
-            setScale(scale * 1.2)
-          }
-        }}
       />
       {/**
       <div className='buttons'>
@@ -85,7 +204,7 @@ const ImgViewer = ({ imgUrl }) => {
             position: fixed;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 50%);
+            background-color: rgba(0, 0, 0, 89%);
             top: 0;
             left: 0;
             justify-content: center;
