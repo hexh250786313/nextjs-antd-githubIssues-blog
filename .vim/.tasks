@@ -1,0 +1,6 @@
+[1.start]
+command=zsh -i -c 'yarn && yarn start'
+cwd=$(VIM_ROOT)
+output=terminal
+pos=watch
+option={"termnr":1}

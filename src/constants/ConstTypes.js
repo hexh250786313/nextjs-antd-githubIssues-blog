@@ -120,9 +120,6 @@ export const aboutQuery = {
 // 查询标识
 export const queryLabel = 'qZy6GBWGe'
 
-// token
-export const githubToken = 'b6a5f3e82ee5c26470864a98f9159ab96bd0b056'
-
 export const queryParams = '+state:open+repo:hexh250786313/Blog+author:hexh250786313'
 
 // 不需要默认图的页面
