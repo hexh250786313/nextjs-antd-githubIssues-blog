@@ -27,7 +27,7 @@
     "prod": "NODE_ENV=production node server.js"
   },
   "engines": {
-    "node": ">=13"
+    "node": ">=16"
   },
   "keywords": [
     "nextjs",
