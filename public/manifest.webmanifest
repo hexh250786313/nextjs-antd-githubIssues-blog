@@ -5,7 +5,7 @@
   "name": "hexh's blog",
   "icons": [
     {
-      "src": "https://dev.azure.com/hexuhua/_api/_common/identityImage?id=eec56913-80c5-43b7-ad8d-fe6d8d2b1103&size=2&t=0&1668394687087",
+      "src": "https://dev.azure.com/hexuhua/f6126346-6e87-4d62-aa80-ff9b88293af0/_apis/git/repositories/ebd79495-5cbb-4565-8573-fa73ee451b5e/items?path=/github.com/hexh250786313/blog/_default/identityImage.jpg&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=main&resolveLfs=true&%24format=octetStream&api-version=5.0",
       "sizes": "220x220",
       "type": "image/png"
     }
