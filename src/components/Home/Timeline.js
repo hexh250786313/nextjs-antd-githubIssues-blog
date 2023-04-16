@@ -166,6 +166,8 @@ const Timeline = ({
         .image {
           width: 100px;
           margin: 0 10px 10px 0;
+          border-radius: 3px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
 
         .wrapper {

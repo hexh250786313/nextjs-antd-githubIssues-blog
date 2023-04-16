@@ -3,6 +3,7 @@ import { Spin, List, Pagination, Skeleton } from 'antd'
 import { handleTagContent, utc2locale } from '@/core/util'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const getLink = (tag, number) => {
   const res = {
@@ -35,12 +36,51 @@ const PostList = ({
   listType,
 }) => {
   const [wrapperClass, setWrapperClass] = useState('wrapper-mouse-hover')
+  const router = useRouter()
 
   useEffect(() => {
     return onLoad()
   }, [])
 
   const itemRender = (current, type, originalElement) => {
+    if (type === 'prev') {
+      switch (listType) {
+        default:
+        case 'list':
+          return (
+            <a
+              onClick={() => {
+                if (currentPage - 1 > 0) {
+                  router.push(`/post/list?page=${currentPage - 1}`)
+                }
+              }}
+            >
+              Previous
+            </a>
+          )
+        case 'search':
+          return originalElement
+      }
+    }
+    if (type === 'next') {
+      switch (listType) {
+        default:
+        case 'list':
+          return (
+            <a
+              onClick={() => {
+                if (currentPage * perPage < postsAmount) {
+                  router.push(`/post/list?page=${currentPage + 1}`)
+                }
+              }}
+            >
+              Next
+            </a>
+          )
+        case 'search':
+          return originalElement
+      }
+    }
     if (type === 'page') {
       switch (listType) {
         default:
@@ -192,6 +232,8 @@ const PostList = ({
           .pic > img {
             margin: 0 10px 0 0;
             width: 100px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
           }
 
           @media (max-width: 767px) {

@@ -112,6 +112,12 @@ const PostDetail = ({
 
           .pic > img {
             width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 9px;
+          }
+
+          .pic > img + img {
+            margin: 16px 0;
           }
 
           .desc {
