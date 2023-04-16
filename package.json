@@ -26,6 +26,9 @@
     "analyse": "NODE_ENV=analyse next build",
     "prod": "NODE_ENV=production node server.js"
   },
+  "engines": {
+    "node": ">=18"
+  },
   "keywords": [
     "nextjs",
     "antd",
