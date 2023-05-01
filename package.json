@@ -44,7 +44,7 @@
     "core-js": "^2.6.5",
     "dynamic-antd-theme": "latest",
     "es6-promise": "^4.2.5",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "if-comp": "^0.0.8",
     "isomorphic-unfetch": "^3.0.0",
     "less": "^3.8.1",
