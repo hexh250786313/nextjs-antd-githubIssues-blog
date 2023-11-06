@@ -60,6 +60,8 @@ const PostDetail = ({
         repo: 'Blog',
         owner: listQuery.creator,
         number: issueId,
+        proxy:
+          'https://cors-anywhere.1l1.icu/https://github.com/login/oauth/access_token',
         distractionFreeMode: false,
       })
       gitalk.render('gitalk-container')
