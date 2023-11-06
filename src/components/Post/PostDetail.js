@@ -52,14 +52,18 @@ const PostDetail = ({
   }, [body])
 
   useEffect(() => {
-    const gitalk = new Gitalk({
-      repo: 'Blog',
-      owner: listQuery.creator,
-      number: Number(location.pathname.split('/').pop()),
-      distractionFreeMode: false,
-    })
-    gitalk.render('gitalk-container')
-
+    const issueId = Number(location.pathname.split('/').pop())
+    if (issueId) {
+      const gitalk = new Gitalk({
+        clientID: 'adc241ebb434da7ae0dc',
+        clientSecret: '20121f9cbf6028ade5cb38e954382f4d6a73a3ec',
+        repo: 'Blog',
+        owner: listQuery.creator,
+        number: issueId,
+        distractionFreeMode: false,
+      })
+      gitalk.render('gitalk-container')
+    }
     return () => {
       setTOC('')
       clearDetail()
