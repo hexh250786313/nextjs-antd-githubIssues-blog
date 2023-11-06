@@ -1,12 +1,14 @@
+import ImgViewer from '@/components/ImgViewer'
+import { handleTagContent, utc2locale } from '@/core/util'
 import { Spin } from 'antd'
+import Gitalk from 'gitalk'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { handleTagContent, utc2locale } from '@/core/util'
 import CodeBlock from '../CodeBlock'
 import Terms from './Term'
 import './index.less'
-import ImgViewer from '@/components/ImgViewer'
+import { listQuery } from '@/constants/ConstTypes'
 
 const PostDetail = ({
   fetchPostDetail,
@@ -50,6 +52,14 @@ const PostDetail = ({
   }, [body])
 
   useEffect(() => {
+    const gitalk = new Gitalk({
+      repo: 'Blog',
+      owner: listQuery.creator,
+      number: Number(location.pathname.split('/').pop()),
+      distractionFreeMode: false,
+    })
+    gitalk.render('gitalk-container')
+
     return () => {
       setTOC('')
       clearDetail()
@@ -60,14 +70,19 @@ const PostDetail = ({
     <div>
       <Spin style={{ minWidth: 0 }} spinning={!body}>
         <div className='wrapper'>
-          <div className='time'>发布于 {utc2locale(created_at || '')}, 编辑于 {utc2locale(updated_at || '')}</div>
+          <div className='time'>
+            发布于 {utc2locale(created_at || '')}, 编辑于{' '}
+            {utc2locale(updated_at || '')}
+          </div>
           {desc && <p className='desc'>{desc}</p>}
           {images && (
             <div className='pic'>
               {images.map(image => (
                 <img
                   src={image.match(/\(.*\)$/)[0].replace(/^\(|\)$/g, '')}
-                  alt={image.match(/^!\[.*\]/)[0].replace(/^!\[|\]$/g, '') || ''}
+                  alt={
+                    image.match(/^!\[.*\]/)[0].replace(/^!\[|\]$/g, '') || ''
+                  }
                   key={image}
                 />
               ))}
@@ -84,7 +99,7 @@ const PostDetail = ({
             }}
             escapeHtml={false}
           />
-
+          <div id='gitalk-container'></div>
           {isShowTerm ? (
             <a href={detail.html_url}>
               <p className='comment'>点击这里前往 Github 查看原文，交流意见~</p>
