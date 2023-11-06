@@ -21,8 +21,8 @@
     ]
   },
   "scripts": {
-    "start": "node server.js",
-    "build": "next build",
+    "start": "node --openssl-legacy-provider server.js",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider next build",
     "analyse": "NODE_ENV=analyse next build",
     "prod": "NODE_ENV=production node server.js"
   },
