@@ -61,7 +61,7 @@ const PostDetail = ({
         owner: listQuery.creator,
         number: issueId,
         proxy:
-          'https://proxy.250786313.workers.dev/proxy/https://github.com/login/oauth/access_token',
+          'https://proxy.hexh.xyz/proxy/https://github.com/login/oauth/access_token',
         distractionFreeMode: false,
       })
       gitalk.render('gitalk-container')
