@@ -8,15 +8,11 @@ let token = ''
 const getToken = async () => {
   if (!token) {
     token = await fetch(
-      `https://api.allorigins.win/get?url=${encodeURIComponent(
-        'https://pastebin.com/raw/jVFN4Tzk',
-      )}`,
-    )
-      .then(response => {
-        if (response.ok) return response.json()
-        throw new Error('Network response was not ok.')
-      })
-      .then(data => data.contents)
+      `https://proxy.hexh.xyz/proxy/https://pastebin.com/raw/jVFN4Tzk`,
+    ).then(response => {
+      if (response.ok) return response.text()
+      throw new Error('Network response was not ok.')
+    })
   }
   return token
 }

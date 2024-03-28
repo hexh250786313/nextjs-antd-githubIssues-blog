@@ -126,4 +126,4 @@ export const queryParams = '+state:open+repo:hexh250786313/Blog+author:hexh25078
 export const pageWithoutDefaultHeader = ['search', 'post', 'about']
 
 // 博文仓库地址
-export const archiveUrl = 'https://proxy.hexh.xyz/proxy/https://github.com/hexh250786313/Blog/issues'
+export const archiveUrl = 'https://github.com/hexh250786313/Blog/issues'
