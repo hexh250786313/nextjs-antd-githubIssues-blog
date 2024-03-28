@@ -16,7 +16,7 @@ const fetchList = query => {
  * search saga
  */
 function * fetchSearch () {
-  // 如果要用 tabkeEvery，则不能用 while(true)
+  // 如果要用 takeEvery，则不能用 while(true)
   while (true) {
     const { payload: nextQueryParams, callback } = yield take(FETCH_SEARCH)
     const prevQueryParams = yield select(state => state.search.query)

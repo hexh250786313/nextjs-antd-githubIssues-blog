@@ -2,7 +2,7 @@ import { color_primary } from '@/constants/CustomTheme'
 import { useState, useEffect } from 'react'
 import { Button, Input, Dropdown, Menu, Drawer } from 'antd'
 import PropTypes from 'prop-types'
-import { blogName, contactTypes, pagesIndex, archieveUrl } from '@/constants/ConstTypes'
+import { blogName, contactTypes, pagesIndex, archiveUrl } from '@/constants/ConstTypes'
 import Link from 'next/link'
 import SearchOutlined from '@ant-design/icons/SearchOutlined'
 import MenuOutlined from '@ant-design/icons/MenuOutlined'
@@ -308,5 +308,5 @@ const linkTo = ({ key }) => {
 }
 
 const linkToArchive = () => {
-  handleLink(archieveUrl)
+  handleLink(archiveUrl)
 }

@@ -4,7 +4,7 @@ const next = require('next')
 const os = require('os')
 // const { publicRuntimeConfig, serverRuntimeConfig } = require('./next.config');
 
-function getIPAdress () {
+function getIPAddress () {
   const interfaces = os.networkInterfaces()
 
   for (const devName in interfaces) {
@@ -43,7 +43,7 @@ app.prepare().then(() => {
     console.log(`
         App is running at:
         - Local: ${serverUrl}
-        - Network: http://${getIPAdress()}:${PORT}
+        - Network: http://${getIPAddress()}:${PORT}
       `)
     // development auto open browser
     if (isDev) {

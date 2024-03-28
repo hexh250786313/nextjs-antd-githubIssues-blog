@@ -8,7 +8,7 @@ import {
   FileTextOutlined
 } from '@ant-design/icons'
 import { color_primary } from '@/constants/CustomTheme'
-import { contactTypes, blogName, archieveUrl } from '@/constants/ConstTypes'
+import { contactTypes, blogName, archiveUrl } from '@/constants/ConstTypes'
 import { handleLink } from '@/core/util'
 import TOC from '@/containers/layout/toc'
 import Router from 'next/router'
@@ -104,10 +104,10 @@ const Drawer = ({
             </Menu.Item>
             {renderContact()}
             <Menu.Item
-              key={archieveUrl}
+              key={archiveUrl}
               icon={<FileTextOutlined />}
             >
-              ARCHIEVE
+              ARCHIVE
             </Menu.Item>
             {mdSource ? renderTOC() : null}
           </Menu>

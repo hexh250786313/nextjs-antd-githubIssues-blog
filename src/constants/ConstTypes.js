@@ -123,7 +123,7 @@ export const queryLabel = 'qZy6GBWGe'
 export const queryParams = '+state:open+repo:hexh250786313/Blog+author:hexh250786313'
 
 // 不需要默认图的页面
-export const pageWihtoutDefaultHeader = ['search', 'post', 'about']
+export const pageWithoutDefaultHeader = ['search', 'post', 'about']
 
 // 博文仓库地址
-export const archieveUrl = 'https://github.com/hexh250786313/Blog/issues'
+export const archiveUrl = 'https://proxy.hexh.xyz/proxy/https://github.com/hexh250786313/Blog/issues'
