@@ -17,7 +17,7 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel='stylesheet'
-            href='https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css'
+            href='https://proxy.hexh.xyz/proxy/https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css'
           ></link>
           <style>
             {`
