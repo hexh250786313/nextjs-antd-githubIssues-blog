@@ -44,8 +44,8 @@ const PostDetail = ({
 
     const imgs = document.getElementsByTagName('img')
 
-    imgs.forEach(imgEle => {
-      imgEle.addEventListener('click', e => {
+    imgs.forEach((imgEle) => {
+      imgEle.addEventListener('click', (e) => {
         ImgViewer.show(e.target.src)
       })
     })
@@ -54,8 +54,18 @@ const PostDetail = ({
   useEffect(() => {
     const issueId = Number(location.pathname.split('/').pop())
     if (issueId) {
+      // 如果是 https://blog.hexh.xyz 则为：Ov23liMwfBFdxuwZsdww
+      // 如果是 https://blog.hexuhua.vercel.app 则为：adc241ebb434da7ae0dc
+      let clientID = ''
+      if (location.origin.startsWith('https://blog.hexh.xyz')) {
+        clientID = 'Ov23liMwfBFdxuwZsdww'
+      } else if (
+        location.origin.startsWith('https://blog.hexuhua.vercel.app')
+      ) {
+        clientID = 'adc241ebb434da7ae0dc'
+      }
       const gitalk = new Gitalk({
-        clientID: 'adc241ebb434da7ae0dc',
+        clientID,
         clientSecret: '20121f9cbf6028ade5cb38e954382f4d6a73a3ec',
         repo: 'Blog',
         owner: listQuery.creator,
@@ -83,7 +93,7 @@ const PostDetail = ({
           {desc && <p className='desc'>{desc}</p>}
           {images && (
             <div className='pic'>
-              {images.map(image => (
+              {images.map((image) => (
                 <img
                   src={image.match(/\(.*\)$/)[0].replace(/^\(|\)$/g, '')}
                   alt={
