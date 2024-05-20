@@ -57,16 +57,19 @@ const PostDetail = ({
       // 如果是 https://blog.hexh.xyz 则为：Ov23liMwfBFdxuwZsdww
       // 如果是 https://blog.hexuhua.vercel.app 则为：adc241ebb434da7ae0dc
       let clientID = ''
+      let clientSecret = ''
       if (location.origin.startsWith('https://blog.hexh.xyz')) {
         clientID = 'Ov23liMwfBFdxuwZsdww'
+        clientSecret = 'd85c3f828cd0615e87f8c84ad5d3bd0d2c888f31'
       } else if (
         location.origin.startsWith('https://blog.hexuhua.vercel.app')
       ) {
         clientID = 'adc241ebb434da7ae0dc'
+        clientSecret = '20121f9cbf6028ade5cb38e954382f4d6a73a3ec'
       }
       const gitalk = new Gitalk({
         clientID,
-        clientSecret: '20121f9cbf6028ade5cb38e954382f4d6a73a3ec',
+        clientSecret,
         repo: 'Blog',
         owner: listQuery.creator,
         number: issueId,
