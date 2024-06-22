@@ -4,7 +4,7 @@
 
 ⚠️ **注意，不支持 IE 浏览器**
 
-点这里看一下：[hexh's blog](https://blog.hexuhua.vercel.app/)
+点这里看一下：[hexh's blog](https://blog.hexh.xyz)
 
 ### 这个项目有什么特别之处
 
