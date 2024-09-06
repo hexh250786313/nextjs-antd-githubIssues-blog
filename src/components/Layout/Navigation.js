@@ -199,7 +199,7 @@ const Navigation = ({
           align-items: center;
           position: fixed;
           top: 0;
-          z-index: 5;
+          z-index: 11;
           box-shadow: ${isShowTopShadow
             ? '0 2px 6px rgba(0, 0, 0, 0.35)'
             : 'null'};
